@@ -339,3 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /ReservationSystem/reservationsystem.db
+/ReservationSystem/reservationsystem.db-wal
+/ReservationSystem/reservationsystem.db-shm
+/client/src/environments

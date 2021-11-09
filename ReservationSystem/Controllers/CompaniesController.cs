@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
 using System;
@@ -21,20 +22,16 @@ namespace ReservationSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Company>> GetCompanies()
+        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
-            var companies = _context.Companies.ToList();
-
-            return companies;
+            return await _context.Companies.ToListAsync();
         }
 
 
         [HttpGet("{id}")]
-        public ActionResult<Company> GetCompany(int id)
+        public async Task<ActionResult<Company>> GetCompany(int id)
         {
-            var company = _context.Companies.Find(id);
-
-            return company;
+            return await _context.Companies.FindAsync(id);
         }
     }
 }
