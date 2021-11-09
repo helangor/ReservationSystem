@@ -32,6 +32,7 @@ namespace ReservationSystemBackend
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
             services.AddControllers();
+            services.AddCors();
 
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +53,8 @@ namespace ReservationSystemBackend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
             app.UseAuthorization();
 
