@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ReservationSystem.Entities;
 using ReservationSystemBackend.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace ReservationSystemBackend.Data
 
 
         public DbSet<Company> Companies { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
