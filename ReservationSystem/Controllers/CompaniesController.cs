@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace ReservationSystem.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CompaniesController : ControllerBase
+    public class CompaniesController : BaseApiController
     {
         private readonly DataContext _context;
 
