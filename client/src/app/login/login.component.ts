@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +10,15 @@ export class LoginComponent implements OnInit {
   model: any = {};
   hide = true;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
   login() {
+    this.accountService.login(this.model).subscribe(res => {
+      console.log({res});
+    });
     console.log("log", this.model);
   }
 
