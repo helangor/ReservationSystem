@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { RegisterComponent } from './register/register.component';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CompanyDetailComponent } from './company-detail/company-detail.componen
     HomeComponent,
     AdminPanelComponent,
     RegisterComponent,
-    CompanyDetailComponent
+    CompanyDetailComponent,
+    CompanyAdminPanelComponent
   ],
   imports: [
     BrowserModule,
