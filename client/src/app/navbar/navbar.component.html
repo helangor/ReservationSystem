@@ -1,6 +1,8 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
-    <a routerLink="/">Koti</a>
-    <a routerLink="/login">Yrityksen sivut</a>
-    <a routerLink="/admin">Admin Panel</a>
-    <a fxFlex *ngIf="accountService.currentUser$ | async">Käyttäjän sivut</a>
+    <button mat-icon-button routerLink="/">
+        <mat-icon>home</mat-icon>
+      </button>
+    <a routerLink="/login" routerLinkActive="active">Yrityksen sivut</a>
+    <a routerLink="/admin" routerLinkActive="active">Admin Panel</a>
+    <a fxFlex *ngIf="accountService.currentUser$ | async" routerLinkActive="active">Käyttäjän sivut</a>
 </mat-toolbar>
