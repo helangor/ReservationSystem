@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <h1>Rekisteröi uusi käyttäjä!</h1>
+    <mat-form-field fxFlex appearance="standard">
+        <mat-label>Käyttäjänimi</mat-label>
+        <input name="username" [(ngModel)]="newUser.username" matInput>
+    </mat-form-field>
+    <mat-form-field fxFlex appearance="standard">
+        <mat-label>Salasana</mat-label>
+        <input name="password" [(ngModel)]="newUser.password" matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="register()">Lisää käyttäjä</button>
+</div>

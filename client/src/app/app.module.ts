@@ -15,6 +15,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { HomeComponent } from './home/home.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { RegisterComponent } from './register/register.component';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     NavbarComponent,
     LoginComponent,
     HomeComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    RegisterComponent,
+    CompanyDetailComponent
   ],
   imports: [
     BrowserModule,
