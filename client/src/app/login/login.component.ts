@@ -8,6 +8,7 @@ import { AccountService } from '../services/account.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   model: any = {};
   hide = true;

@@ -1,5 +1,6 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
-    <span fxFlex>Koti</span>
-    <span fxFlex *ngIf="accountService.currentUser$ | async">Käyttäjän sivut</span>
-    <span fxFlex *ngIf="(accountService.currentUser$ | async) === null">Kirjaudu sisään</span>
+    <a routerLink="/">Koti</a>
+    <a routerLink="/login">Yrityksen sivut</a>
+    <a routerLink="/admin">Admin Panel</a>
+    <a fxFlex *ngIf="accountService.currentUser$ | async">Käyttäjän sivut</a>
 </mat-toolbar>
