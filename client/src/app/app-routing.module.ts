@@ -5,13 +5,21 @@ import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
-  {path:'admin', component: AdminPanelComponent},
+  {
+    path:'', 
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      {path:'admin', component: AdminPanelComponent, canActivate: [AuthGuard]},
+      {path:'company-admin', component: CompanyAdminPanelComponent},
+      {path:'company/:id', component: CompanyDetailComponent},
+    ]
+  },
   {path:'login', component: LoginComponent},
-  {path:'company-admin', component: CompanyAdminPanelComponent},
-  {path:'company/:id', component: CompanyDetailComponent},
   {path:'**', component: HomeComponent, pathMatch: 'full'},
 ];
 
