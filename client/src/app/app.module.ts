@@ -18,6 +18,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { RegisterComponent } from './register/register.component';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-
     MatInputModule,
     FlexLayoutModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
     ],
   providers: [],
   bootstrap: [AppComponent]
