@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ReservationSystem.Extensions;
 using ReservationSystem.Interfaces;
+using ReservationSystem.Middleware;
 using ReservationSystem.Services;
 using ReservationSystemBackend.Data;
 using System;
@@ -47,9 +48,9 @@ namespace ReservationSystemBackend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ReservationSystemBackend v1"));
             }
