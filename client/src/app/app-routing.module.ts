@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -20,6 +21,7 @@ const routes: Routes = [
     ]
   },
   {path:'login', component: LoginComponent},
+  {path:'not-found', component: NotFoundComponent},
   {path:'**', component: HomeComponent, pathMatch: 'full'},
 ];
 

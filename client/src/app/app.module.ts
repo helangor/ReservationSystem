@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule } from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
 import { SharedModule } from './_modules/shared/shared.module';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { SharedModule } from './_modules/shared/shared.module';
     AdminPanelComponent,
     RegisterComponent,
     CompanyDetailComponent,
-    CompanyAdminPanelComponent
+    CompanyAdminPanelComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,9 @@ import { SharedModule } from './_modules/shared/shared.module';
     BrowserAnimationsModule,
     SharedModule
     ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
