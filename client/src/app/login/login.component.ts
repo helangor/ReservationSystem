@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
       console.log({res});
       this.router.navigateByUrl('/company-admin')
       this.snackbar.open("Login Success");
-    }), error => this.snackbar.open("ERROR ", error);
-    console.log("log", this.model);
-  }
+    })}
 
   logout() {
     this.accountService.logout();
