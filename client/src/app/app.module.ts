@@ -15,6 +15,7 @@ import { SharedModule } from './_modules/shared/shared.module';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { CompanyListComponent } from './company-list/company-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     CompanyDetailComponent,
     CompanyAdminPanelComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    CompanyListComponent
   ],
   imports: [
     BrowserModule,
