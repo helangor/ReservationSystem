@@ -9,4 +9,7 @@
     <ng-container *ngIf="(accountService.currentUser$ | async) == null">
         <a routerLink="/login" routerLinkActive="active">Kirjaudu sisään</a>
     </ng-container>
+    <ng-container *ngIf="(accountService.currentUser$ | async) != null">
+        <button mat-raised-button (click)="this.accountService.logout()">Kirjaudu ulos</button>
+    </ng-container>
 </mat-toolbar>
