@@ -1,5 +1,6 @@
-<ul *ngFor="let company of companies">
-    <li>{{company.companyName}}</li>
-    <li>{{company.city}}</li>
-    <li>{{company.introduction}}</li>
-</ul>
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <div *ngFor="let company of companies" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="30" >
+        <app-company-detail [company]="company">
+        </app-company-detail>
+    </div>
+</div>

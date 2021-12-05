@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatCardModule
   ], exports: [
     CommonModule,
     MatToolbarModule,
@@ -32,6 +34,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

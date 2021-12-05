@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { RegisterComponent } from './register/register.component';
-import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { CompanyCardComponent } from './company-card/company-card.component';
 import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
 import { SharedModule } from './_modules/shared/shared.module';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
@@ -25,7 +25,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
     HomeComponent,
     AdminPanelComponent,
     RegisterComponent,
-    CompanyDetailComponent,
+    CompanyCardComponent,
     CompanyAdminPanelComponent,
     NotFoundComponent,
     ServerErrorComponent,
