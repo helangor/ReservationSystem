@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
+import { CompanyDetailedComponent } from './company-detailed/company-detailed.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { HomeComponent } from './home/home.component';
@@ -17,7 +18,7 @@ const routes: Routes = [
     children: [
       {path:'admin', component: AdminPanelComponent, canActivate: [AuthGuard]},
       {path:'company-admin', component: CompanyAdminPanelComponent},
-      {path:'company/:id', component: HomeComponent},
+      {path:'company/:companyName', component: CompanyDetailedComponent},
     ]
   },
   {path:'login', component: LoginComponent},

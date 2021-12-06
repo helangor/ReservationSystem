@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../models/company';
-import { CompaniesService } from '../services/companies.service';
+import { CompanyService } from '../services/company.service';
 
 @Component({
   selector: 'app-company-list',
@@ -10,14 +10,14 @@ import { CompaniesService } from '../services/companies.service';
 export class CompanyListComponent implements OnInit {
   companies: Company[];
 
-  constructor(private companiesService: CompaniesService) { }
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
     this.loadCompanies();
   }
 
   loadCompanies() {
-    this.companiesService.getCompanies().subscribe(companies => {
+    this.companyService.getCompanies().subscribe(companies => {
       this.companies = companies;
     })
   }

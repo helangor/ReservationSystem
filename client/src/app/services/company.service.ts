@@ -6,7 +6,7 @@ import { Company } from '../models/company';
 @Injectable({
   providedIn: 'root'
 })
-export class CompaniesService {
+export class CompanyService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -16,8 +16,8 @@ export class CompaniesService {
   }
 
 
-  getCompany(id: number) {
-    return this.http.get<Company>(this.baseUrl + "company/" + id );
+  getCompany(companyName: string) {
+    return this.http.get<Company>(this.baseUrl + "company/" + companyName );
   }
 
 }

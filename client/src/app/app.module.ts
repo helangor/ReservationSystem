@@ -16,6 +16,7 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { CompanyListComponent } from './company-list/company-list.component';
+import { CompanyDetailedComponent } from './company-detailed/company-detailed.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CompanyListComponent } from './company-list/company-list.component';
     CompanyAdminPanelComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    CompanyDetailedComponent
   ],
   imports: [
     BrowserModule,

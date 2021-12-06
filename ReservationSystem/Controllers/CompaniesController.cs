@@ -26,10 +26,16 @@ namespace ReservationSystem.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
             return await _context.Companies.FindAsync(id);
+        }*/
+
+        [HttpGet("{companyname}")]
+        public async Task<ActionResult<Company>> GetCompany(string companyname)
+        {
+            return await _context.Companies.FindAsync(companyname);
         }
     }
 }
