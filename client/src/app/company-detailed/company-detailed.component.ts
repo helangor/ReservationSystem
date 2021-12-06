@@ -19,6 +19,7 @@ export class CompanyDetailedComponent implements OnInit {
 
   loadCompany() {
     this.companyService.getCompany(this.route.snapshot.paramMap.get('companyName')).subscribe(company => {
+      console.log("COMP ", company);
       this.company = company;
     })
   }

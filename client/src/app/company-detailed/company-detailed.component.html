@@ -1,1 +1,6 @@
-<h1 *ngIf="company">{{company.companyName}}</h1>
+<ng-container *ngIf="company">
+    <h1>{{company.companyName}}</h1>
+    <p>{{company.city}}</p>
+    <p>{{company.introduction}}</p>
+    <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+</ng-container>

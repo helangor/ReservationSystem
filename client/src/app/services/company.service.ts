@@ -17,7 +17,7 @@ export class CompanyService {
 
 
   getCompany(companyName: string) {
-    return this.http.get<Company>(this.baseUrl + "company/" + companyName );
+    return this.http.get<Company>(this.baseUrl + "companies/" + companyName );
   }
 
 }
