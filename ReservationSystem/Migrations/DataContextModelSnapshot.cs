@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReservationSystemBackend.Data;
 
-namespace ReservationSystem.Data.Migrations
+namespace ReservationSystem.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -21,9 +21,6 @@ namespace ReservationSystem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("BLOB");
@@ -49,9 +46,6 @@ namespace ReservationSystem.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Introduction")

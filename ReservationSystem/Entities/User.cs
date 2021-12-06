@@ -12,7 +12,6 @@ namespace ReservationSystem.Entities
         public string UserName { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
-        public List<Company> Companies { get; set; } = new List<Company>();
+        //public DateTime Created { get; set; } = DateTime.Now;    
     }   
 }

@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReservationSystemBackend.Data;
 
-namespace ReservationSystem.Data.Migrations
+namespace ReservationSystem.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211204122445_init")]
-    partial class init
+    [Migration("20211206154421_UpdatedFields3")]
+    partial class UpdatedFields3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,6 @@ namespace ReservationSystem.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("BLOB");
@@ -51,9 +48,6 @@ namespace ReservationSystem.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Introduction")

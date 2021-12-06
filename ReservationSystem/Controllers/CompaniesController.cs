@@ -25,7 +25,6 @@ namespace ReservationSystem.Controllers
             return await _context.Companies.ToListAsync();
         }
 
-
         /*[HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
         {
@@ -35,7 +34,7 @@ namespace ReservationSystem.Controllers
         [HttpGet("{companyname}")]
         public async Task<ActionResult<Company>> GetCompany(string companyname)
         {
-            return await _context.Companies.FindAsync(companyname);
+            return await _context.Companies.FirstAsync(c => c.CompanyName == companyname);
         }
     }
 }
