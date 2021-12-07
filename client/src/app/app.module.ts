@@ -17,6 +17,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyDetailedComponent } from './company-detailed/company-detailed.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CompanyDetailedComponent } from './company-detailed/company-detailed.co
     NotFoundComponent,
     ServerErrorComponent,
     CompanyListComponent,
-    CompanyDetailedComponent
+    CompanyDetailedComponent,
+    CompanyEditComponent
   ],
   imports: [
     BrowserModule,

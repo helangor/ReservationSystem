@@ -17,6 +17,8 @@ export class CompanyDetailedComponent implements OnInit {
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
+
+  //TODO: Filtteri mennyttä päivää ei voi valita. Suomen kielelle kuukaudet. Inline kalenteri.
   
   constructor(private companyService: CompanyService, private route: ActivatedRoute) { }
 
