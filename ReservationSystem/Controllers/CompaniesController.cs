@@ -36,5 +36,12 @@ namespace ReservationSystem.Controllers
         {
             return await _context.Companies.FirstAsync(c => c.CompanyName == companyname);
         }
+
+        [HttpGet("api/companies/GetCompaniesByUsername/{username}")]
+        public async Task<ActionResult<Company>> GetCompaniesByUsername(string username)
+        {
+            var test = username;
+            return await _context.Companies.FirstAsync(c => c.CompanyName == username);
+        }
     }
 }
