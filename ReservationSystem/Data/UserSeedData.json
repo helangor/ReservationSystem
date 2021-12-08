@@ -1,0 +1,50 @@
+[
+    {
+        "UserName": "Pekka",
+		"Created": "2019-12-09",
+		        "Companies": [
+            {
+                "CompanyName": "GrilliKamut",
+                "Introduction": "Rasvasta lihistä",
+				"Created": "2020-06-24",
+				"City": "Kouvola"
+            }
+        ]
+    },
+    {
+        "UserName": "Aino",
+		"Created": "2019-08-10",
+		        "Companies": [
+            {
+                "CompanyName": "Teatteri",
+                "Introduction": "Actor acting",
+				"Created": "2010-03-14",
+				"City": "Helsinki"
+            }
+        ]
+    },
+    {
+        "UserName": "Jami",
+        "Created": "2019-04-24",
+		        "Companies": [
+            {
+                "CompanyName": "Karting GP",
+                "Introduction": "GO GO GO",
+								"Created": "2018-01-02",
+				"City": "Vantaa"
+            }
+        ]
+    },
+    {
+        "UserName": "Pekkis",
+        "Created": "2019-04-30",
+		        "Companies": [
+            {
+                "CompanyName": "Järvipalju",
+                "Introduction": "Rannoilla kirkas vesi ja hyvä mieli",
+												"Created": "2021-12-06",
+				"City": "Lappeenranta"
+            }
+        ]
+    }
+]

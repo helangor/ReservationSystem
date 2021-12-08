@@ -8,10 +8,16 @@ namespace ReservationSystem.Entities
 {
     public class User
     {
+        public User()
+        {
+            this.Companies = new HashSet<Company>();
+        }
         public int Id { get; set; }
         public string UserName { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        //public DateTime Created { get; set; } = DateTime.Now;    
-    }   
+        public DateTime Created { get; set; } = DateTime.Now;    
+        public virtual ICollection<Company> Companies { get; set; }
+
+    }
 }

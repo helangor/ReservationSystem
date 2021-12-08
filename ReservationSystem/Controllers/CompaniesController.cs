@@ -34,14 +34,14 @@ namespace ReservationSystem.Controllers
         [HttpGet("{companyname}")]
         public async Task<ActionResult<Company>> GetCompany(string companyname)
         {
-            return await _context.Companies.FirstAsync(c => c.CompanyName == companyname);
+            return await _context.Companies.FirstOrDefaultAsync(c => c.CompanyName == companyname);
         }
 
-        [HttpGet("api/companies/GetCompaniesByUsername/{username}")]
+        [HttpGet("GetCompaniesByUsername")]
         public async Task<ActionResult<Company>> GetCompaniesByUsername(string username)
         {
             var test = username;
-            return await _context.Companies.FirstAsync(c => c.CompanyName == username);
+            return await _context.Companies.FirstOrDefaultAsync(c => c.CompanyName == username);
         }
     }
 }
