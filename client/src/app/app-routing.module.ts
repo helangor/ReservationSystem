@@ -19,10 +19,10 @@ const routes: Routes = [
     children: [
       {path:'admin', component: AdminPanelComponent, canActivate: [AuthGuard]},
       {path:'company-admin', component: CompanyAdminPanelComponent},
-      {path:'company/edit', component: CompanyEditComponent, pathMatch: 'full'}
+      {path:'companies/edit', component: CompanyEditComponent, pathMatch: 'full'}
     ]
   },
-  {path:'company/:companyName', component: CompanyDetailedComponent},
+  {path:'companies/:companyName', component: CompanyDetailedComponent},
   {path:'login', component: LoginComponent},
   {path:'not-found', component: NotFoundComponent},
   {path:'server-error', component: ServerErrorComponent},
