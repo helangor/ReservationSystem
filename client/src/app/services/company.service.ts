@@ -15,9 +15,12 @@ export class CompanyService {
     return this.http.get<Company[]>(this.baseUrl + 'companies');
   }
 
-
   getCompany(companyName: string) {
     return this.http.get<Company>(this.baseUrl + "companies/" + companyName );
+  }
+  
+  getCompanyByUserName(userName: string) {
+    return this.http.get<Company>(this.baseUrl + "companies/GetCompaniesByUsername?username=" + userName);
   }
 
 }
