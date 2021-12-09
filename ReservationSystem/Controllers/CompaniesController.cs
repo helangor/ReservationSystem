@@ -38,10 +38,14 @@ namespace ReservationSystem.Controllers
         }
 
         [HttpGet("GetCompaniesByUsername")]
-        public async Task<ActionResult<Company>> GetCompaniesByUsername(string username)
+        public  ActionResult<Company> GetCompaniesByUsername(string username)
         {
-            var test = username;
-            return await _context.Companies.FirstOrDefaultAsync(c => c.CompanyName == username);
+            var query = from company in _context.Companies
+                        where company.Users.Any(c => c.UserName == username)
+                        select company;
+
+            var companies = query.ToList();
+            return Ok(companies);
         }
     }
 }
