@@ -9,6 +9,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -19,7 +20,7 @@ const routes: Routes = [
     children: [
       {path:'admin', component: AdminPanelComponent, canActivate: [AuthGuard]},
       {path:'company-admin', component: CompanyAdminPanelComponent},
-      {path:'companies/edit', component: CompanyEditComponent, pathMatch: 'full'}
+      {path:'companies/edit', component: CompanyEditComponent, canDeactivate: [PreventUnsavedChangesGuard], pathMatch: 'full'}
     ]
   },
   {path:'companies/:companyName', component: CompanyDetailedComponent},

@@ -6,8 +6,13 @@
 
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
-            <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
+
+            <ng-container *ngIf="editForm.dirty">
+                <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
+            </ng-container>
     
+
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateCompany(company)">
                 <h1>{{company.companyName}}</h1>
     
                 <mat-form-field appearance="fill">
@@ -17,9 +22,11 @@
                 <mat-form-field appearance="fill">
                     <textarea matInput [(ngModel)]="company.introduction" name="introduction"></textarea>
                 </mat-form-field>
+            </form>
+
 
             <div>
-                <button mat-raised-button color="primary" (click)="updateCompany(company)">Tallenna muutokset</button>
+                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna muutokset</button>
                 <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
             </div>
         </div>

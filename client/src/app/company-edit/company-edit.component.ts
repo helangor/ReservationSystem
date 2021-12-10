@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { Company } from '../models/company';
@@ -12,8 +13,14 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./company-edit.component.scss']
 })
 export class CompanyEditComponent implements OnInit {
+  @ViewChild('editForm') editForm: NgForm;
   companies: Company[];
   user: User;
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+    if (this.editForm.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
   constructor(private accountService: AccountService, private companyService: CompanyService,
     private snackbar: MatSnackBar) { 
@@ -34,6 +41,7 @@ export class CompanyEditComponent implements OnInit {
   updateCompany(company: Company) {
     console.log(company);
     this.snackbar.open("Successfully updated")._dismissAfter(2000);
+    this.editForm.reset(company);
   }
 
 }
