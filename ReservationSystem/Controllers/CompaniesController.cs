@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ReservationSystem.DTOs;
 using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
 using System;
@@ -12,40 +14,40 @@ namespace ReservationSystem.Controllers
 {
     public class CompaniesController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly DataContext context;
+        private readonly IMapper mapper;
 
-        public CompaniesController(DataContext context)
+        public CompaniesController(DataContext context, IMapper mapper)
         {
-            _context = context;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
-            return await _context.Companies.ToListAsync();
+            return await context.Companies.ToListAsync();
         }
 
-        /*[HttpGet("{id}")]
-        public async Task<ActionResult<Company>> GetCompany(int id)
-        {
-            return await _context.Companies.FindAsync(id);
-        }*/
-
         [HttpGet("{companyname}")]
-        public async Task<ActionResult<Company>> GetCompany(string companyname)
+        public async Task<ActionResult<CompanyDto>> GetCompany(string companyname)
         {
-            return await _context.Companies.FirstOrDefaultAsync(c => c.CompanyName == companyname);
+            var company = await context.Companies.FirstOrDefaultAsync(c => c.CompanyName == companyname);
+            var companyToReturn = mapper.Map<Company>(company);
+            return Ok(companyToReturn);
         }
 
         [HttpGet("GetCompaniesByUsername")]
-        public  ActionResult<Company> GetCompaniesByUsername(string username)
+        public  ActionResult<CompanyDto> GetCompaniesByUsername(string username)
         {
-            var query = from company in _context.Companies
+            var query = from company in context.Companies
                         where company.Users.Any(c => c.UserName == username)
                         select company;
 
             var companies = query.ToList();
-            return Ok(companies);
+            var companiesToReturn = mapper.Map<IEnumerable<Company>>(companies);
+
+            return Ok(companiesToReturn);
         }
     }
 }
