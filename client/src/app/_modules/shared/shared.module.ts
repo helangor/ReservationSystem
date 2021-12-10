@@ -9,8 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -26,8 +24,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatSnackBarModule,
     MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule 
   ], exports: [
     CommonModule,
     MatToolbarModule,
@@ -38,9 +34,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule 
+    MatCardModule
   ]
 })
 export class SharedModule { }

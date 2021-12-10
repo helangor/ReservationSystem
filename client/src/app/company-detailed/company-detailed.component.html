@@ -1,24 +1,22 @@
 <ng-container *ngIf="company">
-    <div fxLayout="row" fxLayoutAlign="space-around center">
 
-        <div fxFlex=50>
-            <h1>{{company.companyName}}</h1>
-            <p>{{company.city}}</p>
-            <p>{{company.introduction}}</p>
-            <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+        <h1>{{company.companyName}}</h1>
+
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+
+            <div fxFlex=50 fxLayout="column" fxLayoutAlign="space-around center">
+                <p>{{company.city}}</p>
+                <p>{{company.introduction}}</p>
+                <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+            </div>
+
+            <div fxFlex=50>
+                <mat-card class="calendar">
+                    <mat-calendar (selectedChange)="_onSelectedChange($event)" [selected]="selectedDateRange">
+                    </mat-calendar>
+                </mat-card>
+            </div>
         </div>
-
-        <div fxFlex=50>
-            <mat-form-field appearance="fill">
-                <mat-label>Enter a date range</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
-                    <input matStartDate placeholder="Start date" [matDatepickerFilter]="myFilter">
-                    <input matEndDate placeholder="End date">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
-        </div>
-
     </div>
 </ng-container>

@@ -18,6 +18,9 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyDetailedComponent } from './company-detailed/company-detailed.component';
 import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -40,10 +43,15 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
     SharedModule
     ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    { provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    { provide: DateAdapter, useClass: MomentDateAdapter },
   ],
   bootstrap: [AppComponent]
 })

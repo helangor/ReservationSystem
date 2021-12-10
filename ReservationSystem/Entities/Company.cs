@@ -13,7 +13,7 @@ namespace ReservationSystemBackend.Entities
         public DateTime Created { get; set; } = DateTime.Now;
         public string Introduction { get; set; }
         public string City { get; set; }
-        //public ICollection<Photo> Photos { get; set; }
+        public ICollection<Photo> Photos { get; set; }
         public ICollection<User> Users { get; set; }
 
     }

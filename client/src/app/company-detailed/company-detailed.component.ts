@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateRange, DefaultMatCalendarRangeStrategy, MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../models/company';
 import { CompanyService } from '../services/company.service';
@@ -11,6 +12,7 @@ import { CompanyService } from '../services/company.service';
 })
 export class CompanyDetailedComponent implements OnInit {
   company: Company;
+  selectedDateRange: DateRange<Date>;
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -31,6 +33,23 @@ export class CompanyDetailedComponent implements OnInit {
       console.log("COMP ", company);
       this.company = company;
     })
+  }
+
+
+  _onSelectedChange(date: Date): void {
+    if (
+      this.selectedDateRange &&
+      this.selectedDateRange.start &&
+      date > this.selectedDateRange.start &&
+      !this.selectedDateRange.end
+    ) {
+      this.selectedDateRange = new DateRange(
+        this.selectedDateRange.start,
+        date
+      );
+    } else {
+      this.selectedDateRange = new DateRange(date, null);
+    }
   }
 
 }
