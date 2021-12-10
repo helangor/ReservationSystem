@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { Company } from '../models/company';
 import { User } from '../models/user';
@@ -11,21 +12,28 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./company-edit.component.scss']
 })
 export class CompanyEditComponent implements OnInit {
-  company: Company;
+  companies: Company[];
   user: User;
 
-  constructor(private accountService: AccountService, private companyService: CompanyService) { 
+  constructor(private accountService: AccountService, private companyService: CompanyService,
+    private snackbar: MatSnackBar) { 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
-    this.loadCompany();
+    this.loadCompanies();
   }
 
-  loadCompany() {
-    this.companyService.getCompany(this.user.username).subscribe(company => {
-      this.company = company;
+  loadCompanies() {
+    this.companyService.getCompaniesByUserName(this.user.username).subscribe(companies => {
+      this.companies = companies;
+      console.log("COMPANies ", this.companies);
     })
+  }
+
+  updateCompany(company: Company) {
+    console.log(company);
+    this.snackbar.open("Successfully updated")._dismissAfter(2000);
   }
 
 }
