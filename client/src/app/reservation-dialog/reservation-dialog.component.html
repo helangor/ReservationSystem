@@ -1,0 +1,55 @@
+<mat-tab-group #tabgroup>
+    <mat-tab label="Syötä tiedot">
+
+        <div class="reservation-dialog" fxLayout="column" fxLayoutAlign="space-around center">
+
+            <form #reservationForm="ngForm" id="reservationForm" (ngSubmit)="submitReservationForm(reservation)">
+                <div fxLayout="column" fxLayoutAlign="space-around center">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Etunimi</mat-label>
+                        <input matInput required [(ngModel)]="reservation.firstName" name="firstName">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Sukunimi</mat-label>
+                        <input matInput required [(ngModel)]="reservation.lastName" name="lastName">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Osoite</mat-label>
+                        <input matInput required [(ngModel)]="reservation.address" name="address">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Postinumero</mat-label>
+                        <input matInput required [(ngModel)]="reservation.postalCode" name="postalCode">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Postitoimipaikka</mat-label>
+                        <input matInput required [(ngModel)]="reservation.postalCity" name="postalCity">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Puhelinnumero</mat-label>
+                        <input matInput required [(ngModel)]="reservation.phoneNumber" name="phoneNumber">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Sähköposti</mat-label>
+                        <input matInput required [(ngModel)]="reservation.email" name="email">
+                    </mat-form-field>
+                </div>
+            </form>
+
+            <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn käyttöohjeet</mat-slide-toggle>
+            <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)" [disabled]="!isChecked || !reservationForm.valid">Siirry
+                vahvistamaan tilaus</button>
+                <button mat-button color="primary" (click)="this.dialogRef.close()">Peruuta</button>
+        </div>
+
+
+    </mat-tab>
+    <mat-tab label="Vahvista tilaus" [disabled]="!isChecked || !reservationForm.valid">
+        <div class="reservation-dialog">
+            <p><strong>Nimi: </strong>{{reservation.firstName}} {{reservation.lastName}}</p>
+            <p><strong>Puhelinnumero: </strong>{{reservation.phoneNumber}}</p>
+            <p><strong>Sähköposti: </strong>{{reservation.email}}</p>
+            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.postalCity}}</p>
+        </div>
+    </mat-tab>
+</mat-tab-group>

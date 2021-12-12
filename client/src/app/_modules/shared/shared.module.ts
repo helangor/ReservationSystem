@@ -9,6 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -24,6 +28,10 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatSnackBarModule,
     MatCardModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatTabsModule
   ], exports: [
     CommonModule,
     MatToolbarModule,
@@ -34,7 +42,11 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatTabsModule
   ]
 })
 export class SharedModule { }

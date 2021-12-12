@@ -21,6 +21,7 @@ import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from 
     ServerErrorComponent,
     CompanyListComponent,
     CompanyDetailedComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
+    ReservationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from 
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
-    SharedModule
+    SharedModule,
     ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },

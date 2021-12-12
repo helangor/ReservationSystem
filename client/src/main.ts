@@ -10,3 +10,10 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+
+//TODO: Company jakautuu vielä tuotteisiin. 
+
+//Company-detailed
+//TODO: Kun luodaan varausta niin tarkistaa, ettei välissä ole varattuja päiviä. 
+ 
