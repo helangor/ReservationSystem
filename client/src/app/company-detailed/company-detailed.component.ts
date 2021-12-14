@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DateRange } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { Company } from '../models/company';
 import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
 import { CompanyService } from '../services/company.service';
@@ -14,15 +15,17 @@ import { CompanyService } from '../services/company.service';
 export class CompanyDetailedComponent implements OnInit {
   company: Company;
   selectedDateRange: DateRange<Date>;
-  
+  reservedDays = [];
+
   constructor(
-    private companyService: CompanyService, 
+    private companyService: CompanyService,
     private route: ActivatedRoute,
     public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
     this.loadCompany();
+    this.reservedDays = this.getReservedDays();
   }
 
   loadCompany() {
@@ -31,46 +34,70 @@ export class CompanyDetailedComponent implements OnInit {
     })
   }
 
+  getReservedDays() {
+    let days = [];
+    days.push(moment('2021-12-23'))
+    days.push(moment('2021-12-24'))
+    days.push(moment('2021-12-26'))
+    return days;
+  }
 
-  _onSelectedChange(date: Date): void {
-    //TODO: tähän saa laitettua, että jos välissä varattu päivä niin ei voi valita.
-    if (
-      this.selectedDateRange &&
-      this.selectedDateRange.start &&
-      date > this.selectedDateRange.start &&
-      !this.selectedDateRange.end
-    ) {
-      this.selectedDateRange = new DateRange(
-        this.selectedDateRange.start,
 
-        date
-      );
+  _onSelectedChange(date: any): void {
+    if (!this.selectedDateRange && date) {
+      let tomorrow = moment(date).add(1, 'days');
+      this.selectedDateRange = new DateRange(date, tomorrow);
+      return
+    } 
+    
+    if (date > this.selectedDateRange.end) {
+      this.selectedDateRange = new DateRange(this.selectedDateRange.start, date);
     } else {
-      this.selectedDateRange = new DateRange(date, null);
+      let tomorrow = moment(date).add(1, 'days');
+      this.selectedDateRange = new DateRange(date, tomorrow);
+    }
+
+
+    for (let i = 0; i < this.reservedDays.length; i++) {
+      let reservedDay = this.reservedDays[i];
+      let rangeContainsReservedDays = reservedDay.isBetween(this.selectedDateRange.start, date);
+
+      if (rangeContainsReservedDays && date > reservedDay) {
+        let tomorrow = moment(date).add(1, 'days');
+        this.selectedDateRange = new DateRange(date, tomorrow);
+        break;
+      } else if (rangeContainsReservedDays){
+        this.selectedDateRange = new DateRange(this.selectedDateRange.start, reservedDay);
+        break;
+      }
     }
   }
 
   reserve() {
-    if (!this.selectedDateRange) return;
-
-    if (this.selectedDateRange.start == null || this.selectedDateRange.end == null) return;
+    if (!this.selectedDateRange || this.selectedDateRange.start == null) return;
 
     this.openReservationDialog();
     console.log("RESERVE ", this.selectedDateRange);
-
   }
 
 
   myDateFilter = (d: any) => {
-    let calendarDate = d.toDate();
-    let currentDate = new Date();
-    currentDate.setHours(currentDate.getHours() - 18);
+    let now = moment().set('hour', 18);
 
-    let day = new Date('2021-12-13T03:24:00');
-    if (this.sameDay(day, calendarDate)) return false;
-    //TODO: Tässä filtteröi pois päivät, jotka varattu. NgOninitissä hakee varatut päivät ja sitten tässä check löytyykö.
+    let isReserved = this.isReservedDay(d);
+    if (isReserved) {return false;}
 
-    return calendarDate > currentDate;
+    return d > now;
+  }
+
+  isReservedDay(d: any) {
+    let isReserved: boolean;
+    this.reservedDays.forEach(reservedDay => {
+      if (reservedDay.isSame(d, 'day')) {
+        isReserved = true;
+      }
+    });
+    return isReserved;
   }
 
   sameDay(d1: Date, d2: Date) {
@@ -92,6 +119,6 @@ export class CompanyDetailedComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
 }
+
 
