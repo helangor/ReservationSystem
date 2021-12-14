@@ -37,9 +37,10 @@
             </form>
 
             <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn käyttöohjeet</mat-slide-toggle>
-            <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)" [disabled]="!isChecked || !reservationForm.valid">Siirry
+            <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)"
+                [disabled]="!isChecked || !reservationForm.valid">Siirry
                 vahvistamaan tilaus</button>
-                <button mat-button color="primary" (click)="this.dialogRef.close()">Peruuta</button>
+            <button mat-button color="primary" (click)="this.dialogRef.close()">Peruuta</button>
         </div>
 
 
@@ -49,7 +50,16 @@
             <p><strong>Nimi: </strong>{{reservation.firstName}} {{reservation.lastName}}</p>
             <p><strong>Puhelinnumero: </strong>{{reservation.phoneNumber}}</p>
             <p><strong>Sähköposti: </strong>{{reservation.email}}</p>
-            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.postalCity}}</p>
+            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.postalCity}}
+            </p>
+            <ng-container *ngIf="data && data.dateRange">
+                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("D" + "." + "M" + "." + "YYYY" + " "
+                    + "dddd")}}</p>
+                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("D" + "." + "M" + "." + "YYYY" + "
+                    " + "dddd")}}</p>
+            </ng-container>
+            <button mat-raised-button color="primary" (click)="confirmOrder()">Vahvista tilaus</button>
+
         </div>
     </mat-tab>
 </mat-tab-group>

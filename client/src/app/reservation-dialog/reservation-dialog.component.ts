@@ -20,7 +20,9 @@ export class ReservationDialogComponent implements OnInit {
     postalCode: '',
     postalCity: '',
     phoneNumber: '',
-    email: ''
+    email: '',
+    reservationStartTime: undefined,
+    reservationEndTime: undefined
   };
 
  
@@ -30,6 +32,12 @@ export class ReservationDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if (this.data) {
+      console.log("DATA ", this.data);
+      console.log(this.data.dateRange.start.toDate());
+      this.reservation.reservationStartTime = this.data.dateRange.start.toDate();
+      this.reservation.reservationEndTime = this.data.dateRange.end.toDate();
+    }
   }
 
   changeIndex(tabgroup: MatTabGroup, number: number){
@@ -37,11 +45,11 @@ export class ReservationDialogComponent implements OnInit {
   }
   
   submitReservationForm(reservation: any) {
-    console.log(reservation);
-  }
-
-  test() {
 
   }
 
+  confirmOrder() {
+    console.log(this.reservation);
+
+  }
 }

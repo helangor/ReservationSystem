@@ -7,4 +7,6 @@ export interface Reservation {
     postalCity: string;
     phoneNumber: string;
     email: string;
+    reservationStartTime: Date;
+    reservationEndTime: Date;
 }
