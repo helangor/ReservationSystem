@@ -18,5 +18,7 @@ namespace ReservationSystemBackend.Data
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public object MyEntities { get; internal set; }
     }
 }
