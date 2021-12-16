@@ -24,15 +24,13 @@ namespace ReservationSystem.Controllers
         [HttpPost("CreateReservation")]
         public async Task<IActionResult> Create(Reservation reservation)
         {
-            var test = new Reservation();
-            
             if (ModelState.IsValid)
             {
                 context.Reservations.Add(reservation);
+                context.Companies.Attach(reservation.Company);
                 await context.SaveChangesAsync();
             }
             return Ok("Ok");
-
         }
     }
 }
