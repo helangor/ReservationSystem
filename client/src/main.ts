@@ -10,10 +10,3 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
-
-
-//TODO: Company jakautuu vielä tuotteisiin. 
-
-//Company-detailed
-//TODO: Muuta varauksen tekeminen AirBnb tyyppiseksi. Nyt bugina pidemmällä varauksella jää mahdollisesti viimeinen päivä valitsematta.
- 
