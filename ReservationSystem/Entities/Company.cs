@@ -15,6 +15,6 @@ namespace ReservationSystemBackend.Entities
         public string City { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<User> Users { get; set; }
-
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }
