@@ -1,8 +1,6 @@
 <mat-tab-group #tabgroup>
     <mat-tab label="Syötä tiedot">
-
         <div class="reservation-dialog" fxLayout="column" fxLayoutAlign="space-around center">
-
             <form #reservationForm="ngForm" id="reservationForm" (ngSubmit)="submitReservationForm(reservation)">
                 <div fxLayout="column" fxLayoutAlign="space-around center">
                     <mat-form-field appearance="fill">
@@ -35,12 +33,11 @@
                     </mat-form-field>
                 </div>
             </form>
-
             <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn käyttöohjeet</mat-slide-toggle>
             <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)"
                 [disabled]="!isChecked || !reservationForm.valid">Siirry
                 vahvistamaan tilaus</button>
-            <button mat-button color="primary" (click)="this.dialogRef.close()">Peruuta</button>
+            <button mat-button color="primary" matDialogClose>Peruuta</button>
         </div>
 
 

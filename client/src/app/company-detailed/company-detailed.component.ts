@@ -74,8 +74,6 @@ export class CompanyDetailedComponent implements OnInit {
   }
 
   reserve() {
-    if (!this.selectedDateRange || this.selectedDateRange.start == null) return;
-
     this.openReservationDialog();
     console.log("RESERVE ", this.selectedDateRange);
   }
@@ -107,9 +105,7 @@ export class CompanyDetailedComponent implements OnInit {
   }
 
   openReservationDialog() {
-    const dialogRef = this.dialog.open(ReservationDialogComponent);
-
-    this.dialog.open(ReservationDialogComponent, {
+     const dialogRef = this.dialog.open(ReservationDialogComponent, {
       data: {
         dateRange: this.selectedDateRange,
         company: this.company

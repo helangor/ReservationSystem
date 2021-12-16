@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Reservation } from '../models/reservation';
 import { ReservationService } from '../services/reservation.service';
@@ -31,7 +32,8 @@ export class ReservationDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   public dialogRef: MatDialogRef<ReservationDialogComponent>,
   private http: HttpClient,
-  private reservationService: ReservationService)
+  private reservationService: ReservationService,
+  private snackbar: MatSnackBar)
   {}
 
 
@@ -55,6 +57,10 @@ export class ReservationDialogComponent implements OnInit {
     console.log(this.reservation);
     this.reservationService.createReservation(this.reservation).subscribe(r => {
       console.log(r);
+      this.snackbar.open("Created");
+      this.dialogRef.close();
     })
   }
 }
+
+//TODO: Tämä dialogRef.close() ei sulje koko mat dialogia

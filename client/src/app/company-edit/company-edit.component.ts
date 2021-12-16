@@ -40,7 +40,7 @@ export class CompanyEditComponent implements OnInit {
 
   updateCompany(company: Company) {
     console.log(company);
-    this.snackbar.open("Successfully updated")._dismissAfter(2000);
+    this.snackbar.open("Successfully updated");
     this.editForm.reset(company);
   }
 
