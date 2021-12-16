@@ -1,12 +1,14 @@
+import { Company } from "./company";
+
 export interface Reservation {
-    id: number,
     firstName: string;
     lastName: string;
     address: string;
     postalCode: string;
-    postalCity: string;
+    city: string;
     phoneNumber: string;
     email: string;
-    reservationStartTime: Date;
-    reservationEndTime: Date;
+    startTime: Date;
+    endTime: Date;
+    company: Company;
 }

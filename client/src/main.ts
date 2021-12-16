@@ -15,5 +15,5 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 //TODO: Company jakautuu vielä tuotteisiin. 
 
 //Company-detailed
-//TODO: Kun luodaan varausta niin tarkistaa, ettei välissä ole varattuja päiviä. 
+//TODO: Muuta varauksen tekeminen AirBnb tyyppiseksi. Nyt bugina pidemmällä varauksella jää mahdollisesti viimeinen päivä valitsematta.
  

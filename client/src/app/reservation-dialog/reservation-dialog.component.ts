@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Reservation } from '../models/reservation';
+import { ReservationService } from '../services/reservation.service';
 
 @Component({
   selector: 'app-reservation-dialog',
@@ -13,30 +15,31 @@ export class ReservationDialogComponent implements OnInit {
   @ViewChild('reservationForm') reservationForm: NgForm;
   isChecked: boolean;
   reservation: Reservation = {
-    id: 0,
     firstName: '',
     lastName: '',
     address: '',
     postalCode: '',
-    postalCity: '',
+    city: '',
     phoneNumber: '',
     email: '',
-    reservationStartTime: undefined,
-    reservationEndTime: undefined
+    startTime: undefined,
+    endTime: undefined,
+    company: undefined
   };
 
  
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  public dialogRef: MatDialogRef<ReservationDialogComponent>)
+  public dialogRef: MatDialogRef<ReservationDialogComponent>,
+  private http: HttpClient,
+  private reservationService: ReservationService)
   {}
 
 
   ngOnInit(): void {
     if (this.data) {
-      console.log("DATA ", this.data);
-      console.log(this.data.dateRange.start.toDate());
-      this.reservation.reservationStartTime = this.data.dateRange.start.toDate();
-      this.reservation.reservationEndTime = this.data.dateRange.end.toDate();
+      this.reservation.startTime = this.data.dateRange.start.toDate();
+      this.reservation.endTime = this.data.dateRange.end.toDate();
+      this.reservation.company = this.data.company;
     }
   }
 
@@ -50,6 +53,8 @@ export class ReservationDialogComponent implements OnInit {
 
   confirmOrder() {
     console.log(this.reservation);
-
+    this.reservationService.createReservation(this.reservation).subscribe(r => {
+      console.log(r);
+    })
   }
 }

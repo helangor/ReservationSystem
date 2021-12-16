@@ -112,6 +112,7 @@ export class CompanyDetailedComponent implements OnInit {
     this.dialog.open(ReservationDialogComponent, {
       data: {
         dateRange: this.selectedDateRange,
+        company: this.company
       },
     });
 

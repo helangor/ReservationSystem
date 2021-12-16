@@ -13,3 +13,10 @@ namespace ReservationSystem.Controllers
 
         }
 }
+
+//TODO: 
+
+//Nää kentät ja constructor tänne 
+
+/*private readonly DataContext _context;
+private readonly ITokenService _tokenService;*/

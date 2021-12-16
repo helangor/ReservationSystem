@@ -23,7 +23,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Postitoimipaikka</mat-label>
-                        <input matInput required [(ngModel)]="reservation.postalCity" name="postalCity">
+                        <input matInput required [(ngModel)]="reservation.city" name="city">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Puhelinnumero</mat-label>
@@ -50,7 +50,7 @@
             <p><strong>Nimi: </strong>{{reservation.firstName}} {{reservation.lastName}}</p>
             <p><strong>Puhelinnumero: </strong>{{reservation.phoneNumber}}</p>
             <p><strong>Sähköposti: </strong>{{reservation.email}}</p>
-            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.postalCity}}
+            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.city}}
             </p>
             <ng-container *ngIf="data && data.dateRange">
                 <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("D" + "." + "M" + "." + "YYYY" + " "
