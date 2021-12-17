@@ -16,6 +16,7 @@ export class CompanyDetailedComponent implements OnInit {
   company: Company;
   selectedDateRange: DateRange<Date>;
   reservedDays = [];
+  myDateFilter: (d: any) => boolean;
 
   constructor(
     private companyService: CompanyService,
@@ -25,25 +26,18 @@ export class CompanyDetailedComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCompany();
-    this.reservedDays = this.getReservedDays();
+    
   }
 
   loadCompany() {
     this.companyService.getCompany(this.route.snapshot.paramMap.get('companyName')).subscribe(company => {
       this.company = company;
+      this.getReservedDays();
     })
   }
 
-  getReservedDays() {
-    let days = [];
-    days.push(moment('2021-12-23'))
-    days.push(moment('2021-12-24'))
-    days.push(moment('2021-12-26'))
-    return days;
-  }
-
-
   _onSelectedChange(date: any): void {
+    date.hours(12);
     if (!this.selectedDateRange && date) {
       let tomorrow = moment(date).add(1, 'days');
       this.selectedDateRange = new DateRange(date, tomorrow);
@@ -71,23 +65,52 @@ export class CompanyDetailedComponent implements OnInit {
         break;
       }
     }
+    console.log(this.selectedDateRange)
   }
 
   reserve() {
     this.openReservationDialog();
-    console.log("RESERVE ", this.selectedDateRange);
+  }
+
+  openReservationDialog() {
+     const dialogRef = this.dialog.open(ReservationDialogComponent, {
+      data: {
+        dateRange: this.selectedDateRange,
+        company: this.company
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 
-  myDateFilter = (d: any) => {
-    let now = moment().set('hour', 18);
 
-    let isReserved = this.isReservedDay(d);
-    if (isReserved) {return false;}
 
-    return d > now;
+  getReservedDays() {
+    let days = [];
+
+    this.companyService.getReservedDays(this.company.id).subscribe(reservations => {
+      reservations.forEach(day => {
+        days.push(moment(day))
+      })
+      this.reservedDays = days;  
+      this.initDateFilter();
+    })
   }
 
+  initDateFilter() {
+    this.myDateFilter = (d: any) => {    
+      let isReserved = this.isReservedDay(d);
+      if (isReserved) {return false;}
+  
+      let now = moment().set('hour', 18);
+
+      return d > now;
+    }    
+  }
+  
   isReservedDay(d: any) {
     let isReserved: boolean;
     this.reservedDays.forEach(reservedDay => {
@@ -102,19 +125,6 @@ export class CompanyDetailedComponent implements OnInit {
     return d1.getFullYear() === d2.getFullYear() &&
       d1.getMonth() === d2.getMonth() &&
       d1.getDate() === d2.getDate();
-  }
-
-  openReservationDialog() {
-     const dialogRef = this.dialog.open(ReservationDialogComponent, {
-      data: {
-        dateRange: this.selectedDateRange,
-        company: this.company
-      },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 }
 

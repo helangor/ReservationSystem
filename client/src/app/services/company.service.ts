@@ -23,4 +23,8 @@ export class CompanyService {
     return this.http.get<Company[]>(this.baseUrl + "companies/GetCompaniesByUsername?username=" + userName);
   }
 
+  getReservedDays(id: number) {
+    return this.http.get<any>(this.baseUrl + "companies/GetReservedDays?id=" + id);
+  }
+
 }

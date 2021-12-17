@@ -23,5 +23,20 @@ namespace ReservationSystem.Entities
         public DateTime EndTime { get; set; } = DateTime.Now;
         public Company Company { get; set; }
 
+
+        public List<DateTime> GetReservedDaysList(List<Reservation> reservations)
+        {
+            var dates = new List<DateTime>();
+
+            //TODO: Tähän vielä aikavyöhykkeet mukaan
+
+            foreach (var reservation in reservations)
+            {
+                for (DateTime date = reservation.StartTime; date < reservation.EndTime; date = date.AddDays(1))
+                    dates.Add(date);
+            }
+
+            return dates.OrderBy(x => x.Date).ToList();
+        }
     }
 }

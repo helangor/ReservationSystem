@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.DTOs;
+using ReservationSystem.Entities;
 using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
 using System;
@@ -45,9 +46,29 @@ namespace ReservationSystem.Controllers
                         select company;
 
             var companies = query.ToList();
-            var companiesToReturn = mapper.Map<IEnumerable<Company>>(companies);
+            var companiesToReturn = mapper.Map<IEnumerable<CompanyDto>>(companies);
 
             return Ok(companiesToReturn);
+        }
+
+        [HttpGet("GetReservedDays")]
+        public ActionResult<List<DateTime>> GetReservedDays(int id)
+        {
+            var query = from company in context.Companies
+                        where (company.Id == id)
+                        select company.Reservations;
+
+            var reservations = query.Single();
+            if (reservations.Count == 0)
+            {
+                return Ok(reservations);
+            }
+
+            //TODO: Tämä kantahakuun suoraan
+            var futureReservations = reservations.Where(r => r.EndTime > DateTime.Now).ToList();
+
+            var reservationDays = new Reservation().GetReservedDaysList(futureReservations);
+            return Ok(reservationDays);
         }
     }
 }

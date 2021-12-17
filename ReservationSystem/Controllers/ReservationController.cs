@@ -24,7 +24,6 @@ namespace ReservationSystem.Controllers
         [HttpPost("CreateReservation")]
         public async Task<ActionResult<Reservation>> Create(Reservation reservation)
         {
-
             context.Reservations.Add(reservation);
             context.Companies.Attach(reservation.Company);
             await context.SaveChangesAsync();

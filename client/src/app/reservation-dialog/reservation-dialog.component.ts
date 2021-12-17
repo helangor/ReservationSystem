@@ -48,19 +48,12 @@ export class ReservationDialogComponent implements OnInit {
   changeIndex(tabgroup: MatTabGroup, number: number){
     tabgroup.selectedIndex = number;
   }
-  
-  submitReservationForm(reservation: any) {
-
-  }
 
   confirmOrder() {
     console.log(this.reservation);
     this.reservationService.createReservation(this.reservation).subscribe(r => {
-      console.log(r);
       this.snackbar.open("Created");
       this.dialogRef.close();
     })
   }
 }
-
-//TODO: Tämä dialogRef.close() ei sulje koko mat dialogia

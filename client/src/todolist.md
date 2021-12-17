@@ -1,17 +1,22 @@
 ## TOIMINNOT
-
-- Pitää hakea varatut päivät varauksista ja täyttää ne kalenteriin.
+ ### MUST
+ 
 - Muuta Companyn tilalle Product 
 - Lisää tuotteelle varauksen alku- ja loppuaika.
 - Kuvat mukaan
-- Unohdin salasanani painike ja email
 - Email kun varaus lähtee.
-- Kun kirjautuu väärällä salasanalla niin heittää herjan
 - Käyttöohjeet ja tietosuojaseloste
+
+-COMPANY-EDIT
+   - Voi muokata myös varauksen alku- ja päätösaikaa.
+   - Kuvien uploadaaminen
+
+### NICE TO HAVE
+- Unohdin salasanani painike ja email
 - API Endpointteihin Authorizet
 
  - COMPANY-EDIT
-   - Tänne näkyviin varaukset 
+   - Tänne näkyviin varaukset
    - Voi muokata myös varauksen alku- ja päätösaikaa.
    - Kuvien uploadaaminen
 
@@ -21,3 +26,4 @@
 
 ## BUGIT 
 - ReservationController Create palauttamaan ReservationDTO
+- Kun kirjautuu väärällä salasanalla ei ilmoita herjalla
