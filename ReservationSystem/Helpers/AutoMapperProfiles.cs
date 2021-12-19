@@ -15,7 +15,7 @@ namespace ReservationSystem.Helpers
         {
             CreateMap<User, UserDto>();
             CreateMap<Photo, PhotoDto>();
-            CreateMap<Company, CompanyDto>();
+            CreateMap<Product, ProductDto>();
             CreateMap<Reservation, ReservationDto>();
 
         }

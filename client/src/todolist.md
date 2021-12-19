@@ -1,11 +1,12 @@
 ## TOIMINNOT
  ### MUST
- 
-- Muuta Companyn tilalle Product 
+
+- Muuta Companyn tilalle Product
 - Lisää tuotteelle varauksen alku- ja loppuaika.
 - Kuvat mukaan
 - Email kun varaus lähtee.
 - Käyttöohjeet ja tietosuojaseloste
+- Lisää varuas onnistui komponetti
 
 -COMPANY-EDIT
    - Voi muokata myös varauksen alku- ja päätösaikaa.
@@ -14,6 +15,8 @@
 ### NICE TO HAVE
 - Unohdin salasanani painike ja email
 - API Endpointteihin Authorizet
+- Kalenteri oma komponentti
+- Kalenterin reserved tyyli paljon selkeämpi
 
  - COMPANY-EDIT
    - Tänne näkyviin varaukset

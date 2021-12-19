@@ -1,0 +1,32 @@
+<ng-container *ngIf="products && products.length > 0">
+    <ng-container *ngFor="let product of products">
+
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+
+            <ng-container *ngIf="editForm.dirty">
+                <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
+            </ng-container>
+    
+
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
+                <h1>{{product.productName}}</h1>
+    
+                <mat-form-field appearance="fill">
+                    <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
+                </mat-form-field>
+            </form>
+
+
+            <div>
+                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna muutokset</button>
+                <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+            </div>
+        </div>
+
+    </ng-container>
+  
+</ng-container>

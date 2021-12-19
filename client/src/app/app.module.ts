@@ -4,25 +4,23 @@ import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { RegisterComponent } from './register/register.component';
-import { CompanyCardComponent } from './company-card/company-card.component';
-import { CompanyAdminPanelComponent } from './company-admin-panel/company-admin-panel.component';
 import { SharedModule } from './_modules/shared/shared.module';
-import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { CompanyListComponent } from './company-list/company-list.component';
-import { CompanyDetailedComponent } from './company-detailed/company-detailed.component';
-import { CompanyEditComponent } from './company-edit/company-edit.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
-import { ReservationDialogComponent } from './reservation-dialog/reservation-dialog.component';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductDetailedComponent } from './components/product-detailed/product-detailed.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ReservationDialogComponent } from './components/reservation-dialog/reservation-dialog.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +30,12 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     HomeComponent,
     AdminPanelComponent,
     RegisterComponent,
-    CompanyCardComponent,
-    CompanyAdminPanelComponent,
+    ProductCardComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    CompanyListComponent,
-    CompanyDetailedComponent,
-    CompanyEditComponent,
+    ProductListComponent,
+    ProductDetailedComponent,
+    ProductEditComponent,
     ReservationDialogComponent
   ],
   imports: [

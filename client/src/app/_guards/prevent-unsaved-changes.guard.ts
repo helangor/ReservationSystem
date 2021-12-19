@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CompanyEditComponent } from '../company-edit/company-edit.component';
+import { ProductEditComponent } from '../components/product-edit/product-edit.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreventUnsavedChangesGuard implements CanDeactivate<unknown> {
-  canDeactivate( component: CompanyEditComponent): boolean {
-    if (component.editForm.dirty) {
+  canDeactivate( product: ProductEditComponent): boolean {
+    if (product.editForm.dirty) {
       return confirm('Oletko varma, että haluat poistua? Tallentamattomat muutokset menetetään.')
     }
     return true;
