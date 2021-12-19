@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReservationSystemBackend.Data;
@@ -9,9 +10,10 @@ using ReservationSystemBackend.Data;
 namespace ReservationSystem.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211219200226_UpdatedFields1")]
+    partial class UpdatedFields1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,12 +172,6 @@ namespace ReservationSystem.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
-
-                    b.Property<TimeSpan>("ReservationEndTime")
-                        .HasColumnType("interval");
-
-                    b.Property<TimeSpan>("ReservationStartTime")
-                        .HasColumnType("interval");
 
                     b.HasKey("Id");
 

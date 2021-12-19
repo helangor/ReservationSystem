@@ -9,6 +9,5 @@ namespace ReservationSystemBackend.Entities
         public string Url { get; set; }
         public bool IsMain { get; set; }
         public Product Product { get; set; }
-        public int ProductId { get; set; }
     }
 }

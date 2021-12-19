@@ -33,20 +33,22 @@ namespace ReservationSystem.Controllers
         [HttpGet("{productName}")]
         public async Task<ActionResult<ProductDto>> GetProduct(string productName)
         {
-            var product = await context.Products.FirstOrDefaultAsync(c => c.ProductName == productName);
+            var product = await context.Products.FirstOrDefaultAsync(c => c.Name == productName);
             var productToReturn = mapper.Map<Product>(product);
             return Ok(productToReturn);
         }
 
         [HttpGet("GetProductsByUsername")]
-        public  ActionResult<ProductDto> GetProductsByUsername(string username)
+        public ActionResult<ProductDto> GetProductsByUsername(string username)
         {
-            var query = from product in context.Products
-                        where product.Users.Any(c => c.UserName == username)
-                        select product;
+            var query = from company in context.Companies
+                        where company.Users.Any(c => c.UserName == username)
+                        select company.Products;
 
             var products = query.ToList();
-            var productsToReturn = mapper.Map<IEnumerable<ProductDto>>(products);
+
+            //TODO: Tähän järkevämpi tapa
+            var productsToReturn = mapper.Map<IEnumerable<ProductDto>>(products[0]);
 
             return Ok(productsToReturn);
         }

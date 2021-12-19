@@ -2,48 +2,72 @@
   {
     "UserName": "Pekka",
     "Created": "2019-12-09",
-    "Products": [
+    "Companies": [
       {
-        "ProductName": "GrilliKamut",
-        "Introduction": "Rasvasta lihistä",
+        "Name": "Kouvolan paljuvuokraamo",
+        "Introduction": "Meiltä mm. betonipalju",
         "Created": "2020-06-24",
-        "City": "Kouvola"
+        "Products": [
+          {
+            "Name":  "Palju1",
+            "City": "Kouvola"
+          }
+        ]
       }
     ]
   },
   {
     "UserName": "Aino",
     "Created": "2019-08-10",
-    "Products": [
+    "Companies": [
       {
-        "ProductName": "Teatteri",
-        "Introduction": "Actor acting",
+        "Name": "Hyvinkään paljupojat",
+        "Introduction": "Best of the best",
         "Created": "2010-03-14",
-        "City": "Helsinki"
+        "Products": [
+          {
+            "Name": "Palju XXL",
+            "City": "Hyvinkää"
+          }
+        ]
       }
     ]
   },
   {
     "UserName": "Jami",
     "Created": "2019-04-24",
-    "Products": [
+    "Companies": [
       {
-        "ProductName": "Karting GP",
+        "Name": "Seinäjoen lämpö",
         "Introduction": "GO GO GO",
         "Created": "2018-01-02",
-        "City": "Vantaa"
+        "Products": [
+          {
+            "Name": "Vanha tammitynnyri",
+            "City": "Seinäjoki"
+          }
+        ]
       }
     ]
   },
   {
     "UserName": "Pekkis",
     "Created": "2019-04-30",
-    "Products": [
+    "Companies": [
       {
-        "ProductName": "Järvipalju",
+        "CompanyName": "Järvipalju",
         "Introduction": "Rannoilla kirkas vesi ja hyvä mieli",
         "Created": "2021-12-06",
-        "City": "Lappeenranta"
+        "Products": [
+          {
+            "Name": "Saimaan Suur-Helmi",
+            "City": "Lappeenranta"
+          },
+          {
+            "Name": "Saimaan Pien-Helmi",
+            "City": "Lappeenranta"
+          }
+        ]
       }
     ]
   }

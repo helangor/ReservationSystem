@@ -9,12 +9,13 @@ namespace ReservationSystemBackend.Entities
     public class Product
     {
         public int Id { get; set; }
-        public string ProductName { get; set; }
+        public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
+        public TimeSpan ReservationStartTime { get; set; } = new TimeSpan(14, 0, 0);
+        public TimeSpan ReservationEndTime { get; set; } = new TimeSpan(12, 0, 0);
         public string Introduction { get; set; }
         public string City { get; set; }
         public ICollection<Photo> Photos { get; set; }
-        public ICollection<User> Users { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }
 }

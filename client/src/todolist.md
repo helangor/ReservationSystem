@@ -1,15 +1,13 @@
 ## TOIMINNOT
  ### MUST
-
-- Muuta Companyn tilalle Product
-- Lisää tuotteelle varauksen alku- ja loppuaika.
 - Kuvat mukaan
 - Email kun varaus lähtee.
 - Käyttöohjeet ja tietosuojaseloste
-- Lisää varuas onnistui komponetti
+- Lisää varaus onnistui komponetti
 
 -COMPANY-EDIT
-   - Voi muokata myös varauksen alku- ja päätösaikaa.
+   - Näkee varaukset ja voi asettaa varattuja päiviä
+   - Voi muokata myös varauksen alku- ja päätösaikaa. Esim. Alku 14:00 Palautus 16:00
    - Kuvien uploadaaminen
 
 ### NICE TO HAVE
@@ -24,7 +22,7 @@
    - Kuvien uploadaaminen
 
 - Pitää vielä serveriltä katsoa kun tallentaa varausta, että onko varmasti vielä vapaana
-
+- Lisää NSwag
 
 
 ## BUGIT 

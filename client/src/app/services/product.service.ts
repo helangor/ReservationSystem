@@ -16,7 +16,6 @@ export class ProductService {
   }
 
   getProduct(productName: string) {
-    console.log({productName});
     return this.http.get<Product>(this.baseUrl + "products/" + productName );
   }
   
