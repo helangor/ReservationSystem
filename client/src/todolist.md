@@ -9,12 +9,13 @@
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
    - Voi muokata myös varauksen alku- ja päätösaikaa. Esim. Alku 14:00 Palautus 16:00
+   - Yrityksen tietojen muokkaaminen erillisen napin taakse.
    - Kuvien uploadaaminen
 
 ### NICE TO HAVE
 - Automaattisesti hakee tien perusteella numeron ja toimipaikan. 
 - Unohdin salasanani painike ja email
-- API Endpointteihin Authorizet
+- API Endpointteihin Authorizet toimimaan
 - Kalenteri oma komponentti
 - Kalenterin reserved tyyli paljon selkeämpi
 - Captcha kun tekee varauksen?

@@ -27,4 +27,8 @@ export class ProductService {
     return this.http.get<any>(this.baseUrl + "products/GetReservedDays?id=" + id);
   }
 
+  getReservations(id: number) {
+    return this.http.get<any>(this.baseUrl + "products/GetReservations?id=" + id);
+  }
+
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -56,21 +57,23 @@ namespace ReservationSystem.Controllers
         [HttpGet("GetReservedDays")]
         public ActionResult<List<DateTime>> GetReservedDays(int id)
         {
-            var query = from products in context.Products
-                        where (products.Id == id)
-                        select products.Reservations;
-
-            var reservations = query.Single();
-            if (reservations.Count == 0)
-            {
+            var reservations = Reservation.GetReservations(id, context);
+            if (reservations == null)
                 return Ok(reservations);
-            }
-
+                        
             //TODO: Tämä kantahakuun suoraan
             var futureReservations = reservations.Where(r => r.EndTime > DateTime.Now).ToList();
 
             var reservationDays = new Reservation().GetReservedDaysList(futureReservations);
             return Ok(reservationDays);
+        }
+
+        //[Authorize]
+        [HttpGet("GetReservations")]
+        public ActionResult<List<Reservation>> GetReservations(int id)
+        {
+            var reservations = Reservation.GetReservations(id, context).OrderBy(p => p.StartTime);
+            return Ok(reservations);
         }
     }
 }

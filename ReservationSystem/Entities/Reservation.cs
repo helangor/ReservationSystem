@@ -1,4 +1,5 @@
-﻿using ReservationSystemBackend.Entities;
+﻿using ReservationSystemBackend.Data;
+using ReservationSystemBackend.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,16 @@ namespace ReservationSystem.Entities
             }
 
             return dates.OrderBy(x => x.Date).ToList();
+        }
+
+        public static ICollection<Reservation> GetReservations(int id, DataContext context)
+        {
+            var query = from product in context.Products
+                         where (product.Id == id)
+                         select product.Reservations;
+
+            var reservations = query.SingleOrDefault();
+            return reservations;
         }
     }
 }
