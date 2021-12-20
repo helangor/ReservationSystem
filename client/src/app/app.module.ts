@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReservationDialogComponent } from './components/reservation-dialog/reservation-dialog.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { ReservationSuccessComponent } from './components/reservation-success/reservation-success.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
     ProductListComponent,
     ProductDetailedComponent,
     ProductEditComponent,
-    ReservationDialogComponent
+    ReservationDialogComponent,
+    ReservationSuccessComponent
   ],
   imports: [
     BrowserModule,

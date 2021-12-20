@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabGroup } from '@angular/material/tabs';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 import { ReservationService } from 'src/app/services/reservation.service';
 import { Reservation } from 'src/app/_models/reservation';
 
@@ -33,7 +35,9 @@ export class ReservationDialogComponent implements OnInit {
   public dialogRef: MatDialogRef<ReservationDialogComponent>,
   private http: HttpClient,
   private reservationService: ReservationService,
-  private snackbar: MatSnackBar)
+  private snackbar: MatSnackBar,
+  private router: Router,
+  private dataService: DataService)
   {}
 
 
@@ -50,9 +54,11 @@ export class ReservationDialogComponent implements OnInit {
   }
 
   confirmOrder() {
-    console.log(this.reservation);
+    this.dataService.reservation = this.reservation;
+
     this.reservationService.createReservation(this.reservation).subscribe(r => {
       this.snackbar.open("Created");
       this.dialogRef.close();
-    })}
+      this.router.navigateByUrl('/success')
+    }, error => console.log(error))}
 }
