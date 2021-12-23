@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.DTOs;
 using ReservationSystem.Entities;
+using ReservationSystem.Extensions;
+using ReservationSystem.Interfaces;
 using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
 using System;
@@ -18,11 +20,15 @@ namespace ReservationSystem.Controllers
     {
         private readonly DataContext context;
         private readonly IMapper mapper;
+        private readonly IPhotoService photoService;
 
-        public ProductsController(DataContext context, IMapper mapper)
+        public ProductsController(DataContext context,
+                                  IMapper mapper,
+                                  IPhotoService photoService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.photoService = photoService;
         }
 
         [HttpGet]
@@ -74,6 +80,31 @@ namespace ReservationSystem.Controllers
         {
             var reservations = Reservation.GetReservations(id, context).OrderBy(p => p.StartTime);
             return Ok(reservations);
+        }
+
+        [HttpPost("add-photo")]
+        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, string productName)
+        {
+            var product = await context.Products.FirstOrDefaultAsync(c => c.Name == productName);
+            var result = await photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            if (product.Photos.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            product.Photos.Add(photo);
+
+            await context.SaveChangesAsync();
+            return mapper.Map<PhotoDto>(photo);
         }
     }
 }
