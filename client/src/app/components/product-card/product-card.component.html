@@ -4,7 +4,8 @@
     <mat-card-subtitle>{{product.city}}</mat-card-subtitle>
   </mat-card-header>
   <div class="card-img-wrapper">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="{{product.photos[0] && product.photos[0].url || 'https://material.angular.io/assets/img/examples/shiba2.jpg'}}" 
+    alt="Photo of a Product">
   </div>
   <mat-card-actions>
     <button mat-raised-button color="primary" routerLink="/products/{{product.name}}">Tilaa</button>

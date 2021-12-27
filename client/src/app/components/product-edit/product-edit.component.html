@@ -19,6 +19,11 @@
                     <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
                 </mat-form-field>
             </form>
+            <app-photo-editor [product]="product"></app-photo-editor>
+
+            <div>
+                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna muutokset</button>
+            </div>
 
             <ul *ngFor="let reservation of reservations">
                 <li>{{reservation.firstName}}</li>
@@ -28,7 +33,6 @@
 
 
             <div>
-                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna muutokset</button>
                 <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
             </div>
         </div>

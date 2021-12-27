@@ -42,8 +42,6 @@ export class ProductEditComponent implements OnInit {
   }
   loadReservations(id: number) {
     this.productService.getReservations(id).subscribe(res => {
-      console.log({res});
-      
       this.reservations = res;
     });
   }
@@ -53,5 +51,4 @@ export class ProductEditComponent implements OnInit {
     this.snackbar.open("Successfully updated");
     this.editForm.reset(product);
   }
-
 }
