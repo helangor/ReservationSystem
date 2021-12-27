@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { Reservation } from 'src/app/_models/reservation';
+import { DataService } from 'src/app/_services/data.service';
 
 @Component({
   selector: 'app-reservation-success',

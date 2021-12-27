@@ -5,8 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
-import { ReservationService } from 'src/app/services/reservation.service';
+import { DataService } from 'src/app/_services/data.service';
+import { ReservationService } from 'src/app/_services/reservation.service';
 import { Reservation } from 'src/app/_models/reservation';
 
 @Component({

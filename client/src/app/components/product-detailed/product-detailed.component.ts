@@ -3,7 +3,7 @@ import { DateRange } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from 'src/app/_services/product.service';
 import { Product } from 'src/app/_models/product';
 import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AccountService } from 'src/app/services/account.service';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-login',
