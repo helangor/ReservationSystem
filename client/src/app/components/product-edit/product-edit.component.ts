@@ -2,11 +2,12 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
-import { AccountService } from 'src/app/services/account.service';
-import { ProductService } from 'src/app/services/product.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { ProductService } from 'src/app/_services/product.service';
 import { Product } from 'src/app/_models/product';
 import { Reservation } from 'src/app/_models/reservation';
 import { User } from 'src/app/_models/user';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-edit',
@@ -15,7 +16,7 @@ import { User } from 'src/app/_models/user';
 })
 export class ProductEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
-  products: Product[];
+  product: Product;
   user: User;
   reservations: Reservation[];
 
@@ -26,7 +27,8 @@ export class ProductEditComponent implements OnInit {
   }
 
   constructor(private accountService: AccountService, private productService: ProductService,
-    private snackbar: MatSnackBar) {
+    private snackbar: MatSnackBar,
+    private route: ActivatedRoute) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
@@ -35,11 +37,13 @@ export class ProductEditComponent implements OnInit {
   }
 
   loadProducts() {
-    this.productService.getProductsByUserName(this.user.username).subscribe(products => {
-      this.products = products;
-      this.loadReservations(this.products[0].id)
+
+    this.productService.getProduct(this.route.snapshot.paramMap.get('productName')).subscribe(product => {
+      this.product = product;
+      this.loadReservations(this.product.id)
     })
   }
+  
   loadReservations(id: number) {
     this.productService.getReservations(id).subscribe(res => {
       this.reservations = res;

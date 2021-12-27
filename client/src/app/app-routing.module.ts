@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductDetailedComponent } from './components/product-detailed/product-detailed.component';
+import { ProductEditListComponent } from './components/product-edit-list/product-edit-list.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ReservationSuccessComponent } from './components/reservation-success/reservation-success.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      {path:'products/edit', component: ProductEditComponent, canDeactivate: [PreventUnsavedChangesGuard], pathMatch: 'full'}
+      {path:'products/edit', component: ProductEditListComponent, pathMatch: 'full'},
+      {path:'products/edit/:productName', component: ProductEditComponent, canDeactivate: [PreventUnsavedChangesGuard], pathMatch: 'full'}
     ]
   },
   {path:'products/:productName', component: ProductDetailedComponent},

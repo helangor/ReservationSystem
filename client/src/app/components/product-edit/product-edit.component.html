@@ -1,42 +1,45 @@
-<ng-container *ngIf="products && products.length > 0">
-    <ng-container *ngFor="let product of products">
+<ng-container *ngIf="product">
+    <div fxLayout="column" fxLayoutAlign="space-around center">
 
-        <div fxLayout="column" fxLayoutAlign="space-around center">
-
-            <ng-container *ngIf="editForm.dirty">
-                <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
-            </ng-container>
-    
-
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
-                <h1>{{product.productName}}</h1>
-    
-                <mat-form-field appearance="fill">
-                    <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
-                </mat-form-field>
-    
-                <mat-form-field appearance="fill">
-                    <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
-                </mat-form-field>
-            </form>
-            <app-photo-editor [product]="product"></app-photo-editor>
-
-            <div>
-                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna muutokset</button>
-            </div>
-
-            <ul *ngFor="let reservation of reservations">
-                <li>{{reservation.firstName}}</li>
-                <li>{{reservation.startTime.toString()}}</li>
-                <li>{{reservation.endTime.toString()}}</li>
-            </ul>
+        <ng-container *ngIf="editForm.dirty">
+            <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
+        </ng-container>
 
 
-            <div>
-                <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
-            </div>
+        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
+            <h1>{{product.productName}}</h1>
+
+            <mat-form-field appearance="fill">
+                <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
+            </mat-form-field>
+        </form>
+        <app-photo-editor [product]="product"></app-photo-editor>
+
+        <div>
+            <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna
+                muutokset</button>
         </div>
 
-    </ng-container>
-  
+
+        <div>
+            <img mat-card-image src="{{product.photos[0] && product.photos[0].url}}" alt="Photo of a Product">
+        </div>
+
+        <h1>Varaukset</h1>
+        <ul *ngFor="let reservation of reservations">
+            <li>{{reservation.firstName}}</li>
+            <li>{{reservation.startTime.toString()}}</li>
+            <li>{{reservation.endTime.toString()}}</li>
+        </ul>
+
+
+        <div>
+            <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+        </div>
+    </div>
+
 </ng-container>

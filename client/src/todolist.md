@@ -1,10 +1,11 @@
 ## TOIMINNOT
  ### MUST
-- Kuvat mukaan
 - Email kun varaus lähtee.
 - Käyttöohjeet ja tietosuojaseloste
 - Kalenterin valinta Haku ja palautus eri valinnat. (airbnb)
 - Company-detail formin inputtien validate
+- Kun menee yrityksen muokkaukseen niin ensin näkyy lista products, jos näitä useita.
+- Ei voi luoda uutta productia, joka nimi jo olemassa
 
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
