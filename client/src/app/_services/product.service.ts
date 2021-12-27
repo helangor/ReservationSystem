@@ -18,10 +18,6 @@ export class ProductService {
   getProduct(productName: string) {
     return this.http.get<Product>(this.baseUrl + "products/" + productName );
   }
-  
-  getProductsByUserName(userName: string) {
-    return this.http.get<Product[]>(this.baseUrl + "products/GetProductsByUsername?username=" + userName);
-  }
 
   getReservedDays(id: number) {
     return this.http.get<any>(this.baseUrl + "products/GetReservedDays?id=" + id);
