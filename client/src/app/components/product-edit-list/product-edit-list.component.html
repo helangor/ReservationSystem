@@ -1,0 +1,6 @@
+<ul *ngFor="let company of companies">
+    <li>{{company.name}}</li>
+    <ul *ngFor="let product of company.products">
+        <a routerLink="/products/edit/{{product.name}}">{{product.name}}</a>
+    </ul>
+</ul>
