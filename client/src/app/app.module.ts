@@ -22,6 +22,7 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ReservationSuccessComponent } from './components/reservation-success/reservation-success.component';
+import { PhotoEditorComponent } from './components/photo-editor/photo-editor.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ReservationSuccessComponent } from './components/reservation-success/re
     ProductDetailedComponent,
     ProductEditComponent,
     ReservationDialogComponent,
-    ReservationSuccessComponent
+    ReservationSuccessComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,

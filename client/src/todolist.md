@@ -14,6 +14,8 @@
 
 ### NICE TO HAVE
 - Automaattisesti hakee tien perusteella numeron ja toimipaikan. 
+- Tee Default photo ja eti samalla myös muille default parametreille koko Angularista hyvä keskitetty paikka. 
+- Muuta API endpointtien nimet tyylillä get-users. Nyt PascalCase
 - Unohdin salasanani painike ja email
 - API Endpointteihin Authorizet toimimaan
 - Kalenteri oma komponentti
