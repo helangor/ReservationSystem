@@ -17,6 +17,7 @@ namespace ReservationSystemBackend.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<User> Users { get; set; }
     }

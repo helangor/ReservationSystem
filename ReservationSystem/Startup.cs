@@ -35,7 +35,9 @@ namespace ReservationSystemBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors();
             services.AddIdentityServices(_config);
 

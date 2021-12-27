@@ -34,13 +34,14 @@ namespace ReservationSystem.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await context.Products.ToListAsync();
+            var products = await context.Products.Include(p => p.Photos).ToListAsync();
+            return Ok(products);
         }
 
         [HttpGet("{productName}")]
         public async Task<ActionResult<ProductDto>> GetProduct(string productName)
         {
-            var product = await context.Products.FirstOrDefaultAsync(c => c.Name == productName);
+            var product = await context.Products.Include(p => p.Reservations).Include(p => p.Photos).FirstOrDefaultAsync(c => c.Name == productName);
             var productToReturn = mapper.Map<Product>(product);
             return Ok(productToReturn);
         }
@@ -75,17 +76,32 @@ namespace ReservationSystem.Controllers
         }
 
         //[Authorize]
-        [HttpGet("GetReservations")]
+        [HttpGet("get-reservations")]
         public ActionResult<List<Reservation>> GetReservations(int id)
         {
             var reservations = Reservation.GetReservations(id, context).OrderBy(p => p.StartTime);
             return Ok(reservations);
         }
 
+        //[Authorize]
+        [HttpGet("get-photos")]
+        public ActionResult<List<Photo>> GetPhotos(int id)
+        {
+            var query = from product in context.Products
+                        where (product.Id == id)
+                        select product.Photos;
+
+            var photos = query.SingleOrDefault();
+            return Ok(photos);
+        }
+
+        //[Authorize]
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, string productName)
         {
             var product = await context.Products.FirstOrDefaultAsync(c => c.Name == productName);
+            if (product == null) return NotFound("ProductNotFound");
+
             var result = await photoService.AddPhotoAsync(file);
 
             if (result.Error != null) return BadRequest(result.Error.Message);
@@ -93,17 +109,14 @@ namespace ReservationSystem.Controllers
             var photo = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
+                PublicId = result.PublicId,
+                Product = product
             };
 
-            if (product.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
-
-            product.Photos.Add(photo);
-
+            context.Photos.Add(photo);
+            context.Products.Attach(photo.Product);
             await context.SaveChangesAsync();
+
             return mapper.Map<PhotoDto>(photo);
         }
     }
