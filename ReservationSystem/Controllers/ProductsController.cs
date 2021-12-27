@@ -41,24 +41,9 @@ namespace ReservationSystem.Controllers
         [HttpGet("{productName}")]
         public async Task<ActionResult<ProductDto>> GetProduct(string productName)
         {
-            var product = await context.Products.Include(p => p.Reservations).Include(p => p.Photos).FirstOrDefaultAsync(c => c.Name == productName);
+            var product = await context.Products.Include(p => p.Photos).FirstOrDefaultAsync(c => c.Name == productName);
             var productToReturn = mapper.Map<Product>(product);
             return Ok(productToReturn);
-        }
-
-        [HttpGet("GetProductsByUsername")]
-        public ActionResult<ProductDto> GetProductsByUsername(string username)
-        {
-            var query = from company in context.Companies
-                        where company.Users.Any(c => c.UserName == username)
-                        select company.Products;
-
-            var products = query.ToList();
-
-            //TODO: Tähän järkevämpi tapa
-            var productsToReturn = mapper.Map<IEnumerable<ProductDto>>(products[0]);
-
-            return Ok(productsToReturn);
         }
 
         [HttpGet("GetReservedDays")]
