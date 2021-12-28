@@ -22,26 +22,21 @@ namespace ReservationSystem.Services
             _emailServiceSettings = emailServiceSettings.Value;
         }
 
-        public void Send(string from, string to, string subject, string html)
+        public async void SendEmail(string to, string subject, string html)
         {
-            // create message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(from));
+            email.From.Add(MailboxAddress.Parse(_emailServiceSettings.SmtpUser));
             email.To.Add(MailboxAddress.Parse(to));
             email.Subject = subject;
             email.Body = new TextPart(TextFormat.Html) { Text = html };
 
-            // send email
-            using (var client = new SmtpClient())
-            {
-                client.Connect(_emailServiceSettings.SmtpHost, _emailServiceSettings.SmtpPort, SecureSocketOptions.None);
+            using var smtp = new SmtpClient();
+            smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
+            smtp.Connect(_emailServiceSettings.SmtpHost, _emailServiceSettings.SmtpPort, SecureSocketOptions.StartTlsWhenAvailable);
+            smtp.Authenticate(_emailServiceSettings.SmtpUser, _emailServiceSettings.SmtpPass);
 
-                // Note: only needed if the SMTP server requires authentication
-                client.Authenticate(_emailServiceSettings.SmtpUser, _emailServiceSettings.SmtpPass);
-
-                client.Send(email);
-                client.Disconnect(true);
-            }
+            await smtp.SendAsync(email);
+            smtp.Disconnect(true);
         }
     }
 }

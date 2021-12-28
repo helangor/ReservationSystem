@@ -7,6 +7,6 @@ namespace ReservationSystem.Interfaces
 {
     public interface IEmailService
     {
-        void Send(string from, string to, string subject, string html);
+        void SendEmail(string to, string subject, string html);
     }
 }

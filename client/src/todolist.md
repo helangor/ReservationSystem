@@ -1,15 +1,16 @@
 ## TOIMINNOT
  ### MUST
-- Email kun varaus lähtee.
 - Käyttöohjeet ja tietosuojaseloste
 - Kalenterin valinta Haku ja palautus eri valinnat. (airbnb)
 - Company-detail formin inputtien validate
-- Kun menee yrityksen muokkaukseen niin ensin näkyy lista products, jos näitä useita.
 - Ei voi luoda uutta productia, joka nimi jo olemassa
+- Varaus email järkevämmäksi. 
+- Varaukselle, IsVerified. Eli myyjän pitää vahvistaa tilaus.
 
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
    - Voi muokata myös varauksen alku- ja päätösaikaa. Esim. Alku 14:00 Palautus 16:00
+   - Voi vahvistaa tilauksen
    - Yrityksen tietojen muokkaaminen erillisen napin taakse.
    - Kuvien uploadaaminen
 
