@@ -24,6 +24,9 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { ReservationSuccessComponent } from './components/reservation-success/reservation-success.component';
 import { PhotoEditorComponent } from './components/photo-editor/photo-editor.component';
 import { ProductEditListComponent } from './components/product-edit-list/product-edit-list.component';
+import { InstructionsComponent } from './components/instructions/instructions.component';
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
+import { PrivacyStatementComponent } from './components/privacy-statement/privacy-statement.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { ProductEditListComponent } from './components/product-edit-list/product
     ReservationDialogComponent,
     ReservationSuccessComponent,
     PhotoEditorComponent,
-    ProductEditListComponent
+    ProductEditListComponent,
+    InstructionsComponent,
+    TermsOfServiceComponent,
+    PrivacyStatementComponent,
     ],
   imports: [
     BrowserModule,

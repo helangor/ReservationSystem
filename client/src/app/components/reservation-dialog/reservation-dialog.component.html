@@ -33,7 +33,11 @@
                     </mat-form-field>
                 </div>
             </form>
-            <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn käyttöohjeet</mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn 
+                <a target="_blank" [routerLink]="'/vuokrausehdot'">vuokrausehdot</a> 
+                ja 
+                <a target="_blank" [routerLink]="'/tietosuojaseloste'">tietosuojaselosteen</a> 
+                </mat-slide-toggle>
             <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)"
                 [disabled]="!isChecked || !reservationForm.valid">Siirry
                 vahvistamaan tilaus</button>

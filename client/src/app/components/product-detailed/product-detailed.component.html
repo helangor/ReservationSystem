@@ -11,7 +11,8 @@
                 <img mat-card-image
                     src="{{product.photos[0] && product.photos[0].url || 'https://material.angular.io/assets/img/examples/shiba2.jpg'}}"
                     alt="Photo of a Product">
-                <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+                    <button mat-raised-button color="primary" target="_blank" [routerLink]="'/vuokrausehdot'">Vuokrausehdot</button>
+                    <button mat-raised-button color="primary" target="_blank" [routerLink]="'/kayttoohje'">Käyttöohjeet</button>
             </div>
 
             <div fxFlex=40>
