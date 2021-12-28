@@ -30,12 +30,15 @@ namespace ReservationSystem.Controllers
 
             //TODO: Tähän vielä varmistus, että email on oikea. 
             var reservationMessage = string.Format(
-                "<div>Hei {0}</div> " +
-                "<h1>Varaus luotu {1}</h1>" +
-                "<h1>Odotathan vielä, että yritys vahvistaa tilauksesi</h1>" +
-                "<p>Laina-aika alkaa {2} ja päättyy {3}</p>" +
-                "<p>Mukavaa paljuilua</p>"
-                , reservation.FirstName, reservation.Product.Name, reservation.StartTime.ToShortDateString(), reservation.EndTime.ToShortDateString());
+                "<div>Hei {0}!</div> " +
+                "<p>Olemme vastaanottaneet varauksenne ajalle {1} - {2}</p>" +
+                "<p>Vuokraavan yrityksen tiedot:</p>" +
+                "<p>{3}</p>" +
+                "<p>{4}</p>" +
+                "<br>" +
+                "<p>Mukavaa paljuilua toivottaa, </p>" +
+                "<p>Paljumies, www.paljumies.fi</p>",
+                reservation.FirstName, reservation.StartTime.ToLongDateString(), reservation.EndTime.ToLongDateString(), reservation.Product.Name, reservation.Product.City);
 
             emailService.SendEmail(reservation.Email, "Varaus vahvistus", reservationMessage);
 
