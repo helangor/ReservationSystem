@@ -1,14 +1,11 @@
 ## TOIMINNOT
  ### MUST
-- Käyttöohjeet ja tietosuojaseloste
-- Kalenterin valinta Haku ja palautus eri valinnat. (airbnb)
 - Company-detail formin inputtien validate
 - Ei voi luoda uutta productia, joka nimi jo olemassa
-- Routet suomeksi
 
 - Varauksen luominen
    - Varaus email järkevämmäksi. Palautus ja hakuajat tähän mukaan.
-   - Lähettää s-postin myös varaajalle.
+   - Lähettää s-postin myös paljufirmalle.
 
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
@@ -31,7 +28,7 @@
 - Vaihda käyttöohjeet ja vuokrausehdot, että lukee markdown filestä. Sitten helppo muuttaa niitä tarvittaessa. Nämä myös tulemaan modalina, eikä pelkästään omana sivuna.
 - Pitää vielä serveriltä katsoa kun tallentaa varausta, että onko varmasti vielä vapaana
 - Lisää NSwag
-
+- Routet suomeksi
 
 ## BUGIT 
 - ReservationController Create palauttamaan ReservationDTO

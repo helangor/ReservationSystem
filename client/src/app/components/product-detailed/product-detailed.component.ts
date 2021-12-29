@@ -16,6 +16,7 @@ export class ProductDetailedComponent implements OnInit {
   product: Product;
   selectedDateRange: DateRange<Date>;
   reservedDays = [];
+  originalReservedDays = [];
   myDateFilter: (d: any) => boolean;
 
   constructor(
@@ -37,30 +38,30 @@ export class ProductDetailedComponent implements OnInit {
   }
 
   _onSelectedChange(date: any): void {
-    date.hours(12);
-    if (!this.selectedDateRange && date) {
-      let tomorrow = moment(date).add(1, 'days');
-      this.selectedDateRange = new DateRange(date, tomorrow);
-      return
-    }
+    this.reservedDays = [...this.originalReservedDays];
+    this.initDateFilter();
 
-    if (date > this.selectedDateRange.end) {
+    var startTime = parseInt(this.product.reservationStartTime.toString().slice(0, 2))
+    date.hours(startTime);
+
+    if (!this.selectedDateRange || this.selectedDateRange.end || date <= this.selectedDateRange.start) {
+      this.selectedDateRange = new DateRange(date, null);
+
+      //Allows to select return to reserved day. 
+      let nextResDay = this.getNextReservedDay(date);
+      if (nextResDay) {
+        this.reservedDays = this.removeDayFromReservedDay(nextResDay);
+        this.initDateFilter();
+      }
+
+    } else if (this.selectedDateRange.start && !this.selectedDateRange.end) {
       this.selectedDateRange = new DateRange(this.selectedDateRange.start, date);
-    } else {
-      let tomorrow = moment(date).add(1, 'days');
-      this.selectedDateRange = new DateRange(date, tomorrow);
     }
-
 
     for (let i = 0; i < this.reservedDays.length; i++) {
       let reservedDay = this.reservedDays[i];
       let rangeContainsReservedDays = reservedDay.isBetween(this.selectedDateRange.start, date);
-
-      if (rangeContainsReservedDays && date > reservedDay) {
-        let tomorrow = moment(date).add(1, 'days');
-        this.selectedDateRange = new DateRange(date, tomorrow);
-        break;
-      } else if (rangeContainsReservedDays) {
+      if (rangeContainsReservedDays) {
         this.selectedDateRange = new DateRange(this.selectedDateRange.start, reservedDay);
         break;
       }
@@ -83,9 +84,6 @@ export class ProductDetailedComponent implements OnInit {
     });
   }
 
-
-
-
   getReservedDays() {
     let days = [];
 
@@ -94,6 +92,7 @@ export class ProductDetailedComponent implements OnInit {
         days.push(moment(day))
       })
       this.reservedDays = days;
+      this.originalReservedDays = days;
       this.initDateFilter();
     })
   }
@@ -119,10 +118,19 @@ export class ProductDetailedComponent implements OnInit {
     return isReserved;
   }
 
-  sameDay(d1: Date, d2: Date) {
-    return d1.getFullYear() === d2.getFullYear() &&
-      d1.getMonth() === d2.getMonth() &&
-      d1.getDate() === d2.getDate();
+  getNextReservedDay(d: any) {
+    let reservedDay;
+    for (let resDay of this.reservedDays) {
+      if (resDay.isSameOrAfter(d)) {
+        reservedDay = resDay;
+        break;
+      }
+    }
+    return reservedDay;
+  }
+
+  removeDayFromReservedDay(nextResDay: any) {
+    return this.reservedDays.filter(day => !day.isSame(nextResDay, 'day'));
   }
 }
 

@@ -6,7 +6,6 @@ export interface Company {
     id: number,
     name: string;
     created: Date;
-    Created: Time;
     introduction: string;
     products: Product[];
     users: User[];
