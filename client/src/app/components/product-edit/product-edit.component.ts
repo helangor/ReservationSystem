@@ -51,8 +51,9 @@ export class ProductEditComponent implements OnInit {
   }
 
   updateProduct(product: Product) {
-    console.log(product);
-    this.snackbar.open("Successfully updated");
-    this.editForm.reset(product);
+    this.productService.updateProduct(product).subscribe(res => {
+      this.snackbar.open("Successfully updated");
+      this.editForm.reset(product);
+    }, error => console.log(error))
   }
 }

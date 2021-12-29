@@ -61,6 +61,22 @@ namespace ReservationSystem.Controllers
         }
 
         //[Authorize]
+        //PUT??
+        [HttpPost("update-product")]
+        public ActionResult UpdateProduct(Product product)
+        {
+            var currentProduct = context.Products.FirstOrDefault(c => c.Id == product.Id);
+            if (currentProduct != null)
+            {
+                currentProduct.ReservationEndTime = product.ReservationEndTime;
+                currentProduct.ReservationStartTime = product.ReservationStartTime;
+                context.SaveChanges();
+            }
+            
+            return Ok();
+        }
+
+        //[Authorize]
         [HttpGet("get-reservations")]
         public ActionResult<List<Reservation>> GetReservations(int id)
         {

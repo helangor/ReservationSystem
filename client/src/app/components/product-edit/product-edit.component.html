@@ -1,45 +1,59 @@
 <ng-container *ngIf="product">
-    <div fxLayout="column" fxLayoutAlign="space-around center">
+    <mat-tab-group #tabgroup>
+        <mat-tab label="Arvojen muokkaus">
+            <div fxLayout="column" fxLayoutAlign="space-around center">
 
-        <ng-container *ngIf="editForm.dirty">
-            <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
-        </ng-container>
+                <h1>Varaukset</h1>
+                <ul *ngFor="let reservation of reservations">
+                    <li>{{reservation.firstName}}</li>
+                    <li>{{reservation.startTime.toString()}}</li>
+                    <li>{{reservation.endTime.toString()}}</li>
+                </ul>
 
+                <h2>Ajat</h2>
+                <mat-form-field appearance="fill">
+                    <mat-label>Varauksen alkuaika: </mat-label>
+                    <input matInput type="time" [(ngModel)]="product.reservationStartTime">
+                </mat-form-field>
 
-        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
-            <h1>{{product.productName}}</h1>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Varauksen loppuaika: </mat-label>
+                    <input matInput type="time" [(ngModel)]="product.reservationEndTime">
+                </mat-form-field>
 
-            <mat-form-field appearance="fill">
-                <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
-            </mat-form-field>
+                <div>
+                    <button mat-raised-button color="primary" (click)="updateProduct(this.product)">Tallenna</button>
+                    <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
+                </div>
+            </div>
+        </mat-tab>
 
-            <mat-form-field appearance="fill">
-                <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
-            </mat-form-field>
-        </form>
-        <app-photo-editor [product]="product"></app-photo-editor>
+        <mat-tab label="Tekstin muokkaus">
+            <ng-container *ngIf="editForm.dirty">
+                <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
+            </ng-container>
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
+                <h1>{{product.productName}}</h1>
 
-        <div>
-            <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna
-                muutokset</button>
-        </div>
+                <mat-form-field appearance="fill">
+                    <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
+                </mat-form-field>
 
+                <mat-form-field appearance="fill">
+                    <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
+                </mat-form-field>
+            </form>
+            <app-photo-editor [product]="product"></app-photo-editor>
 
-        <div>
-            <img mat-card-image src="{{product.photos[0] && product.photos[0].url}}" alt="Photo of a Product">
-        </div>
+            <div>
+                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna
+                    muutokset</button>
+            </div>
 
-        <h1>Varaukset</h1>
-        <ul *ngFor="let reservation of reservations">
-            <li>{{reservation.firstName}}</li>
-            <li>{{reservation.startTime.toString()}}</li>
-            <li>{{reservation.endTime.toString()}}</li>
-        </ul>
-
-
-        <div>
-            <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
-        </div>
-    </div>
-
+            <div>
+                <img mat-card-image src="{{product.photos[0] && product.photos[0].url}}" alt="Photo of a Product">
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </ng-container>

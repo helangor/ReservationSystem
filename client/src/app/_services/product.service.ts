@@ -27,4 +27,9 @@ export class ProductService {
     return this.http.get<any>(this.baseUrl + "products/GetReservations?id=" + id);
   }
 
+  updateProduct(product: Product) {
+    let url = this.baseUrl + "products/update-product"
+    return this.http.post<any>(url, product);
+  }
+
 }
