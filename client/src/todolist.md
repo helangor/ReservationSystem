@@ -1,19 +1,18 @@
 ## TOIMINNOT
  ### MUST
-- Company-detail formin inputtien validate
-- Ei voi luoda uutta productia, joka nimi jo olemassa
+- Lisää tuotteille hinnat
 
 - Varauksen luominen
-   - Varaus email järkevämmäksi. Palautus ja hakuajat tähän mukaan.
    - Lähettää s-postin myös paljufirmalle.
 
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
    - Voi muokata myös varauksen alku- ja päätösaikaa. Esim. Alku 14:00 Palautus 16:00
-   - Voi vahvistaa tilauksen
    - Yrityksen tietojen muokkaaminen erillisen napin taakse.
    - Kuvien uploadaaminen
    - Voi peruuttaa varauksen, jolloin lähtee peruutus s-posti lähettäjälle.
+   - Voi määrittää hinnat
+       - Hinnan määritys backendiin
 
 ### NICE TO HAVE
 - Automaattisesti hakee tien perusteella numeron ja toimipaikan. 
@@ -21,7 +20,6 @@
 - Muuta API endpointtien nimet tyylillä get-users. Nyt PascalCase
 - Unohdin salasanani painike ja email
 - API Endpointteihin Authorizet toimimaan
-- Kalenteri oma komponentti
 - Kalenterin reserved tyyli paljon selkeämpi
 - Captcha kun tekee varauksen?
 - Luo email template, jossa Paljumiehen tiedot
@@ -29,6 +27,10 @@
 - Pitää vielä serveriltä katsoa kun tallentaa varausta, että onko varmasti vielä vapaana
 - Lisää NSwag
 - Routet suomeksi
+
+- Voi luoda uusia producteja muokkauksesta
+    - Ei voi luoda uutta productia, joka nimi jo olemassa
+
 
 ## BUGIT 
 - ReservationController Create palauttamaan ReservationDTO
