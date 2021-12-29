@@ -38,7 +38,7 @@ namespace ReservationSystem.Controllers
                 "<br>" +
                 "<p>Mukavaa paljuilua toivottaa, </p>" +
                 "<p>Paljumies, www.paljumies.fi</p>",
-                reservation.FirstName, reservation.StartTime.ToLongDateString(), reservation.EndTime.ToLongDateString(), reservation.Product.Name, reservation.Product.City);
+                reservation.FirstName, TimeZone.CurrentTimeZone.ToLocalTime(reservation.StartTime).ToString(), TimeZone.CurrentTimeZone.ToLocalTime(reservation.EndTime).ToString(), reservation.Product.Name, reservation.Product.City);
 
             emailService.SendEmail(reservation.Email, "Varaus vahvistus", reservationMessage);
 

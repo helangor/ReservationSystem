@@ -14,7 +14,7 @@ import { ReservationDialogComponent } from '../reservation-dialog/reservation-di
 })
 export class ProductDetailedComponent implements OnInit {
   product: Product;
-  selectedDateRange: DateRange<Date>;
+  selectedDateRange: DateRange<any>;
   reservedDays = [];
   originalReservedDays = [];
   myDateFilter: (d: any) => boolean;
@@ -26,8 +26,8 @@ export class ProductDetailedComponent implements OnInit {
 
 
   ngOnInit(): void {
+    moment.locale('fi');
     this.loadProduct();
-
   }
 
   loadProduct() {
@@ -40,9 +40,6 @@ export class ProductDetailedComponent implements OnInit {
   _onSelectedChange(date: any): void {
     this.reservedDays = [...this.originalReservedDays];
     this.initDateFilter();
-
-    var startTime = parseInt(this.product.reservationStartTime.toString().slice(0, 2))
-    date.hours(startTime);
 
     if (!this.selectedDateRange || this.selectedDateRange.end || date <= this.selectedDateRange.start) {
       this.selectedDateRange = new DateRange(date, null);
@@ -69,6 +66,7 @@ export class ProductDetailedComponent implements OnInit {
   }
 
   reserve() {
+    this.setCorrectStartAndEndTime();
     this.openReservationDialog();
   }
 
@@ -83,6 +81,14 @@ export class ProductDetailedComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+  setCorrectStartAndEndTime() {
+    let start = moment(this.selectedDateRange.start.format("YYYY-MM-DD") + ' ' + this.product.reservationStartTime.toString());  
+    let end = moment(this.selectedDateRange.end.format("YYYY-MM-DD") + ' ' + this.product.reservationEndTime.toString());
+    this.selectedDateRange = new DateRange(start, end); 
+  }
+
+
 
   getReservedDays() {
     let days = [];
