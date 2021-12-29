@@ -58,8 +58,8 @@
             <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.city}}
             </p>
             <ng-container *ngIf="data && data.dateRange">
-                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY")}}</p>
-                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY")}}</p>
+                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY" + " " + "k:mm")}}</p>
+                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY" + " " + "k:mm")}}</p>
             </ng-container>
             <button mat-raised-button color="primary" (click)="confirmOrder()">Vahvista tilaus</button>
 
