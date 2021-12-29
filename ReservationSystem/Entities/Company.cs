@@ -12,6 +12,7 @@ namespace ReservationSystem.Entities
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public string Introduction { get; set; }
+        public string Email { get; set; }
         public ICollection<User> Users { get; set; }
         public ICollection<Product> Products { get; set; }
     }
