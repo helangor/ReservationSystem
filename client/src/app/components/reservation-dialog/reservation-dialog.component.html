@@ -17,7 +17,8 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Postinumero</mat-label>
-                        <input matInput required [(ngModel)]="reservation.postalCode" name="postalCode">
+                        <input matInput required [(ngModel)]="reservation.postalCode" name="postalCode"
+                            [formControl]="postalCode">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Postitoimipaikka</mat-label>
@@ -25,22 +26,25 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Puhelinnumero</mat-label>
-                        <input matInput required [(ngModel)]="reservation.phoneNumber" name="phoneNumber">
+                        <input matInput required [(ngModel)]="reservation.phoneNumber" name="phoneNumber"
+                            [formControl]="phone">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Sähköposti</mat-label>
-                        <input matInput required [(ngModel)]="reservation.email" name="email">
+                        <input matInput [(ngModel)]="reservation.email" name="email" [formControl]="email" required>
+                        <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
             </form>
-            <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn 
-                <a target="_blank" [routerLink]="'/vuokrausehdot'">vuokrausehdot</a> 
-                ja 
-                <a target="_blank" [routerLink]="'/tietosuojaseloste'">tietosuojaselosteen</a> 
-                </mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn
+                <a target="_blank" [routerLink]="'/vuokrausehdot'">vuokrausehdot</a>
+                ja
+                <a target="_blank" [routerLink]="'/tietosuojaseloste'">tietosuojaselosteen</a>
+            </mat-slide-toggle>
             <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)"
-                [disabled]="!isChecked || !reservationForm.valid">Siirry
-                vahvistamaan tilaus</button>
+                [disabled]="!isChecked || reservationForm.invalid || email.invalid || phone.invalid || postalCode.invalid">
+                Siirry vahvistamaan tilaus
+            </button>
             <button mat-button color="primary" matDialogClose>Peruuta</button>
         </div>
 
@@ -54,10 +58,8 @@
             <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.city}}
             </p>
             <ng-container *ngIf="data && data.dateRange">
-                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("D" + "." + "M" + "." + "YYYY" + " "
-                    + "dddd")}}</p>
-                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("D" + "." + "M" + "." + "YYYY" + "
-                    " + "dddd")}}</p>
+                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY")}}</p>
+                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY")}}</p>
             </ng-container>
             <button mat-raised-button color="primary" (click)="confirmOrder()">Vahvista tilaus</button>
 

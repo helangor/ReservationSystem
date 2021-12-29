@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabGroup } from '@angular/material/tabs';
@@ -30,6 +30,14 @@ export class ReservationDialogComponent implements OnInit {
     product: undefined
   };
 
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+  phone = new FormControl('', [Validators.required, Validators.pattern("^[\+]?[0-9 ]{7,20}$")]);
+  postalCode = new FormControl('', [Validators.required, Validators.pattern("^[0-9]{5}")]);
+
+  getEmailErrorMessage() {
+    return this.email.hasError('email') ? 'Sähköpostiosoite virheellinen' : '';
+  }
  
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   public dialogRef: MatDialogRef<ReservationDialogComponent>,
