@@ -24,7 +24,7 @@ export class ProductService {
   }
 
   getReservations(id: number) {
-    return this.http.get<any>(this.baseUrl + "products/GetReservations?id=" + id);
+    return this.http.get<any>(this.baseUrl + "products/get-reservations?id=" + id);
   }
 
   updateProduct(product: Product) {

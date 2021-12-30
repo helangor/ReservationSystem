@@ -1,14 +1,12 @@
 ## TOIMINNOT
  ### MUST
 - Lisää tuotteille hinnat
-
-- Varauksen luominen
-   - Lähettää s-postin myös paljufirmalle.
+- ULKONÄÖN luominen
+- Lähettää s-postin myös paljufirmalle, kun varaus tehdään.
+- Mahdollisuus laittaa viesti/lisätietoa varaukseen
 
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
-   - Voi muokata myös varauksen alku- ja päätösaikaa. Esim. Alku 14:00 Palautus 16:00
-   - Yrityksen tietojen muokkaaminen erillisen napin taakse. Tai tabilla omaan välilehteen
    - Kuvien uploadaaminen
    - Voi peruuttaa varauksen, jolloin lähtee peruutus s-posti lähettäjälle.
    - Voi määrittää hinnat

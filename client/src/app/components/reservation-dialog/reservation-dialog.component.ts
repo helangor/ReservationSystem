@@ -27,7 +27,9 @@ export class ReservationDialogComponent implements OnInit {
     email: '',
     startTime: undefined,
     endTime: undefined,
-    product: undefined
+    product: undefined,
+    status: '',
+    extraInfo: ''
   };
 
 

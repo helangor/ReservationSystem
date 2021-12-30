@@ -27,6 +27,7 @@ import { ProductEditListComponent } from './components/product-edit-list/product
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { PrivacyStatementComponent } from './components/privacy-statement/privacy-statement.component';
+import { ReservationTableComponent } from './components/reservation-table/reservation-table.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PrivacyStatementComponent } from './components/privacy-statement/privac
     InstructionsComponent,
     TermsOfServiceComponent,
     PrivacyStatementComponent,
+    ReservationTableComponent,
     ],
   imports: [
     BrowserModule,

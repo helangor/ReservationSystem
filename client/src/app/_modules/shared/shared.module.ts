@@ -13,6 +13,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDialogModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule
+
   ], exports: [
     CommonModule,
     MatToolbarModule,
@@ -47,7 +50,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ]
 })
 export class SharedModule { }

@@ -1,40 +1,36 @@
 <ng-container *ngIf="product">
     <mat-tab-group #tabgroup>
-        <mat-tab label="Arvojen muokkaus">
+        <mat-tab label="Varausten muokkaus">
             <div fxLayout="column" fxLayoutAlign="space-around center">
 
-                <h1>Varaukset</h1>
-                <ul *ngFor="let reservation of reservations">
-                    <li>{{reservation.firstName}}</li>
-                    <li>{{reservation.startTime.toString()}}</li>
-                    <li>{{reservation.endTime.toString()}}</li>
-                </ul>
-
-                <h2>Ajat</h2>
-                <mat-form-field appearance="fill">
-                    <mat-label>Varauksen alkuaika: </mat-label>
-                    <input matInput type="time" [(ngModel)]="product.reservationStartTime">
-                </mat-form-field>
-
-                
-                <mat-form-field appearance="fill">
-                    <mat-label>Varauksen loppuaika: </mat-label>
-                    <input matInput type="time" [(ngModel)]="product.reservationEndTime">
-                </mat-form-field>
-
+                <h1>{{product.name}}</h1>
+                <h2>Varaukset</h2>
+                <app-reservation-table fxFill [reservations]="reservations"></app-reservation-table>
                 <div>
-                    <button mat-raised-button color="primary" (click)="updateProduct(this.product)">Tallenna</button>
                     <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
                 </div>
             </div>
         </mat-tab>
 
-        <mat-tab label="Tekstin muokkaus">
+        <mat-tab label="Arvojen muokkaus">
             <ng-container *ngIf="editForm.dirty">
                 <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
             </ng-container>
+
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
                 <h1>{{product.productName}}</h1>
+
+                <h2>Ajat</h2>
+                <mat-form-field appearance="fill">
+                    <mat-label>Varauksen alkuaika: </mat-label>
+                    <input matInput type="time" [(ngModel)]="product.reservationStartTime"  name="reservationStartTime">
+                </mat-form-field>
+    
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Varauksen loppuaika: </mat-label>
+                    <input matInput type="time" [(ngModel)]="product.reservationEndTime"  name="reservationEndTime">
+                </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
