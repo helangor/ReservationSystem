@@ -85,6 +85,14 @@ namespace ReservationSystem.Controllers
         }
 
         //[Authorize]
+        [HttpGet("get-future-reservations")]
+        public ActionResult<List<Reservation>> GetFutureReservations(int id)
+        {
+            var reservations = Reservation.GetReservations(id, context).Where(p => p.EndTime > DateTime.Now).OrderBy(p => p.StartTime);
+            return Ok(reservations);
+        }
+
+        //[Authorize]
         [HttpGet("get-photos")]
         public ActionResult<List<Photo>> GetPhotos(int id)
         {
