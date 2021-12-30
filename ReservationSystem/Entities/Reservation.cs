@@ -38,10 +38,10 @@ namespace ReservationSystem.Entities
             return dates.OrderBy(x => x.Date).ToList();
         }
 
-        public static ICollection<Reservation> GetReservations(int id, DataContext context)
+        public static ICollection<Reservation> GetReservations(int productId, DataContext context)
         {
             var query = from product in context.Products
-                        where (product.Id == id)
+                        where (product.Id == productId)
                         select product.Reservations;
 
             var reservations = query.SingleOrDefault();
@@ -53,6 +53,7 @@ namespace ReservationSystem.Entities
             New,
             Confirmed,
             Rejected,
+            Cancelled,
             NotAvailable
         }
     }

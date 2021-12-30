@@ -1,18 +1,20 @@
 ## TOIMINNOT
  ### MUST
 - Lisää tuotteille hinnat
+    - EDIT komponentissa voi määrittää
+    - Backendin puolella tapahtuu
 - ULKONÄÖN luominen
 - Lähettää s-postin myös paljufirmalle, kun varaus tehdään.
-- Mahdollisuus laittaa viesti/lisätietoa varaukseen
+- Paljufirmalle s-posti ja puh.nro kentät
+- Hakemaan kalenterin varatut päivät, siten, ettei siinä mukana varauksia jotka cancelled,  rejected etc..
 
 -COMPANY-EDIT
    - Näkee varaukset ja voi asettaa varattuja päiviä
    - Kuvien uploadaaminen
-   - Voi peruuttaa varauksen, jolloin lähtee peruutus s-posti lähettäjälle.
-   - Voi määrittää hinnat
-       - Hinnan määritys backendiin
 
 ### NICE TO HAVE
+- Luo peruuta varaus confirm dialog.
+- Varaukselle varausnumero. Id?
 - Automaattisesti hakee tien perusteella numeron ja toimipaikan. 
 - Tee Default photo ja eti samalla myös muille default parametreille koko Angularista hyvä keskitetty paikka. 
 - Muuta API endpointtien nimet tyylillä get-users. Nyt PascalCase

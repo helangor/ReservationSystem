@@ -1,4 +1,5 @@
-﻿using ReservationSystemBackend.Entities;
+﻿using ReservationSystemBackend.Data;
+using ReservationSystemBackend.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,11 @@ namespace ReservationSystem.Entities
         public string Email { get; set; }
         public ICollection<User> Users { get; set; }
         public ICollection<Product> Products { get; set; }
+
+        public static Company GetCompanyByProductId(int productId, DataContext context)
+        {
+            var company = context.Companies.Where(c => c.Products.Any(p => p.Id == productId)).FirstOrDefault();
+            return company;
+        }
     }
 }

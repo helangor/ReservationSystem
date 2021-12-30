@@ -17,20 +17,7 @@ import { Reservation } from 'src/app/_models/reservation';
 export class ReservationDialogComponent implements OnInit {
   @ViewChild('reservationForm') reservationForm: NgForm;
   isChecked: boolean;
-  reservation: Reservation = {
-    firstName: '',
-    lastName: '',
-    address: '',
-    postalCode: '',
-    city: '',
-    phoneNumber: '',
-    email: '',
-    startTime: undefined,
-    endTime: undefined,
-    product: undefined,
-    status: '',
-    extraInfo: ''
-  };
+  reservation: Reservation = new Reservation();
 
 
   email = new FormControl('', [Validators.required, Validators.email]);

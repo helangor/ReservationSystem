@@ -34,6 +34,10 @@
                         <input matInput [(ngModel)]="reservation.email" name="email" [formControl]="email" required>
                         <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
                     </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Viesti vuokraajalle</mat-label>
+                        <textarea matInput [(ngModel)]="reservation.extraInfo" name="extraInfo"></textarea>
+                    </mat-form-field>
                 </div>
             </form>
             <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn
@@ -61,6 +65,8 @@
                 <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY" + " " + "k:mm")}}</p>
                 <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY" + " " + "k:mm")}}</p>
             </ng-container>
+            <p><strong>Viesti: </strong>{{reservation.extraInfo}}</p>
+
             <button mat-raised-button color="primary" (click)="confirmOrder()">Vahvista tilaus</button>
 
         </div>

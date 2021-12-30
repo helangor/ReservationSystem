@@ -8,6 +8,7 @@ import { Product } from 'src/app/_models/product';
 import { Reservation } from 'src/app/_models/reservation';
 import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
+import { ReservationService } from 'src/app/_services/reservation.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -28,7 +29,8 @@ export class ProductEditComponent implements OnInit {
 
   constructor(private accountService: AccountService, private productService: ProductService,
     private snackbar: MatSnackBar,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private reservationService: ReservationService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
@@ -45,7 +47,7 @@ export class ProductEditComponent implements OnInit {
   }
   
   loadReservations(id: number) {
-    this.productService.getReservations(id).subscribe(res => {
+    this.reservationService.getValidFutureReservations(id).subscribe(res => {
       this.reservations = res;
     });
   }

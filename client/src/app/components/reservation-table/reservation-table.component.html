@@ -27,6 +27,8 @@
                             <p><strong>Puhelinnumero: </strong> {{element.phoneNumber}} </p>
                             <p><strong>Email: </strong> {{element.email}} </p>
                             <p><strong>Osoite: </strong> {{element.address + ", " + element.postalCode + " " + element.city}} </p>
+                            <p><strong>Viesti: </strong> {{element.extraInfo}}</p>
+                            <button mat-raised-button color="warn" (click)="cancelReservation(element)">Peruuta varaus</button>
                         </div>
                     </div>
                 </td>

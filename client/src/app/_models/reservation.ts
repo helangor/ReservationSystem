@@ -1,6 +1,6 @@
 import { Product } from "./product";
 
-export interface Reservation {
+export class Reservation {
     firstName: string;
     lastName: string;
     address: string;
