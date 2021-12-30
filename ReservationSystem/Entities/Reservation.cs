@@ -19,6 +19,8 @@ namespace ReservationSystem.Entities
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime StartTime { get; set; } = DateTime.Now;
         public DateTime EndTime { get; set; } = DateTime.Now;
+        public ReservationStatus Status { get; set; } = ReservationStatus.New;
+        public string ExtraInfo { get; set; }
         public Product Product { get; set; }
 
         public List<DateTime> GetReservedDaysList(List<Reservation> reservations)
@@ -39,11 +41,19 @@ namespace ReservationSystem.Entities
         public static ICollection<Reservation> GetReservations(int id, DataContext context)
         {
             var query = from product in context.Products
-                         where (product.Id == id)
-                         select product.Reservations;
+                        where (product.Id == id)
+                        select product.Reservations;
 
             var reservations = query.SingleOrDefault();
             return reservations;
+        }
+
+        public enum ReservationStatus
+        {
+            New,
+            Confirmed,
+            Rejected,
+            NotAvailable
         }
     }
 }
