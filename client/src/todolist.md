@@ -4,8 +4,8 @@
     - EDIT komponentissa voi määrittää
     - Backendin puolella tapahtuu
 - ULKONÄÖN luominen
-- Lähettää s-postin myös paljufirmalle, kun varaus tehdään.
 - Paljufirmalle s-posti ja puh.nro kentät
+- Lähettää s-postin myös paljufirmalle, kun varaus tehdään.
 - Hakemaan kalenterin varatut päivät, siten, ettei siinä mukana varauksia jotka cancelled,  rejected etc..
 
 -COMPANY-EDIT
@@ -27,6 +27,8 @@
 - Pitää vielä serveriltä katsoa kun tallentaa varausta, että onko varmasti vielä vapaana
 - Lisää NSwag
 - Routet suomeksi
+- Yritys voi luoda lisää tuotteita
+- Tuotteet flag onko nähtävissä vai ei.
 
 - Voi luoda uusia producteja muokkauksesta
     - Ei voi luoda uutta productia, joka nimi jo olemassa

@@ -12,6 +12,6 @@ export class CompanyService {
   constructor(private http: HttpClient) { }
 
   getCompaniesByUserName(userName: string) {
-    return this.http.get<Company[]>(this.baseUrl + "company/GetCompaniesByUsername?username=" + userName);
+    return this.http.get<Company[]>(this.baseUrl + "company/get-companies-by-username?username=" + userName);
   }
 }

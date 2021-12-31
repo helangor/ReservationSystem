@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   getReservedDays(id: number) {
-    return this.http.get<any>(this.baseUrl + "products/GetReservedDays?id=" + id);
+    return this.http.get<any>(this.baseUrl + "products/get-reserved-days-for-product?productId=" + id);
   }
 
   updateProduct(product: Product) {

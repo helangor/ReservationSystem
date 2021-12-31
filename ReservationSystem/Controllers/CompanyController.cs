@@ -21,7 +21,7 @@ namespace ReservationSystem.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("GetCompaniesByUserName")]
+        [HttpGet("get-companies-by-username")]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompaniesByUserName(string username)
         {
             var companies = await context.Companies.Where(c => c.Users.Any(u => u.UserName == username.ToLower())).Include(p => p.Products).ToListAsync();

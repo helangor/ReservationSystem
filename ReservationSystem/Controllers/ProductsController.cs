@@ -46,10 +46,10 @@ namespace ReservationSystem.Controllers
             return Ok(productToReturn);
         }
 
-        [HttpGet("GetReservedDays")]
-        public ActionResult<List<DateTime>> GetReservedDays(int id)
+        [HttpGet("get-reserved-days-for-product")]
+        public ActionResult<List<DateTime>> GetReservedDaysForProduct(int productId)
         {
-            var reservations = Reservation.GetReservations(id, context);
+            var reservations = Reservation.GetReservations(productId, context);
             if (reservations == null)
                 return Ok(reservations);
                         
