@@ -27,8 +27,11 @@ namespace ReservationSystem.Controllers
         [HttpPost("create-reservation")]
         public async Task<ActionResult> CreateReservation(Reservation reservation)
         {
+            TimeZoneInfo localZone = TimeZoneInfo.Local;
+            var startTime = TimeZoneInfo.ConvertTime(reservation.StartTime, localZone);
+            var endTime = TimeZoneInfo.ConvertTime(reservation.EndTime, localZone);
+
             reservation.Status = Reservation.ReservationStatus.New;
-            //TODO: Tähän vielä varmistus, että email on oikea. 
             var reservationMessage = string.Format(
                 "<div>Hei {0}!</div> " +
                 "<p>Olemme vastaanottaneet varauksenne ajalle {1} - {2}</p>" +
@@ -38,7 +41,7 @@ namespace ReservationSystem.Controllers
                 "<br>" +
                 "<p>Mukavaa paljuilua toivottaa, </p>" +
                 "<p>Paljumies, www.paljumies.fi</p>",
-                reservation.FirstName, TimeZone.CurrentTimeZone.ToLocalTime(reservation.StartTime).ToString(), TimeZone.CurrentTimeZone.ToLocalTime(reservation.EndTime).ToString(), reservation.Product.Name, reservation.Product.City);
+                reservation.FirstName, startTime.ToString(), endTime.ToString(), reservation.Product.Name, reservation.Product.City);
 
             emailService.SendEmail(reservation.Email, "Varaus vahvistus", reservationMessage);
 
@@ -59,10 +62,14 @@ namespace ReservationSystem.Controllers
             {
                 entity.Status = Reservation.ReservationStatus.Cancelled;
                 context.Reservations.Update(entity);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
 
             var company = Company.GetCompanyByProductId(entity.Product.Id, context);
+
+            TimeZoneInfo localZone = TimeZoneInfo.Local;
+            var startTime = TimeZoneInfo.ConvertTime(reservation.StartTime, localZone);
+            var endTime = TimeZoneInfo.ConvertTime(reservation.EndTime, localZone);
 
             var reservationMessage = string.Format(
                 "<div>Hei {0}!</div> " +
@@ -72,7 +79,7 @@ namespace ReservationSystem.Controllers
                 "<p>{3}</p>" +
                 "<br>" +
                 "<p>Paljumies, www.paljumies.fi</p>",
-                reservation.FirstName, TimeZone.CurrentTimeZone.ToLocalTime(reservation.StartTime).ToString(), TimeZone.CurrentTimeZone.ToLocalTime(reservation.EndTime).ToString(), company.Name);
+                reservation.FirstName, startTime.ToString(), endTime.ToString(), company.Name);
 
             emailService.SendEmail(reservation.Email, "Varaus peruutettu", reservationMessage);
             return Ok();
