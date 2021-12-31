@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       console.log({res});
       this.router.navigateByUrl('/')
 
-    }, error => console.log("Error"))};
+    }, error => this.snackbar.open("Väärä käyttäjätunnus tai salasana"))};
 
   logout() {
     this.accountService.logout();
