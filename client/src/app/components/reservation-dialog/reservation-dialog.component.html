@@ -13,16 +13,16 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Osoite</mat-label>
-                        <input matInput required [(ngModel)]="reservation.address" name="address">
+                        <input matInput [(ngModel)]="reservation.address" name="address">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Postinumero</mat-label>
-                        <input matInput required [(ngModel)]="reservation.postalCode" name="postalCode"
+                        <input matInput [(ngModel)]="reservation.postalCode" name="postalCode"
                             [formControl]="postalCode">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Postitoimipaikka</mat-label>
-                        <input matInput required [(ngModel)]="reservation.city" name="city">
+                        <input matInput [(ngModel)]="reservation.city" name="city">
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Puhelinnumero</mat-label>
@@ -46,7 +46,7 @@
                 <a target="_blank" [routerLink]="'/tietosuojaseloste'">tietosuojaselosteen</a>
             </mat-slide-toggle>
             <button mat-raised-button color="primary" (click)="changeIndex(tabgroup,1)"
-                [disabled]="!isChecked || reservationForm.invalid || email.invalid || phone.invalid || postalCode.invalid">
+                [disabled]="!isChecked || reservationForm.invalid || email.invalid || phone.invalid">
                 Siirry vahvistamaan tilaus
             </button>
             <button mat-button color="primary" matDialogClose>Peruuta</button>

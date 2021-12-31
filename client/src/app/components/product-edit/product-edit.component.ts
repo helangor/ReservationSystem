@@ -9,6 +9,8 @@ import { Reservation } from 'src/app/_models/reservation';
 import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { ReservationService } from 'src/app/_services/reservation.service';
+import { Company } from 'src/app/_models/company';
+import { CompanyService } from 'src/app/_services/company.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -17,9 +19,12 @@ import { ReservationService } from 'src/app/_services/reservation.service';
 })
 export class ProductEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
+  @ViewChild('companyEditForm') companyEditForm: NgForm;
+
   product: Product;
   user: User;
   reservations: Reservation[];
+  company: Company;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
@@ -27,7 +32,9 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
-  constructor(private accountService: AccountService, private productService: ProductService,
+  constructor(private accountService: AccountService, 
+    private productService: ProductService,
+    private companyService: CompanyService,
     private snackbar: MatSnackBar,
     private route: ActivatedRoute,
     private reservationService: ReservationService) {
@@ -35,18 +42,23 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.getProduct();
   }
 
-  loadProducts() {
-
+  getProduct() {
     this.productService.getProduct(this.route.snapshot.paramMap.get('productName')).subscribe(product => {
       this.product = product;
-      this.loadReservations(this.product.id)
+      this.getReservations(product.id)
+      this.getCompany(product.id) 
     })
   }
-  
-  loadReservations(id: number) {
+  getCompany(id: number) {
+    this.companyService.getCompanyByProductId(id).subscribe(res => {
+      this.company = res;
+    });
+  }
+
+  getReservations(id: number) {
     this.reservationService.getValidFutureReservations(id).subscribe(res => {
       this.reservations = res;
     });
@@ -54,8 +66,22 @@ export class ProductEditComponent implements OnInit {
 
   updateProduct(product: Product) {
     this.productService.updateProduct(product).subscribe(res => {
-      this.snackbar.open("Successfully updated");
+      this.snackbar.open("Tiedot päivitetty");
       this.editForm.reset(product);
-    }, error => console.log(error))
+    }, error => {
+     this.snackbar.open("Tietojen päivittäminen epäonnistui");
+    });
   }
+
+  
+  updateCompany(company: Company) {
+      console.log({company});
+      this.companyService.updateCompany(company).subscribe(res => {
+        this.snackbar.open("Yrityksen tiedot päivitetty");
+        this.editForm.reset(company);
+      }, error => {
+        this.snackbar.open("Tietojen päivittäminen epäonnistui");
+       });
+     }
+   
 }

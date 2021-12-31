@@ -14,4 +14,13 @@ export class CompanyService {
   getCompaniesByUserName(userName: string) {
     return this.http.get<Company[]>(this.baseUrl + "company/get-companies-by-username?username=" + userName);
   }
+
+  getCompanyByProductId(productId: number) {
+    return this.http.get<Company>(this.baseUrl + "company/get-company-by-product-id?productId=" + productId);
+  }
+
+  updateCompany(company: Company) {
+    let url = this.baseUrl + "company/update-company"
+    return this.http.put<any>(url, company);
+  }
 }

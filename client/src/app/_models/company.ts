@@ -9,4 +9,9 @@ export interface Company {
     introduction: string;
     products: Product[];
     users: User[];
+    address: string;
+    postalCode: string;
+    city: string;
+    phoneNumber: string;
+    email: string;
 }

@@ -12,44 +12,86 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Arvojen muokkaus">
-            <ng-container *ngIf="editForm.dirty">
-                <strong>HUOMIO</strong>Olet tehnyt muutoksia. Muista tallentaa
-            </ng-container>
+        <mat-tab label="Tuotteen tietojen muokkaus" fxLayout="column" fxLayoutAlign="space-around center">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)" fxLayout="column" fxLayoutAlign="space-around center">
+                
+                <ng-container *ngIf="editForm.dirty" class="unsaved-changes">
+                    <p class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
+                </ng-container>
 
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)">
                 <h1>{{product.productName}}</h1>
 
-                <h2>Ajat</h2>
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nimi: </mat-label>
+                    <textarea matInput [(ngModel)]="product.name" name="name"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
                     <mat-label>Varauksen alkuaika: </mat-label>
-                    <input matInput type="time" [(ngModel)]="product.reservationStartTime"  name="reservationStartTime">
+                    <input matInput type="time" [(ngModel)]="product.reservationStartTime" name="reservationStartTime">
                 </mat-form-field>
-    
-                
-                <mat-form-field appearance="fill">
+
+                <mat-form-field appearance="outline">
                     <mat-label>Varauksen loppuaika: </mat-label>
-                    <input matInput type="time" [(ngModel)]="product.reservationEndTime"  name="reservationEndTime">
+                    <input matInput type="time" [(ngModel)]="product.reservationEndTime" name="reservationEndTime">
                 </mat-form-field>
 
-                <mat-form-field appearance="fill">
-                    <textarea matInput [(ngModel)]="product.city" name="city"></textarea>
+                <mat-form-field appearance="outline">
+                    <mat-label>Tuotteen kaupunki: </mat-label>
+                    <input matInput [(ngModel)]="product.city" name="city">
                 </mat-form-field>
 
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
+                    <mat-label>Esittelyteksti: </mat-label>
                     <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
                 </mat-form-field>
-            </form>
-            <app-photo-editor [product]="product"></app-photo-editor>
-
-            <div>
                 <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna
                     muutokset</button>
-            </div>
+            </form>
+            <!-- <app-photo-editor [product]="product"></app-photo-editor>
 
             <div>
                 <img mat-card-image src="{{product.photos[0] && product.photos[0].url}}" alt="Photo of a Product">
-            </div>
+            </div> -->
         </mat-tab>
+
+        <ng-container *ngIf="company">
+            <mat-tab label="Yrityksen tietojen muokkaus" fxLayout="column" fxLayoutAlign="space-around center">
+                <form #companyEditForm="ngForm" id="companyEditForm" (ngSubmit)="updateCompany(company)"
+                    fxLayout="column" fxLayoutAlign="space-around center">
+
+                    <ng-container *ngIf="companyEditForm.dirty">
+                        <p class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
+                    </ng-container>
+    
+
+                    <h1>{{company.name}}</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nimi: </mat-label>
+                        <input matInput [(ngModel)]="company.name" name="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Kaupunki: </mat-label>
+                        <input matInput [(ngModel)]="company.city" name="city">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Puhelinnumero: </mat-label>
+                        <input matInput [(ngModel)]="company.phoneNumber" name="phoneNumber">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sähköposti: </mat-label>
+                        <input matInput [(ngModel)]="company.email" name="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Esittely teksti: </mat-label>
+                        <textarea matInput [(ngModel)]="company.introduction" name="introduction"></textarea>
+                    </mat-form-field>
+                    <button [disabled]="!companyEditForm.dirty" form="companyEditForm" mat-raised-button
+                        color="primary">Tallenna muutokset
+                    </button>
+                </form>
+            </mat-tab>
+        </ng-container>
+
     </mat-tab-group>
 </ng-container>
