@@ -27,5 +27,31 @@ namespace ReservationSystem.Controllers
             var companies = await context.Companies.Where(c => c.Users.Any(u => u.UserName == username.ToLower())).Include(p => p.Products).ToListAsync();
             return Ok(companies);
         }
+
+        [HttpGet("get-company-by-product-id")]
+        public ActionResult<Company> GetCompanyByProductId(int productId)
+        {
+            var company = Company.GetCompanyByProductId(productId, context);
+            return Ok(company);
+        }
+
+        //[Authorize]
+        [HttpPut("update-company")]
+        public ActionResult UpdateCompany(Company company)
+        {
+            var currentCompany = context.Companies.Single(c => c.Id == company.Id);
+            if (currentCompany != null)
+            {
+                currentCompany.Name = company.Name;
+                currentCompany.City = company.City;
+                currentCompany.PhoneNumber = company.PhoneNumber;
+                currentCompany.Email = company.Email;
+                currentCompany.Introduction = company.Introduction;
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
+
     }
 }
