@@ -30,26 +30,42 @@ namespace ReservationSystem.Controllers
             TimeZoneInfo localZone = TimeZoneInfo.Local;
             var startTime = TimeZoneInfo.ConvertTime(reservation.StartTime, localZone);
             var endTime = TimeZoneInfo.ConvertTime(reservation.EndTime, localZone);
+            var company = Company.GetCompanyByProductId(reservation.Product.Id, context);
 
             reservation.Status = Reservation.ReservationStatus.New;
-            var reservationMessage = string.Format(
+            var customerReservationMessage = string.Format(
                 "<div>Hei {0}!</div> " +
-                "<p>Olemme vastaanottaneet varauksenne ajalle {1} - {2}</p>" +
+                "<p>Olemme vastaanottaneet varauksenne: {1} ajalle {2} - {3}</p>" +
                 "<p>Vuokraavan yrityksen tiedot:</p>" +
-                "<p>{3}</p>" +
                 "<p>{4}</p>" +
+                "<p>{5}</p>" +
                 "<br>" +
                 "<p>Mukavaa paljuilua toivottaa, </p>" +
                 "<p>Paljumies, www.paljumies.fi</p>",
-                reservation.FirstName, startTime.ToString(), endTime.ToString(), reservation.Product.Name, reservation.Product.City);
+                reservation.FirstName, reservation.Id, startTime.ToString(), endTime.ToString(), reservation.Product.Name, reservation.Product.City);
+            emailService.SendEmail(reservation.Email, "Varausvahvistus", customerReservationMessage);
 
-            emailService.SendEmail(reservation.Email, "Varaus vahvistus", reservationMessage);
+            var companyReservationMessage = string.Format(
+            "<div>Hei {0}!</div> " +
+            "<p>Paljunne on varattu ajalle {1} - {2}</p>" +
+            "<p>Varausnumero: {3}</p>" +
+            "<p>Varaajan tiedot:</p>" +
+            "<p>Nimi: {4} {5}</p>" +
+            "<p>Puhelinnumero: {6}</p>" +
+            "<p>Sähköposti: {7}</p>" +
+            "<p>Viesti: {8}</p>" +
+            "<br>" +
+            "<p>Paljujen paras välittäjä</p>" +
+            "<p>Paljumies, www.paljumies.fi</p>",
+            company.Name, startTime.ToString(), endTime.ToString(), reservation.Id, reservation.FirstName, reservation.LastName, reservation.PhoneNumber, reservation.Email, reservation.ExtraInfo);
+            emailService.SendEmail(company.Email, "Varausvahvistus", companyReservationMessage);
 
             //Kludge. Ettei valita kuvien ID keystä
             reservation.Product.Photos = null;
             context.Reservations.Add(reservation);
             context.Products.Attach(reservation.Product);
             await context.SaveChangesAsync();
+
             return Ok();
         }
 
