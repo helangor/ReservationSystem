@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ReservationSystem.DTOs;
 using ReservationSystem.Entities;
 using ReservationSystem.Extensions;
@@ -54,9 +55,14 @@ namespace ReservationSystem.Controllers
                 return Ok(reservations);
                         
             //TODO: Tämä kantahakuun suoraan
-            var futureReservations = reservations.Where(r => r.EndTime > DateTime.Now).ToList();
+            var futureReservations = reservations.Where(r => r.EndTime >= DateTime.Now
+            && r.Status != Reservation.ReservationStatus.Rejected
+            && r.Status != Reservation.ReservationStatus.Cancelled
+            ).ToList();
 
-            var reservationDays = new Reservation().GetReservedDaysList(futureReservations);
+            var product = context.Products.Single(p => p.Id == productId);
+            var reservationDays = new Reservation().GetReservedDaysList(futureReservations, product);
+
             return Ok(reservationDays);
         }
 
@@ -70,6 +76,9 @@ namespace ReservationSystem.Controllers
             {
                 currentProduct.ReservationEndTime = product.ReservationEndTime;
                 currentProduct.ReservationStartTime = product.ReservationStartTime;
+                currentProduct.Name = product.Name;
+                currentProduct.Introduction = product.Introduction;
+                currentProduct.City = product.City;
                 context.SaveChanges();
             }
             

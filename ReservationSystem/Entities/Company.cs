@@ -13,6 +13,10 @@ namespace ReservationSystem.Entities
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public string Introduction { get; set; }
+        public string Address { get; set; }
+        public string PostalCode { get; set; }
+        public string City { get; set; }
+        public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public ICollection<User> Users { get; set; }
         public ICollection<Product> Products { get; set; }
