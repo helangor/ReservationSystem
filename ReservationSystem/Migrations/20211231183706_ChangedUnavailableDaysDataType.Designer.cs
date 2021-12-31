@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReservationSystemBackend.Data;
@@ -9,9 +10,10 @@ using ReservationSystemBackend.Data;
 namespace ReservationSystem.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211231183706_ChangedUnavailableDaysDataType")]
+    partial class ChangedUnavailableDaysDataType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,14 +200,31 @@ namespace ReservationSystem.Migrations
                     b.Property<TimeSpan>("ReservationStartTime")
                         .HasColumnType("interval");
 
-                    b.Property<string>("UnavailableDays")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ReservationSystemBackend.Entities.UnavailableDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("UnavailableDay");
                 });
 
             modelBuilder.Entity("CompanyUser", b =>
@@ -248,6 +267,13 @@ namespace ReservationSystem.Migrations
                         .HasForeignKey("CompanyId");
                 });
 
+            modelBuilder.Entity("ReservationSystemBackend.Entities.UnavailableDay", b =>
+                {
+                    b.HasOne("ReservationSystemBackend.Entities.Product", null)
+                        .WithMany("UnavailableDays")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("ReservationSystem.Entities.Company", b =>
                 {
                     b.Navigation("Products");
@@ -258,6 +284,8 @@ namespace ReservationSystem.Migrations
                     b.Navigation("Photos");
 
                     b.Navigation("Reservations");
+
+                    b.Navigation("UnavailableDays");
                 });
 #pragma warning restore 612, 618
         }
