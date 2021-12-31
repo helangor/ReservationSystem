@@ -1,4 +1,5 @@
-﻿using ReservationSystemBackend.Data;
+﻿using Newtonsoft.Json;
+using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace ReservationSystem.Entities
         public string ExtraInfo { get; set; }
         public Product Product { get; set; }
 
-        public List<DateTime> GetReservedDaysList(List<Reservation> reservations)
+        public List<DateTime> GetReservedDaysList(List<Reservation> reservations, Product product)
         {
             var dates = new List<DateTime>();
 
@@ -34,6 +35,17 @@ namespace ReservationSystem.Entities
                 for (DateTime date = reservation.StartTime; date < reservation.EndTime; date = date.AddDays(1))
                     dates.Add(date);
             }
+
+            var unavailableDaysJson = product.UnavailableDays;
+            if (unavailableDaysJson != null)
+            {
+                List<DateTime> unavailableDays = JsonConvert.DeserializeObject<List<DateTime>>(unavailableDaysJson);
+                dates = dates.Concat(unavailableDays).Distinct().ToList();
+            }
+
+            //TODO: Kun tallennetaan listaa niin sitten tekee tämän tallennuksessa
+            //string output = JsonConvert.SerializeObject(reservationDays);
+            //product.UnavailableDays = output;
 
             return dates.OrderBy(x => x.Date).ToList();
         }

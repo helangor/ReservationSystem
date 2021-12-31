@@ -15,6 +15,7 @@ namespace ReservationSystemBackend.Entities
         public TimeSpan ReservationEndTime { get; set; } = new TimeSpan(12, 0, 0);
         public string Introduction { get; set; }
         public string City { get; set; }
+        public string UnavailableDays { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }
