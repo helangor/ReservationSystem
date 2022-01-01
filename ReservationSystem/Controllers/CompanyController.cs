@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Entities;
@@ -21,6 +22,7 @@ namespace ReservationSystem.Controllers
             this.mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet("get-companies-by-username")]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompaniesByUserName(string username)
         {
@@ -28,6 +30,7 @@ namespace ReservationSystem.Controllers
             return Ok(companies);
         }
 
+        [Authorize]
         [HttpGet("get-company-by-product-id")]
         public ActionResult<Company> GetCompanyByProductId(int productId)
         {
@@ -35,7 +38,7 @@ namespace ReservationSystem.Controllers
             return Ok(company);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut("update-company")]
         public ActionResult UpdateCompany(Company company)
         {

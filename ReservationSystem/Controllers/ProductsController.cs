@@ -66,9 +66,8 @@ namespace ReservationSystem.Controllers
             return Ok(reservationDays);
         }
 
-        //[Authorize]
-        //PUT??
-        [HttpPost("update-product")]
+        [Authorize]
+        [HttpPut("update-product")]
         public ActionResult UpdateProduct(Product product)
         {
             var currentProduct = context.Products.FirstOrDefault(c => c.Id == product.Id);
@@ -85,7 +84,6 @@ namespace ReservationSystem.Controllers
             return Ok();
         }
 
-        //[Authorize]
         [HttpGet("get-photos")]
         public async Task< ActionResult<List<Photo>>> GetPhotos(int id)
         {
@@ -97,7 +95,7 @@ namespace ReservationSystem.Controllers
             return Ok(photos);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, int productId)
         {

@@ -23,7 +23,7 @@ namespace ReservationSystem.Controllers
             this.mapper = mapper;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
@@ -32,7 +32,7 @@ namespace ReservationSystem.Controllers
             return Ok(usersToReturn);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(int id)
         {

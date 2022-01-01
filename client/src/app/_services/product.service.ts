@@ -25,7 +25,7 @@ export class ProductService {
 
   updateProduct(product: Product) {
     let url = this.baseUrl + "products/update-product"
-    return this.http.post<any>(url, product);
+    return this.http.put<any>(url, product);
   }
 
 }

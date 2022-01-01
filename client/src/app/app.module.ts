@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,7 @@ import { InstructionsComponent } from './components/instructions/instructions.co
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { PrivacyStatementComponent } from './components/privacy-statement/privacy-statement.component';
 import { ReservationTableComponent } from './components/reservation-table/reservation-table.component';
+import { AuthInterceptor } from './_interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { ReservationTableComponent } from './components/reservation-table/reserv
     TermsOfServiceComponent,
     PrivacyStatementComponent,
     ReservationTableComponent,
-    ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -61,12 +62,13 @@ import { ReservationTableComponent } from './components/reservation-table/reserv
     MatNativeDateModule,
     MatMomentDateModule,
     SharedModule,
-    ],
+  ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: DateAdapter, useClass: MomentDateAdapter },
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
   ],
   bootstrap: [AppComponent]
 })

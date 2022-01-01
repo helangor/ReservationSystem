@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Entities;
@@ -69,7 +70,7 @@ namespace ReservationSystem.Controllers
             return Ok();
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("cancel-reservation")]
         public async Task<ActionResult> CancelReservation(Reservation reservation)
         {
@@ -101,7 +102,7 @@ namespace ReservationSystem.Controllers
             return Ok();
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("get-product-all-reservations")]
         public ActionResult<List<Reservation>> GetReservations(int productId)
         {
@@ -109,7 +110,7 @@ namespace ReservationSystem.Controllers
             return Ok(reservations);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("get-product-valid-future-reservations")]
         public ActionResult<List<Reservation>> GetFutureReservations(int productId)
         {
