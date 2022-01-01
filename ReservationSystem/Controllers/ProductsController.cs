@@ -87,26 +87,33 @@ namespace ReservationSystem.Controllers
 
         //[Authorize]
         [HttpGet("get-photos")]
-        public ActionResult<List<Photo>> GetPhotos(int id)
+        public async Task< ActionResult<List<Photo>>> GetPhotos(int id)
         {
             var query = from product in context.Products
                         where (product.Id == id)
                         select product.Photos;
 
-            var photos = query.SingleOrDefault();
+            var photos = await query.ToListAsync();
             return Ok(photos);
         }
 
         //[Authorize]
         [HttpPost("add-photo")]
-        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, string productName)
+        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, int productId)
         {
-            var product = await context.Products.FirstOrDefaultAsync(c => c.Name == productName);
+            var product = await context.Products.Include(p => p.Photos).FirstOrDefaultAsync(c => c.Id == productId);
             if (product == null) return NotFound("ProductNotFound");
 
             var result = await photoService.AddPhotoAsync(file);
-
             if (result.Error != null) return BadRequest(result.Error.Message);
+
+            //Here removes old photos. Change when in the future more photos is allowed.
+            var photoIds = product.Photos.Select(photo => photo.PublicId).ToArray();
+            if (photoIds.Length > 0)
+            {
+                var removeResult = await photoService.DeleteExistingPhotosAsync(photoIds);
+                product.Photos.Clear();
+            }
 
             var photo = new Photo
             {

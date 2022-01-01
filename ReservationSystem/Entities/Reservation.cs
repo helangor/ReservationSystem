@@ -45,6 +45,7 @@ namespace ReservationSystem.Entities
 
             //TODO: Kun tallennetaan listaa niin sitten tekee tämän tallennuksessa
             //string output = JsonConvert.SerializeObject(reservationDays);
+            //Samalla poistaa vanhemmat päivät kuin tämä
             //product.UnavailableDays = output;
 
             return dates.OrderBy(x => x.Date).ToList();

@@ -6,15 +6,15 @@
     - EDIT komponentissa voi määrittää
     - Backendin puolella tapahtuu
 
--COMPANY-EDIT
-   - Voi asettaa varattuja päiviä
-   - Kuvien uploadaaminen
+- Vaihda default kuva koirasta johonkin muuhun.
 
 ### NICE TO HAVE
 - Luo peruuta varaus confirm dialog.
 - Tee Default photo ja eti samalla myös muille default parametreille koko Angularista hyvä keskitetty paikka. 
+- Antamaan error, jos kuva ei sopiva tai muuta ongelmia kuvan upload
 - Unohdin salasanani painike ja email
 - API Endpointteihin Authorizet toimimaan
+- Kun vaihdetaan kuva niin tekee cascaden muille productin kuville. Jäävät siis DB, mutta id null. Olisi kivempi jos saisi kokonaan pois.
 
 - Tuotteen tilaus/Varaus
     - Valittavat lisävalinnat
@@ -34,6 +34,7 @@
     - Tuotteet flag onko nähtävissä vai ei.
     - Voi luoda uusia producteja muokkauksesta
         - Ei voi luoda uutta productia, joka nimi jo olemassa
+    - Voi asettaa varattuja päiviä, jolloin palju ei ole vuokrattavissa
 
 - Muuta
     - Lisää NSwag

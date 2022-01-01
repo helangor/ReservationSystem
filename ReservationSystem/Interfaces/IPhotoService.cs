@@ -11,5 +11,6 @@ namespace ReservationSystem.Interfaces
     {
         Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
         Task<DeletionResult> DeletePhotoAsync(string publicId);
+        Task<DelResResult> DeleteExistingPhotosAsync(string[] photoIds);
     }
 }

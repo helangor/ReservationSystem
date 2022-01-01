@@ -14,7 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
-
+import {FileUploadModule} from 'ng2-file-upload';
 
 @NgModule({
   declarations: [],
@@ -33,8 +33,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
-    MatTableModule
-
+    MatTableModule,
+    FileUploadModule
   ], exports: [
     CommonModule,
     MatToolbarModule,
@@ -51,7 +51,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSlideToggleModule,
     MatTabsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    FileUploadModule
   ]
 })
 export class SharedModule { }

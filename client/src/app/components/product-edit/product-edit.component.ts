@@ -78,7 +78,7 @@ export class ProductEditComponent implements OnInit {
       console.log({company});
       this.companyService.updateCompany(company).subscribe(res => {
         this.snackbar.open("Yrityksen tiedot päivitetty");
-        this.editForm.reset(company);
+        this.companyEditForm.reset(company);
       }, error => {
         this.snackbar.open("Tietojen päivittäminen epäonnistui");
        });

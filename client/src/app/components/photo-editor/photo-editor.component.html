@@ -1,5 +1,18 @@
-<div>
-    <div *ngFor="let photo of product.photos">
-        <img src="{{photo.url}}" alt="Photo of {{product.name}}">
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <img mat-card-image
+        src="{{product.photos[0] && product.photos[0].url || 'https://material.angular.io/assets/img/examples/shiba2.jpg'}}"
+        alt="Photo of a Product">
+
+    <div>
+        Vaihda kuva
+        <input type="file" ng2FileSelect [uploader]="uploader" />
+
+        <ng-container *ngIf="uploader && uploader.queue[0]">
+            <button mat-button color="primary" (click)="uploader.queue[0].upload()"
+                [disabled]="uploader.queue[0].isUploading">
+                Vaihda kuva
+            </button>
+        </ng-container>
+
     </div>
 </div>

@@ -12,47 +12,45 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Tuotteen tietojen muokkaus" fxLayout="column" fxLayoutAlign="space-around center">
-            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)" fxLayout="column" fxLayoutAlign="space-around center">
-                
-                <ng-container *ngIf="editForm.dirty" class="unsaved-changes">
-                    <p class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
-                </ng-container>
+        <mat-tab label="Tuotteen tietojen muokkaus">
+            <div class="unsaved-changes">
+                <p *ngIf="editForm.dirty" class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)" fxLayout="column" fxLayoutAlign="space-around center">
+                    <h1>{{product.productName}}</h1>
 
-                <h1>{{product.productName}}</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nimi: </mat-label>
+                        <textarea matInput [(ngModel)]="product.name" name="name"></textarea>
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Nimi: </mat-label>
-                    <textarea matInput [(ngModel)]="product.name" name="name"></textarea>
-                </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Varauksen alkuaika: </mat-label>
+                        <input matInput type="time" [(ngModel)]="product.reservationStartTime"
+                            name="reservationStartTime">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Varauksen alkuaika: </mat-label>
-                    <input matInput type="time" [(ngModel)]="product.reservationStartTime" name="reservationStartTime">
-                </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Varauksen loppuaika: </mat-label>
+                        <input matInput type="time" [(ngModel)]="product.reservationEndTime" name="reservationEndTime">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Varauksen loppuaika: </mat-label>
-                    <input matInput type="time" [(ngModel)]="product.reservationEndTime" name="reservationEndTime">
-                </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tuotteen kaupunki: </mat-label>
+                        <input matInput [(ngModel)]="product.city" name="city">
+                    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Tuotteen kaupunki: </mat-label>
-                    <input matInput [(ngModel)]="product.city" name="city">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Esittelyteksti: </mat-label>
-                    <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
-                </mat-form-field>
-                <button [disabled]="!editForm.dirty" form="editForm" mat-raised-button color="primary">Tallenna
-                    muutokset</button>
-            </form>
-            <!-- <app-photo-editor [product]="product"></app-photo-editor>
-
-            <div>
-                <img mat-card-image src="{{product.photos[0] && product.photos[0].url}}" alt="Photo of a Product">
-            </div> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Esittelyteksti: </mat-label>
+                        <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
+                    </mat-form-field>
+                    <button form="editForm" mat-raised-button color="primary" [disabled]="!editForm.dirty">
+                        Tallenna muutokset
+                    </button>
+                </form>
+                <app-photo-editor [product]="product" (refreshData)="getProduct()"></app-photo-editor>
+            </div>
         </mat-tab>
 
         <ng-container *ngIf="company">
@@ -63,7 +61,7 @@
                     <ng-container *ngIf="companyEditForm.dirty">
                         <p class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
                     </ng-container>
-    
+
 
                     <h1>{{company.name}}</h1>
                     <mat-form-field appearance="outline">

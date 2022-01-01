@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using ReservationSystem.Helpers;
 using ReservationSystem.Interfaces;
+using ReservationSystemBackend.Data;
+using ReservationSystemBackend.Entities;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ReservationSystem.Services
@@ -47,6 +50,13 @@ namespace ReservationSystem.Services
 
             var result = await _cloudinary.DestroyAsync(deleteParams);
             return result; 
+        }
+
+
+        public async Task<DelResResult> DeleteExistingPhotosAsync(string[] photoIds)
+        {
+            var result = await _cloudinary.DeleteResourcesAsync(ResourceType.Image, photoIds);
+            return result;
         }
     }
 }
