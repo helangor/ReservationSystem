@@ -16,8 +16,9 @@
             <div class="unsaved-changes">
                 <p *ngIf="editForm.dirty" class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
             </div>
-            <div fxLayout="row" fxLayoutAlign="space-around center">
-                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)" fxLayout="column" fxLayoutAlign="space-around center">
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)" 
+                fxLayout="column" fxLayoutAlign="space-around center" fxFlex=100 fxFlex.gt-sm=50>
                     <h1>{{product.productName}}</h1>
 
                     <mat-form-field appearance="outline">
@@ -49,7 +50,9 @@
                         Tallenna muutokset
                     </button>
                 </form>
-                <app-photo-editor [product]="product" (refreshData)="getProduct()"></app-photo-editor>
+                <app-photo-editor [product]="product" (refreshData)="getProduct()" fxFlex=100 fxFlex.gt-sm=50>
+                    
+                </app-photo-editor>
             </div>
         </mat-tab>
 

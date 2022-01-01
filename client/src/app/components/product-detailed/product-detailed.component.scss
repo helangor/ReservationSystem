@@ -1,9 +1,6 @@
 .calendar {
-  width: 270px;
-}
-
-.columns {
-  min-width: 60%;
+  max-width: 400px;
+  min-width: 280px;
 }
 
 img {
@@ -12,4 +9,8 @@ img {
 
 a {
   margin: 0 10px;
+}
+
+.product-info {
+  width: 100%;
 }

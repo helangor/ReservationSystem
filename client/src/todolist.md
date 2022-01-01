@@ -11,6 +11,7 @@
 - Tee Default photo ja eti samalla myös muille default parametreille koko Angularista hyvä keskitetty paikka. 
 - Antamaan error, jos kuva ei sopiva tai muuta ongelmia kuvan upload
 - Unohdin salasanani painike ja email
+- Ilmoita, jos varaus ei mene läpi. Äläkä lähetä viestejä.
 
 - Tuotteen tilaus/Varaus
     - Valittavat lisävalinnat

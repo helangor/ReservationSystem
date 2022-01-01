@@ -13,7 +13,7 @@
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Varaaja </th>
-                <td mat-cell *matCellDef="let element"> {{element.firstName + " " + element.lastName}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
 
 
@@ -23,7 +23,7 @@
                     <div class="example-element-detail"
                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                         <div> 
-                            <p><strong>Varaaja: </strong> {{element.firstName + " " + element.lastName}} </p>
+                            <p><strong>Varaaja: </strong> {{element.name}} </p>
                             <p><strong>Puhelinnumero: </strong> {{element.phoneNumber}} </p>
                             <p><strong>Email: </strong> {{element.email}} </p>
                             <p><strong>Osoite: </strong> {{element.address + ", " + element.postalCode + " " + element.city}} </p>

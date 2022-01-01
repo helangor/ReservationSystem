@@ -1,13 +1,12 @@
 <ng-container *ngIf="product">
-
-    <div fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxLayoutAlign="space-between center">
         <h1>{{product.name}}, {{product.city}}</h1>
         <p>{{product.introduction}}</p>
 
-        <div fxLayout="row" fxLayoutAlign="space-around center" class="columns">
-            <div fxFlex=60 fxLayout="column" fxLayoutAlign="space-around center">
+        <div fxLayout="row wrap" fxLayoutAlign="space-around center" class="columns" class="product-info">
+            <div fxFlex=100 fxFlex.gt-sm=60  fxLayout="column" fxLayoutAlign="space-around center" >
                 <img mat-card-image
-                    src="{{product.photos[0] && product.photos[0].url || 'https://material.angular.io/assets/img/examples/shiba2.jpg'}}"
+                    src="{{product.photos[0] && product.photos[0].url || 'assets/images/default.jpg'}}"
                     alt="Photo of a Product">
                 <div fxLayout="row">
                     <a href="/vuokrausehdot" target="_blank">
@@ -19,7 +18,7 @@
                 </div>
             </div>
 
-            <div fxFlex=40>
+            <div fxFlex="100" fxFlex.gt-sm=40 fxLayout="column" fxLayoutAlign="space-around center">
                 <mat-card class="calendar">
                     <mat-calendar (selectedChange)="_onSelectedChange($event)" [selected]="selectedDateRange"
                         [dateFilter]="myDateFilter">

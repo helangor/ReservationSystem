@@ -1,4 +1,4 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
-    <p>Kiitos tilauksestasi<span *ngIf="reservation && reservation.firstName">, {{reservation.firstName}}!</span> </p>
+    <p>Kiitos tilauksestasi<span *ngIf="reservation && reservation.name">, {{reservation.name}}!</span> </p>
     <button mat-raised-button color="primary" routerLink="/">Takaisin etusivulle</button>
 </div>

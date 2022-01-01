@@ -1,47 +1,44 @@
 <mat-tab-group #tabgroup>
     <mat-tab label="Syötä tiedot">
-        <div class="reservation-dialog" fxLayout="column" fxLayoutAlign="space-around center">
-            <form #reservationForm="ngForm" id="reservationForm">
-                <div fxLayout="column" fxLayoutAlign="space-around center">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Etunimi</mat-label>
-                        <input matInput required [(ngModel)]="reservation.firstName" name="firstName">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Sukunimi</mat-label>
-                        <input matInput required [(ngModel)]="reservation.lastName" name="lastName">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Osoite</mat-label>
-                        <input matInput [(ngModel)]="reservation.address" name="address">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Postinumero</mat-label>
-                        <input matInput [(ngModel)]="reservation.postalCode" name="postalCode"
-                            [formControl]="postalCode">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Postitoimipaikka</mat-label>
-                        <input matInput [(ngModel)]="reservation.city" name="city">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Puhelinnumero</mat-label>
-                        <input matInput required [(ngModel)]="reservation.phoneNumber" name="phoneNumber"
-                            [formControl]="phone">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Sähköposti</mat-label>
-                        <input matInput [(ngModel)]="reservation.email" name="email" [formControl]="email" required>
-                        <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Viesti vuokraajalle</mat-label>
-                        <textarea matInput [(ngModel)]="reservation.extraInfo" name="extraInfo"></textarea>
-                    </mat-form-field>
-                </div>
+        <mat-dialog-content>
+            <form #reservationForm="ngForm" id="reservationForm" fxLayout="column" fxLayoutAlign="center center">
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Etu- ja sukunimi</mat-label>
+                    <input matInput required [(ngModel)]="reservation.name" name="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Osoite</mat-label>
+                    <input matInput [(ngModel)]="reservation.address" name="address">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Postinumero</mat-label>
+                    <input matInput [(ngModel)]="reservation.postalCode" name="postalCode">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Postitoimipaikka</mat-label>
+                    <input matInput [(ngModel)]="reservation.city" name="city">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Puhelinnumero</mat-label>
+                    <input matInput required [(ngModel)]="reservation.phoneNumber" name="phoneNumber"
+                        [formControl]="phone">
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Sähköposti</mat-label>
+                    <input matInput [(ngModel)]="reservation.email" name="email" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Viesti vuokraajalle</mat-label>
+                    <textarea matInput [(ngModel)]="reservation.extraInfo" name="extraInfo"></textarea>
+                </mat-form-field>
             </form>
+        </mat-dialog-content>
+
+        <div fxLayout="column" fxLayoutAlign="space-around center">
             <mat-slide-toggle [(ngModel)]="isChecked">Hyväksyn
                 <a target="_blank" [routerLink]="'/vuokrausehdot'">vuokrausehdot</a>
+                <br>
                 ja
                 <a target="_blank" [routerLink]="'/tietosuojaseloste'">tietosuojaselosteen</a>
             </mat-slide-toggle>
@@ -56,16 +53,17 @@
     </mat-tab>
     <mat-tab label="Vahvista tilaus" [disabled]="!isChecked || !reservationForm.valid">
         <div class="reservation-dialog">
-            <p><strong>Nimi: </strong>{{reservation.firstName}} {{reservation.lastName}}</p>
+            <p><strong>Nimi: </strong>{{reservation.name}}</p>
             <p><strong>Puhelinnumero: </strong>{{reservation.phoneNumber}}</p>
             <p><strong>Sähköposti: </strong>{{reservation.email}}</p>
-            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.city}}
-            </p>
+            <p><strong>Osoite: </strong>{{reservation.address}}, {{reservation.postalCode}} {{reservation.city}}</p>
             <ng-container *ngIf="data && data.dateRange">
-                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY" + " " + "k:mm")}}</p>
-                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY" + " " + "k:mm")}}</p>
+                <p><strong>Alkuaika: </strong>{{data.dateRange.start.format("dddd" + " " + "D" + "." + "M" + "." +
+                    "YYYY" + " " + "k:mm")}}</p>
+                <p><strong>Loppuaika: </strong>{{data.dateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY"
+                    + " " + "k:mm")}}</p>
             </ng-container>
-            <p><strong>Viesti: </strong>{{reservation.extraInfo}}</p>
+            <p *ngIf="reservation.extraInfo"><strong>Viesti: </strong>{{reservation.extraInfo}}</p>
 
             <button mat-raised-button color="primary" (click)="confirmOrder()">Vahvista tilaus</button>
 

@@ -2,11 +2,27 @@
     <button mat-icon-button routerLink="/">
         <mat-icon>home</mat-icon>
     </button>
+
     <ng-container *ngIf="accountService.currentUser$ | async as user">
-        <a routerLink="/products/edit" routerLinkActive="active">Yrityksen muokkaus</a>
-        <button mat-raised-button (click)="this.accountService.logout()">Kirjaudu ulos</button>
+        <a routerLink="/products/edit" routerLinkActive="active" [fxHide.xs]="true" [fxHide.sm]="false">Yrityksen muokkaus</a>
+        <button mat-raised-button (click)="this.accountService.logout()" [fxHide.xs]="true" [fxHide.sm]="false">Kirjaudu ulos</button>
     </ng-container>
     <ng-container *ngIf="(accountService.currentUser$ | async) == null">
-        <a routerLink="/login" routerLinkActive="active">Kirjaudu sisään</a>
+        <a routerLink="/login" routerLinkActive="active" [fxHide.xs]="true" [fxHide.sm]="false">Kirjaudu sisään</a>
     </ng-container>
+
+
+    <button mat-icon-button [fxHide.xs]="false" [fxHide.gt-xs]="true" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <ng-container *ngIf="accountService.currentUser$ | async as user">
+            <button mat-menu-item routerLink="/products/edit" routerLinkActive="active">Yrityksen muokkaus</button>
+            <button mat-menu-item (click)="this.accountService.logout()">Kirjaudu ulos</button>
+        </ng-container>
+        <ng-container *ngIf="(accountService.currentUser$ | async) == null">
+            <button mat-menu-item routerLink="/login" routerLinkActive="active">Kirjaudu sisään</button>
+        </ng-container>
+    </mat-menu>
+
 </mat-toolbar>

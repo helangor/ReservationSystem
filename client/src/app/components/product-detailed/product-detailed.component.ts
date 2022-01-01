@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { ProductService } from 'src/app/_services/product.service';
 import { Product } from 'src/app/_models/product';
 import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-detailed',
