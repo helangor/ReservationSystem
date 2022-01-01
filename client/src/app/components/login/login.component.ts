@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,9 +11,13 @@ import { AccountService } from 'src/app/_services/account.service';
 })
 
 export class LoginComponent implements OnInit {
+  @HostListener('document:keypress', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key == 'Enter') {this.login()}
+  }
   model: any = {};
   hide = true;
-
+  
   constructor(public accountService: AccountService, private router: Router, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
