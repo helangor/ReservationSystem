@@ -6,8 +6,6 @@
     - EDIT komponentissa voi määrittää
     - Backendin puolella tapahtuu
 
-- Vaihda default kuva koirasta johonkin muuhun.
-
 ### NICE TO HAVE
 - Luo peruuta varaus confirm dialog.
 - Tee Default photo ja eti samalla myös muille default parametreille koko Angularista hyvä keskitetty paikka. 
