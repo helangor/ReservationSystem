@@ -1,22 +1,25 @@
 <ng-container *ngIf="product">
 
     <div fxLayout="column" fxLayoutAlign="space-around center">
-        <h1>{{product.productName}}</h1>
+        <h1>{{product.name}}, {{product.city}}</h1>
+        <p>{{product.introduction}}</p>
 
         <div fxLayout="row" fxLayoutAlign="space-around center" class="columns">
-
             <div fxFlex=60 fxLayout="column" fxLayoutAlign="space-around center">
-                <p>{{product.city}}</p>
-                <p>{{product.introduction}}</p>
                 <img mat-card-image
                     src="{{product.photos[0] && product.photos[0].url || 'https://material.angular.io/assets/img/examples/shiba2.jpg'}}"
                     alt="Photo of a Product">
-                    <button mat-raised-button color="primary" target="_blank" [routerLink]="'/vuokrausehdot'">Vuokrausehdot</button>
-                    <button mat-raised-button color="primary" target="_blank" [routerLink]="'/kayttoohje'">Käyttöohjeet</button>
+                <div fxLayout="row">
+                    <a href="/vuokrausehdot" target="_blank">
+                        <button mat-stroked-button color="primary" href="">Vuokrausehdot</button>
+                    </a>
+                    <a href="/kayttoohje" target="_blank">
+                        <button mat-stroked-button color="primary" href="">Käyttöohjeet</button>
+                    </a>
+                </div>
             </div>
 
             <div fxFlex=40>
-                <h2>Varaa palju</h2>
                 <mat-card class="calendar">
                     <mat-calendar (selectedChange)="_onSelectedChange($event)" [selected]="selectedDateRange"
                         [dateFilter]="myDateFilter">
@@ -26,20 +29,18 @@
                 <ng-container *ngIf="this.selectedDateRange">
                     <p *ngIf="this.selectedDateRange.start"><strong>Aloitusaika:</strong>
                         {{this.selectedDateRange.start.format("dddd" + " " + "D"+ "." + "M" + "." + "YYYY" + " ")}}
-                        klo:
-                        {{product.reservationStartTime.slice(0, -3)}} 
+                        klo:{{product.reservationStartTime.slice(0, -3)}}
                     </p>
                     <p *ngIf="this.selectedDateRange.end"><strong>Lopetusaika:</strong>
                         {{this.selectedDateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY")}}
-                        klo:
-                        {{product.reservationEndTime.slice(0, -3)}}
+                        klo:{{product.reservationEndTime.slice(0, -3)}}
                     </p>
                     <p *ngIf="!this.selectedDateRange.end"><strong>Lopetusaika: </strong> Valitse lopetuspäivä</p>
                 </ng-container>
 
                 <ng-container *ngIf="!this.selectedDateRange">
-                    <p><strong>Aloitusaika: </strong> Valitse aloituspäivä</p>
-                    <p><strong>Lopetusaika: </strong> Valitse lopetuspäivä</p>
+                    <p><strong>Aloitusaika: </strong> Valitse aloituspäivä kalenterista</p>
+                    <p><strong>Lopetusaika: </strong> Valitse lopetuspäivä kalenterista</p>
                 </ng-container>
 
 

@@ -1,11 +1,15 @@
-.demo-inline-calendar-card {
-    width: 300px;
-  }
+.calendar {
+  width: 270px;
+}
 
-  .calendar {
-    min-width: 300px;
-  }
+.columns {
+  min-width: 60%;
+}
 
-  .columns {
-    min-width: 60%;
-  }
+img {
+  max-width: 400px;
+}
+
+a {
+  margin: 0 10px;
+}
