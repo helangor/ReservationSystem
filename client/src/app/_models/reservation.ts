@@ -1,8 +1,7 @@
 import { Product } from "./product";
 
 export class Reservation {
-    firstName: string;
-    lastName: string;
+    name: string;
     address: string;
     postalCode: string;
     city: string;

@@ -43,7 +43,7 @@ namespace ReservationSystem.Controllers
                 "<br>" +
                 "<p>Mukavaa paljuilua toivottaa, </p>" +
                 "<p>Paljumies, www.paljumies.fi</p>",
-                reservation.FirstName, reservation.Id, startTime.ToString(), endTime.ToString(), reservation.Product.Name, reservation.Product.City);
+                reservation.Name, reservation.Id, startTime.ToString(), endTime.ToString(), reservation.Product.Name, reservation.Product.City);
             emailService.SendEmail(reservation.Email, "Varausvahvistus", customerReservationMessage);
 
             var companyReservationMessage = string.Format(
@@ -51,14 +51,14 @@ namespace ReservationSystem.Controllers
             "<p>Paljunne on varattu ajalle {1} - {2}</p>" +
             "<p>Varausnumero: {3}</p>" +
             "<p>Varaajan tiedot:</p>" +
-            "<p>Nimi: {4} {5}</p>" +
-            "<p>Puhelinnumero: {6}</p>" +
-            "<p>Sähköposti: {7}</p>" +
-            "<p>Viesti: {8}</p>" +
+            "<p>Nimi: {4} </p>" +
+            "<p>Puhelinnumero: {5}</p>" +
+            "<p>Sähköposti: {6}</p>" +
+            "<p>Viesti: {7}</p>" +
             "<br>" +
             "<p>Paljujen paras välittäjä</p>" +
             "<p>Paljumies, www.paljumies.fi</p>",
-            company.Name, startTime.ToString(), endTime.ToString(), reservation.Id, reservation.FirstName, reservation.LastName, reservation.PhoneNumber, reservation.Email, reservation.ExtraInfo);
+            company.Name, startTime.ToString(), endTime.ToString(), reservation.Id, reservation.Name,  reservation.PhoneNumber, reservation.Email, reservation.ExtraInfo);
             emailService.SendEmail(company.Email, "Varausvahvistus", companyReservationMessage);
 
             //Kludge. Ettei valita kuvien ID keystä
@@ -96,7 +96,7 @@ namespace ReservationSystem.Controllers
                 "<p>{3}</p>" +
                 "<br>" +
                 "<p>Paljumies, www.paljumies.fi</p>",
-                reservation.FirstName, startTime.ToString(), endTime.ToString(), company.Name);
+                reservation.Name, startTime.ToString(), endTime.ToString(), company.Name);
 
             emailService.SendEmail(reservation.Email, "Varaus peruutettu", reservationMessage);
             return Ok();
