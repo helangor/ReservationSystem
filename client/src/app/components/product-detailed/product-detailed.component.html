@@ -34,7 +34,7 @@
                         {{this.selectedDateRange.end.format("dddd" + " " + "D" + "." + "M" + "." + "YYYY")}}
                         klo:{{product.reservationEndTime.slice(0, -3)}}
                     </p>
-                    <p *ngIf="!this.selectedDateRange.end"><strong>Lopetusaika: </strong> Valitse lopetuspäivä</p>
+                    <p *ngIf="!this.selectedDateRange.end"><strong>Lopetusaika: </strong> Valitse lopetuspäivä kalenterista</p>
                 </ng-container>
 
                 <ng-container *ngIf="!this.selectedDateRange">

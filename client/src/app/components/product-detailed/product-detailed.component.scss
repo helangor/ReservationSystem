@@ -1,14 +1,18 @@
-.calendar {
-  max-width: 400px;
-  min-width: 280px;
-}
-
 img {
   max-width: 400px;
 }
 
 a {
   margin: 0 10px;
+}
+
+.calendar {
+  max-width: 400px;
+  min-width: 280px;
+}
+
+::ng-deep  .mat-calendar-body-disabled {
+  background-color: rgba(0, 0, 0, 0.07);
 }
 
 .product-info {
