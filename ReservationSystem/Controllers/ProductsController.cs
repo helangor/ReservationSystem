@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ReservationSystem.DTOs;
 using ReservationSystem.Entities;
+using ReservationSystem.Enums;
 using ReservationSystem.Extensions;
 using ReservationSystem.Interfaces;
 using ReservationSystemBackend.Data;
@@ -56,8 +57,8 @@ namespace ReservationSystem.Controllers
                         
             //TODO: Tämä kantahakuun suoraan
             var futureReservations = reservations.Where(r => r.EndTime >= DateTime.Now
-            && r.Status != Reservation.ReservationStatus.Rejected
-            && r.Status != Reservation.ReservationStatus.Cancelled
+            && r.Status != ReservationStatus.Rejected
+            && r.Status != ReservationStatus.Cancelled
             ).ToList();
 
             var product = context.Products.Single(p => p.Id == productId);
@@ -70,7 +71,7 @@ namespace ReservationSystem.Controllers
         [HttpPut("update-product")]
         public ActionResult UpdateProduct(Product product)
         {
-            var currentProduct = context.Products.FirstOrDefault(c => c.Id == product.Id);
+            var currentProduct = context.Products.Include(p => p.PriceRows).FirstOrDefault(c => c.Id == product.Id);
             if (currentProduct != null)
             {
                 currentProduct.ReservationEndTime = product.ReservationEndTime;
@@ -78,6 +79,7 @@ namespace ReservationSystem.Controllers
                 currentProduct.Name = product.Name;
                 currentProduct.Introduction = product.Introduction;
                 currentProduct.City = product.City;
+                currentProduct.PriceRows = product.PriceRows;
                 context.SaveChanges();
             }
             

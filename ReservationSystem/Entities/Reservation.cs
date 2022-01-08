@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ReservationSystem.Enums;
 using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
 using System;
@@ -21,6 +22,7 @@ namespace ReservationSystem.Entities
         public DateTime EndTime { get; set; } = DateTime.Now;
         public ReservationStatus Status { get; set; } = ReservationStatus.New;
         public string ExtraInfo { get; set; }
+        public double Price { get; set; }
         public Product Product { get; set; }
 
         public List<DateTime> GetReservedDaysList(List<Reservation> reservations, Product product)
@@ -58,15 +60,6 @@ namespace ReservationSystem.Entities
 
             var reservations = query.SingleOrDefault();
             return reservations;
-        }
-
-        public enum ReservationStatus
-        {
-            New,
-            Confirmed,
-            Rejected,
-            Cancelled,
-            NotAvailable
         }
     }
 }

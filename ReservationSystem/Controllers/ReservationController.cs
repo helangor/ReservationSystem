@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Entities;
+using ReservationSystem.Enums;
 using ReservationSystem.Interfaces;
 using ReservationSystemBackend.Data;
 using System;
@@ -33,7 +34,7 @@ namespace ReservationSystem.Controllers
             var endTime = TimeZoneInfo.ConvertTime(reservation.EndTime, localZone);
             var company = Company.GetCompanyByProductId(reservation.Product.Id, context);
 
-            reservation.Status = Reservation.ReservationStatus.New;
+            reservation.Status = ReservationStatus.New;
             var customerReservationMessage = string.Format(
                 "<div>Hei {0}!</div> " +
                 "<p>Olemme vastaanottaneet varauksenne: {1} ajalle {2} - {3}</p>" +
@@ -77,7 +78,7 @@ namespace ReservationSystem.Controllers
             var entity = context.Reservations.Include(p => p.Product).FirstOrDefault(item => item.Id == reservation.Id);
             if (entity != null)
             {
-                entity.Status = Reservation.ReservationStatus.Cancelled;
+                entity.Status = ReservationStatus.Cancelled;
                 context.Reservations.Update(entity);
                 await context.SaveChangesAsync();
             }
@@ -116,8 +117,8 @@ namespace ReservationSystem.Controllers
         {
             var reservations = Reservation.GetReservations(productId, context).Where(
                 p => p.EndTime >= DateTime.Now
-                && p.Status != Reservation.ReservationStatus.Rejected
-                && p.Status != Reservation.ReservationStatus.Cancelled)
+                && p.Status != ReservationStatus.Rejected
+                && p.Status != ReservationStatus.Cancelled)
                 .OrderBy(p => p.StartTime);
             return Ok(reservations);
         }
