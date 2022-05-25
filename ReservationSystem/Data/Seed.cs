@@ -30,6 +30,17 @@ namespace ReservationSystem.Data
                 context.Users.Add(user);
             }
 
+            if (!context.Products.Any())
+            {
+                var priceRows = new List<PriceRow> {
+                new PriceRow { Name = "Päivä", TimePeriod = Enums.TimePeriod.Day, Price = 100 },
+                new PriceRow { Name = "Viikonloppu", TimePeriod = Enums.TimePeriod.Weekend, Price = 150 },
+                new PriceRow { Name = "Viikko", TimePeriod = Enums.TimePeriod.Week, Price = 200 }
+            };
+
+                context.SaveChanges();
+            }
+
             await context.SaveChangesAsync();
         }
     }

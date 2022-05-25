@@ -1,6 +1,9 @@
-﻿using ReservationSystem.Entities;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ReservationSystem.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +19,7 @@ namespace ReservationSystemBackend.Entities
         public string Introduction { get; set; }
         public string City { get; set; }
         public string UnavailableDays { get; set; }
+        public ICollection<PriceRow> PriceRows { get; set; } 
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }
