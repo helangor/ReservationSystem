@@ -1,6 +1,6 @@
-<ng-container *ngIf="reservations">
+<ng-container *ngIf="product.reservations">
     <div fxLayout="column" fxLayoutAlign="space-around center">
-        <table mat-table [dataSource]="reservations" multiTemplateDataRows class="mat-elevation-z8">
+        <table mat-table [dataSource]="product.reservations" multiTemplateDataRows class="mat-elevation-z8">
             <ng-container matColumnDef="startTime">
                 <th mat-header-cell *matHeaderCellDef>Aloitus </th>
                 <td mat-cell *matCellDef="let element"> {{element.startTime +'Z' | date:'dd.MM.yyyy HH:mm'}} </td>

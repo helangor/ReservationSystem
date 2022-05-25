@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ReservationService } from 'src/app/_services/reservation.service';
 import { Company } from 'src/app/_models/company';
 import { CompanyService } from 'src/app/_services/company.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PriceEditDialogComponent } from '../price-edit-dialog/price-edit-dialog.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -37,7 +39,8 @@ export class ProductEditComponent implements OnInit {
     private companyService: CompanyService,
     private snackbar: MatSnackBar,
     private route: ActivatedRoute,
-    private reservationService: ReservationService) {
+    private reservationService: ReservationService,
+    private dialog: MatDialog) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
@@ -46,21 +49,18 @@ export class ProductEditComponent implements OnInit {
   }
 
   getProduct() {
-    this.productService.getProduct(this.route.snapshot.paramMap.get('productName')).subscribe(product => {
+    this.productService.getProductAllData(this.route.snapshot.paramMap.get('productName')).subscribe(product => {
       this.product = product;
-      this.getReservations(product.id)
-      this.getCompany(product.id) 
+
+      console.log("PRODUCT ", this.product);
+      
+      
+      this.getCompany(product.id)
     })
   }
   getCompany(id: number) {
     this.companyService.getCompanyByProductId(id).subscribe(res => {
       this.company = res;
-    });
-  }
-
-  getReservations(id: number) {
-    this.reservationService.getValidFutureReservations(id).subscribe(res => {
-      this.reservations = res;
     });
   }
 
@@ -83,5 +83,16 @@ export class ProductEditComponent implements OnInit {
         this.snackbar.open("Tietojen päivittäminen epäonnistui");
        });
      }
+
+     openPriceEditDialog() {
+      const dialogRef = this.dialog.open(PriceEditDialogComponent, {
+        data: {
+          product: this.product
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
    
 }

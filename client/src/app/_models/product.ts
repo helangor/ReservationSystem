@@ -1,5 +1,7 @@
 import { Time } from "@angular/common";
 import { Photo } from "./photo";
+import { PriceRow } from "./priceRow";
+import { Reservation } from "./reservation";
 
 export interface Product {
     id: number,
@@ -10,4 +12,6 @@ export interface Product {
     introduction: string;
     city: string;
     photos: Photo[];
+    reservations: Reservation[];
+    priceRows: PriceRow[];
 }

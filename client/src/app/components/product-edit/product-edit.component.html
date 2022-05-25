@@ -5,20 +5,20 @@
 
                 <h1>{{product.name}}</h1>
                 <h2>Tulevat Varaukset</h2>
-                <app-reservation-table fxFill [reservations]="reservations" [product]="product"></app-reservation-table>
+                <app-reservation-table fxFill [product]="product"></app-reservation-table>
                 <div>
                     <button mat-raised-button color="primary" routerLink="/">Takaisin kotisivulle</button>
                 </div>
             </div>
         </mat-tab>
 
-        <mat-tab label="Tuotteen tietojen muokkaus">
+        <mat-tab label="Tuotteiden muokkaus">
             <div class="unsaved-changes">
                 <p *ngIf="editForm.dirty" class="unsaved-changes">Huomio! Tallentamattomia muutoksia</p>
             </div>
             <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateProduct(product)" 
-                fxLayout="column" fxLayoutAlign="space-around center" fxFlex=100 fxFlex.gt-sm=50>
+                <form #editForm="ngForm" id="editForm" fxLayout="column"
+                    fxLayoutAlign="space-around center" fxFlex=100 fxFlex.gt-sm=50>
                     <h1>{{product.productName}}</h1>
 
                     <mat-form-field appearance="outline">
@@ -46,18 +46,21 @@
                         <mat-label>Esittelyteksti: </mat-label>
                         <textarea matInput [(ngModel)]="product.introduction" name="introduction"></textarea>
                     </mat-form-field>
-                    <button form="editForm" mat-raised-button color="primary" [disabled]="!editForm.dirty">
+
+                    <button mat-button (click)="openPriceEditDialog()">Muokkaa hintoja</button>
+
+                    <button form="editForm" mat-raised-button color="primary" [disabled]="!editForm.dirty" (click)="updateProduct(product)">
                         Tallenna muutokset
                     </button>
                 </form>
                 <app-photo-editor [product]="product" (refreshData)="getProduct()" fxFlex=100 fxFlex.gt-sm=50>
-                    
+
                 </app-photo-editor>
             </div>
         </mat-tab>
 
         <ng-container *ngIf="company">
-            <mat-tab label="Yrityksen tietojen muokkaus" fxLayout="column" fxLayoutAlign="space-around center">
+            <mat-tab label="Yrityksen muokkaus" fxLayout="column" fxLayoutAlign="space-around center">
                 <form #companyEditForm="ngForm" id="companyEditForm" (ngSubmit)="updateCompany(company)"
                     fxLayout="column" fxLayoutAlign="space-around center">
 

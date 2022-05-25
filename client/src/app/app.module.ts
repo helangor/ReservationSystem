@@ -29,6 +29,7 @@ import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-
 import { PrivacyStatementComponent } from './components/privacy-statement/privacy-statement.component';
 import { ReservationTableComponent } from './components/reservation-table/reservation-table.component';
 import { AuthInterceptor } from './_interceptors/auth.interceptor';
+import { PriceEditDialogComponent } from './components/price-edit-dialog/price-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { AuthInterceptor } from './_interceptors/auth.interceptor';
     TermsOfServiceComponent,
     PrivacyStatementComponent,
     ReservationTableComponent,
+    PriceEditDialogComponent,
   ],
   imports: [
     BrowserModule,

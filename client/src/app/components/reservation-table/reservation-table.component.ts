@@ -19,7 +19,6 @@ import { ReservationService } from 'src/app/_services/reservation.service';
   ],
 })
 export class ReservationTableComponent implements OnInit {
-  @Input() reservations: Reservation[];
   @Input() product: Product;
 
   columnsToDisplay: string[] = ['startTime', 'endTime', 'name'];
@@ -40,7 +39,7 @@ export class ReservationTableComponent implements OnInit {
 
   loadReservations(id: number) {
     this.reservationService.getValidFutureReservations(id).subscribe(res => {
-      this.reservations = res;
+      this.product.reservations = res;
     });
   }
 }
