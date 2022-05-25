@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReservationSystemBackend.Data;
@@ -9,9 +10,10 @@ using ReservationSystemBackend.Data;
 namespace ReservationSystem.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220102143937_AddedPriceRowsJson")]
+    partial class AddedPriceRowsJson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,20 +79,11 @@ namespace ReservationSystem.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime>("SpecialEndDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("SpecialStartDate")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TimePeriod")
                         .HasColumnType("integer");
