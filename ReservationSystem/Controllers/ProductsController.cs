@@ -48,6 +48,14 @@ namespace ReservationSystem.Controllers
             return Ok(productToReturn);
         }
 
+        [Authorize]
+        [HttpGet("get-product-all-data")]
+        public async Task<ActionResult<ProductDto>> GetProductAllData(string productName)
+        {
+            var product = await context.Products.Include(p => p.Photos).Include(p => p.PriceRows).Include(p => p.Reservations).FirstOrDefaultAsync(c => c.Name == productName);
+            return Ok(product);
+        }
+
         [HttpGet("get-reserved-days-for-product")]
         public ActionResult<List<DateTime>> GetReservedDaysForProduct(int productId)
         {
