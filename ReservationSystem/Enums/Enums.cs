@@ -14,7 +14,7 @@ namespace ReservationSystem.Enums
         NotAvailable
     }
 
-    public enum PriceTableTimePeriod
+    public enum TimePeriod
     {
         Day,
         Week,
