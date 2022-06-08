@@ -1,0 +1,24 @@
+.navigation {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background: deepskyblue;
+}
+
+.navigation-menu li {
+  display: inline-block;
+  margin: 0 1em;
+  flex-grow: 1;
+  width: calc(25% - 2em);
+}
+
+.navigation a {
+  color: white;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  background: #1565c0;
+}
