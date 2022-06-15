@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductDto } from "../../types/types";
@@ -21,18 +22,18 @@ const FetchProducts = () => {
 export function Products() {
   const { products, error, loaded } = FetchProducts();
 
-  console.log({ products });
-
   if (loaded) {
     if (error) {
       return <span>Error: {error}</span>;
     } else {
       return (
-        <>
+        <Grid container spacing={2}>
           {products.map((p) => (
-            <ProductCard {...p} />
+            <Grid item xs={12} md={6} lg={4} key={p.id}>
+              <ProductCard {...p} key={p.id} />
+            </Grid>
           ))}
-        </>
+        </Grid>
       );
     }
   }
