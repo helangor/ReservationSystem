@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
 
 export function Navbar() {
   return (
     <>
       <nav className="navigation">
-        <a href="/" className="brand-name">
-          Brändi
-        </a>
+        <Link to="/" className="brand-name">
+          <p>Brändi</p>
+        </Link>
         <div className="navigation-menu">
           <ul>
             <li>
