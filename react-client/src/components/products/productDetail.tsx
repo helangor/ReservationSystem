@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Dialog, DialogTitle } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -7,6 +7,9 @@ import "../../styles/productDetail.css";
 import { Col, Container, Row } from "react-grid-system";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import ReservationDialog from "../reservation-dialog/reservationDialog";
+import config from "../../config.json";
+const locale = config.LOCALE;
 
 const FetchProduct = () => {
   const { productName } = useParams();
@@ -24,12 +27,28 @@ const FetchProduct = () => {
   return { product, error, loaded };
 };
 
+const getDate = (date: Date) => {
+  if (!date) {
+    return;
+  } else {
+    return date.toLocaleDateString(locale);
+  }
+};
+
 export function ProductDetail() {
   const { product, error, loaded } = FetchProduct();
-  const [selectedDate, setSelectedDate] = useState<Date[]>([
-    new Date(),
-    new Date(),
-  ]);
+  const [selectedDate, setSelectedDate] = useState<Date[]>([]);
+
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  console.log({ locale });
 
   return (
     <Container fluid>
@@ -43,9 +62,6 @@ export function ProductDetail() {
         <Col>
           <p>{product?.city}</p>
         </Col>
-        <Col>
-          <p>Price: $</p>
-        </Col>
       </Row>
       <Row>
         <Col>
@@ -58,14 +74,34 @@ export function ProductDetail() {
               selectRange={true}
               onChange={(value: Date[], event: any) => {
                 setSelectedDate(value);
-                console.log({ value });
               }}
             ></Calendar>
           </Row>
           <Row>
-            <h2>
-              {selectedDate[0].getDate()} - {selectedDate[1].getDate()}
-            </h2>
+            <p>
+              <p>
+                <strong>Alkuaika</strong>:{" "}
+                {selectedDate[0] && selectedDate[0].toLocaleDateString(locale)}
+              </p>
+              <p>
+                <strong>Loppuaika</strong>:{" "}
+                {selectedDate[1] && selectedDate[1].toLocaleDateString(locale)}
+              </p>
+              <p>
+                <strong>Hinta</strong>: 100e
+              </p>
+            </p>
+          </Row>
+          <Row>
+            <Button variant="outlined" onClick={handleClickOpen}>
+              Tilaa
+            </Button>
+            <ReservationDialog
+              open={open}
+              onClose={handleClose}
+              product={product!}
+              reserveDates={selectedDate}
+            />
           </Row>
         </Col>
       </Row>
