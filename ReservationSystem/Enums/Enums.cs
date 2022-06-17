@@ -13,13 +13,4 @@ namespace ReservationSystem.Enums
         Cancelled,
         NotAvailable
     }
-
-    public enum TimePeriod
-    {
-        Day,
-        Week,
-        Weekend,
-        WeekendDay,
-        Special
-    }
 }

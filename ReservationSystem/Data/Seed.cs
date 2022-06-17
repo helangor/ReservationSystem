@@ -33,9 +33,9 @@ namespace ReservationSystem.Data
             if (!context.Products.Any())
             {
                 var priceRows = new List<PriceRow> {
-                new PriceRow { Name = "Päivä", TimePeriod = Enums.TimePeriod.Day, Price = 100 },
-                new PriceRow { Name = "Viikonloppu", TimePeriod = Enums.TimePeriod.Weekend, Price = 150 },
-                new PriceRow { Name = "Viikko", TimePeriod = Enums.TimePeriod.Week, Price = 200 }
+                new PriceRow { Name = "Päivä", Price = 100 },
+                new PriceRow { Name = "Viikonloppu", DayOfWeeks = new List<DayOfWeek>{ DayOfWeek.Saturday, DayOfWeek.Sunday }, AmountOfConsecutiveDays = 2, Price = 150 },
+                new PriceRow { Name = "Viikko", AmountOfConsecutiveDays = 7, Price = 200 }
             };
 
                 context.SaveChanges();
