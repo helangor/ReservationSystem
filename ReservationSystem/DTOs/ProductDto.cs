@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReservationSystem.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,6 @@ namespace ReservationSystem.DTOs
         public string Introduction { get; set; }
         public string City { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
+        public ICollection<PriceRow> PriceRows { get; set; }
     }
 }

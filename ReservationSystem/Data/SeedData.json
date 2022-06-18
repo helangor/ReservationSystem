@@ -17,6 +17,12 @@
                 "Url": "https://res.cloudinary.com/dmpop1rlt/image/upload/v1641079696/dkyk2jxe8xwigrjfhvk2.jpg",
                 "PublicId": "dkyk2jxe8xwigrjfhvk2"
               }
+            ],
+            "PriceRows": [
+              {
+                "Name": "Päivä",
+                "Price": 100
+              }
             ]
           }
         ]
@@ -40,6 +46,12 @@
               {
                 "Url": "https://res.cloudinary.com/dmpop1rlt/image/upload/v1641079682/vfhrrofkc37dtkgsycmv.jpg",
                 "PublicId": "vfhrrofkc37dtkgsycmv"
+              }
+            ],
+            "PriceRows": [
+              {
+                "Name": "Päivä",
+                "Price": 100
               }
             ]
           }
@@ -65,6 +77,12 @@
                 "Url": "https://res.cloudinary.com/dmpop1rlt/image/upload/v1641079665/hy5ddckrk3m4dmkconyz.jpg",
                 "PublicId": "hy5ddckrk3m4dmkconyz"
               }
+            ],
+            "PriceRows": [
+              {
+                "Name": "Päivä",
+                "Price": 100
+              }
             ]
           }
         ]
@@ -89,6 +107,12 @@
                 "Url": "https://res.cloudinary.com/dmpop1rlt/image/upload/v1641077118/icoieffjgxfor61x076d.jpg",
                 "PublicId": "icoieffjgxfor61x076d"
               }
+            ],
+            "PriceRows": [
+              {
+                "Name": "Päivä",
+                "Price": 100
+              }
             ]
           },
           {
@@ -98,6 +122,12 @@
               {
                 "Url": "https://res.cloudinary.com/dmpop1rlt/image/upload/v1641079654/jxvjn2gbxzlnpkpcxogb.jpg",
                 "PublicId": "jxvjn2gbxzlnpkpcxogb"
+              }
+            ],
+            "PriceRows": [
+              {
+                "Name": "Päivä",
+                "Price": 100
               }
             ]
           }

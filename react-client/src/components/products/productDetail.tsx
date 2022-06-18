@@ -77,19 +77,18 @@ export function ProductDetail() {
               }}
             ></Calendar>
           </Row>
-          <Row>
+          <Row direction="column">
             <p>
-              <p>
-                <strong>Alkuaika</strong>:{" "}
-                {selectedDate[0] && selectedDate[0].toLocaleDateString(locale)}
-              </p>
-              <p>
-                <strong>Loppuaika</strong>:{" "}
-                {selectedDate[1] && selectedDate[1].toLocaleDateString(locale)}
-              </p>
-              <p>
-                <strong>Hinta</strong>: 100e
-              </p>
+              <strong>Alkuaika</strong>:{" "}
+              {selectedDate[0] && selectedDate[0].toLocaleDateString(locale)}
+            </p>
+            <p>
+              <strong>Loppuaika</strong>:{" "}
+              {selectedDate[1] && selectedDate[1].toLocaleDateString(locale)}
+            </p>
+            <p>
+              <strong>Hinta</strong>:{" "}
+              {product?.priceRows.find((p) => (p.name = "Päivä"))?.price} euroa
             </p>
           </Row>
           <Row>

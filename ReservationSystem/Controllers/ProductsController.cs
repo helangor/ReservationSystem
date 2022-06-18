@@ -36,14 +36,14 @@ namespace ReservationSystem.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            var products = await context.Products.Include(p => p.Photos).ToListAsync();
+            var products = await context.Products.Include(p => p.Photos).Include(p => p.PriceRows).ToListAsync();
             return Ok(products);
         }
 
         [HttpGet("{productName}")]
         public async Task<ActionResult<ProductDto>> GetProduct(string productName)
         {
-            var product = await context.Products.Include(p => p.Photos).FirstOrDefaultAsync(c => c.Name == productName);
+            var product = await context.Products.Include(p => p.Photos).Include(p => p.PriceRows).FirstOrDefaultAsync(c => c.Name == productName);
             var productToReturn = mapper.Map<Product>(product);
             return Ok(productToReturn);
         }

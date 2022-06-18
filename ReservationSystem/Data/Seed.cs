@@ -17,8 +17,8 @@ namespace ReservationSystem.Data
         {
             if (await context.Users.AnyAsync()) return;
 
-            var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
-            var users = JsonSerializer.Deserialize<List<User>>(userData);
+            var data = await System.IO.File.ReadAllTextAsync("Data/SeedData.json");
+            var users = JsonSerializer.Deserialize<List<User>>(data);
             foreach (var user in users)
             {
                 using var hmac = new HMACSHA512();
@@ -28,18 +28,21 @@ namespace ReservationSystem.Data
                 user.PasswordSalt = hmac.Key;
 
                 context.Users.Add(user);
+
+                foreach (var company in user.Companies)
+                {
+                    context.Companies.Add(company);
+                    foreach (var product in company.Products)
+                    {
+                        context.Products.Add(product);
+                        foreach (var priceRow in product.PriceRows)
+                        {
+                            context.PriceRows.Add(priceRow);
+                        }
+                    }
+                }
             }
 
-            if (!context.Products.Any())
-            {
-                var priceRows = new List<PriceRow> {
-                new PriceRow { Name = "Päivä", Price = 100 },
-                new PriceRow { Name = "Viikonloppu", DayOfWeeks = new List<DayOfWeek>{ DayOfWeek.Saturday, DayOfWeek.Sunday }, AmountOfConsecutiveDays = 2, Price = 150 },
-                new PriceRow { Name = "Viikko", AmountOfConsecutiveDays = 7, Price = 200 }
-            };
-
-                context.SaveChanges();
-            }
 
             await context.SaveChangesAsync();
         }
