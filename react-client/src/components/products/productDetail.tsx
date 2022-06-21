@@ -48,69 +48,72 @@ export function ProductDetail() {
     setOpen(false);
   };
 
-  console.log({ locale });
-
-  return (
-    <Container fluid>
-      <Row>
-        <Col>{product?.introduction}</Col>
-      </Row>
-      <Row>
-        <Col>
-          <p>{product?.name}</p>
-        </Col>
-        <Col>
-          <p>{product?.city}</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <img src={product?.photos[0].url}></img>
-        </Col>
-        <Col>
-          <Row>
-            <Calendar
-              minDate={new Date()}
-              selectRange={true}
-              onChange={(value: Date[], event: any) => {
-                setSelectedDate(value);
-              }}
-            ></Calendar>
-          </Row>
-          <Row direction="column">
-            <p>
-              <strong>Alkuaika</strong>:{" "}
-              {selectedDate[0] && selectedDate[0].toLocaleDateString(locale)}
-            </p>
-            <p>
-              <strong>Loppuaika</strong>:{" "}
-              {selectedDate[1] && selectedDate[1].toLocaleDateString(locale)}
-            </p>
-            <p>
-              <strong>Hinta</strong>:{" "}
-              {product?.priceRows.find((p) => (p.name = "Päivä"))?.price} euroa
-            </p>
-          </Row>
-          <Row>
-            <Button variant="outlined" onClick={handleClickOpen}>
-              Tilaa
+  if (!product) {
+    return <p>Loading</p>;
+  } else {
+    return (
+      <Container fluid>
+        <Row>
+          <Col>{product?.introduction}</Col>
+        </Row>
+        <Row>
+          <Col>
+            <p>{product?.name}</p>
+          </Col>
+          <Col>
+            <p>{product?.city}</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <img src={product?.photos[0].url}></img>
+          </Col>
+          <Col>
+            <Row>
+              <Calendar
+                minDate={new Date()}
+                selectRange={true}
+                onChange={(value: Date[], event: any) => {
+                  setSelectedDate(value);
+                }}
+              ></Calendar>
+            </Row>
+            <Row direction="column">
+              <p>
+                <strong>Alkuaika</strong>:{" "}
+                {selectedDate[0] && selectedDate[0].toLocaleDateString(locale)}
+              </p>
+              <p>
+                <strong>Loppuaika</strong>:{" "}
+                {selectedDate[1] && selectedDate[1].toLocaleDateString(locale)}
+              </p>
+              <p>
+                <strong>Hinta</strong>:{" "}
+                {product?.priceRows.find((p) => (p.name = "Päivä"))?.price}{" "}
+                euroa
+              </p>
+            </Row>
+            <Row>
+              <Button variant="outlined" onClick={handleClickOpen}>
+                Tilaa
+              </Button>
+              <ReservationDialog
+                open={open}
+                onClose={handleClose}
+                product={product}
+                reserveDates={selectedDate}
+              />
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={4}>
+            <Button variant="contained">
+              <Link to="/">Mene takaisin etusivulle</Link>
             </Button>
-            <ReservationDialog
-              open={open}
-              onClose={handleClose}
-              product={product!}
-              reserveDates={selectedDate}
-            />
-          </Row>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={4}>
-          <Button variant="contained">
-            <Link to="/">Mene takaisin etusivulle</Link>
-          </Button>
-        </Col>
-      </Row>
-    </Container>
-  );
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 }

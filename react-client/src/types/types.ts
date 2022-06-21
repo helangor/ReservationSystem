@@ -42,8 +42,8 @@ export interface Reservation {
   phoneNumber: string;
   email: string;
   created: string;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
   status: ReservationStatus;
   extraInfo: string;
   price: number;
