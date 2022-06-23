@@ -5,12 +5,18 @@ using ReservationSystemBackend.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace ReservationSystem.Entities
 {
-    public class Reservation
+    public class Reservation : BaseEntity
     {
-        public int Id { get; set; }
+        static int nextReservationNumber;
+        public Reservation()
+        {
+            ReservationNumber = Interlocked.Increment(ref nextReservationNumber);
+        }
+        public int ReservationNumber { get; private set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string PostalCode { get; set; }

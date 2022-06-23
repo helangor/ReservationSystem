@@ -7,10 +7,6 @@ using ReservationSystem.Entities;
 using ReservationSystem.Helpers;
 using ReservationSystem.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace ReservationSystem.Services
 {
@@ -74,16 +70,17 @@ namespace ReservationSystem.Services
             reservation.Id, reservation.Name, reservation.PhoneNumber, reservation.Email, reservation.ExtraInfo);
         }
 
-        public string GetReservationMessage(string companyName, Reservation reservation) {
-                return string.Format(
-            "<div>Hei {0}!</div> " +
-            "<p>Vuokranantaja on peruuttanut varauksenne ajalle {1} - {2}</p>" +
-            "<p>Jos asiasta heräsi kysyttävää, olkaa yhteydessä vuokraavaan yritykseen </p>" +
-            "<p>Vuokraavan yrityksen tiedot:</p>" +
-            "<p>{3}</p>" +
-            "<br>" +
-            "<p>Paljumies, www.paljumies.fi</p>",
-            reservation.Name, GetLocalTime(reservation.StartTime).ToString(), GetLocalTime(reservation.EndTime).ToString(), companyName);
+        public string GetReservationMessage(string companyName, Reservation reservation)
+        {
+            return string.Format(
+        "<div>Hei {0}!</div> " +
+        "<p>Vuokranantaja on peruuttanut varauksenne ajalle {1} - {2}</p>" +
+        "<p>Jos asiasta heräsi kysyttävää, olkaa yhteydessä vuokraavaan yritykseen </p>" +
+        "<p>Vuokraavan yrityksen tiedot:</p>" +
+        "<p>{3}</p>" +
+        "<br>" +
+        "<p>Paljumies, www.paljumies.fi</p>",
+        reservation.Name, GetLocalTime(reservation.StartTime).ToString(), GetLocalTime(reservation.EndTime).ToString(), companyName);
         }
 
 

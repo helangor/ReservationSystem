@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservationSystem.Entities;
@@ -29,10 +28,13 @@ namespace ReservationSystem.Controllers
         {
             var company = Company.GetCompanyByProductId(reservation.Product.Id, context);
 
+                var test = reservation.Id;
+
             //Kludge. Ettei valita kuvien ID keystä
             reservation.Product.Photos = null;
             context.Reservations.Add(reservation);
-            context.Products.Attach(reservation.Product);
+            context.Attach(reservation.Product);
+            context.Attach(reservation.Product.PriceRows.First());
             await context.SaveChangesAsync();
 
             reservation.Status = ReservationStatus.New;

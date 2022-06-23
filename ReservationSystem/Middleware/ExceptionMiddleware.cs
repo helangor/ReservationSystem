@@ -3,8 +3,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ReservationSystem.Errors;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -24,7 +22,7 @@ namespace ReservationSystem.Middleware
             _logger = logger;
             _env = env;
         }
-        
+
         public async Task InvokeAsync(HttpContext context)
         {
             try

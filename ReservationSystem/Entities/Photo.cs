@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ReservationSystem.Entities;
 
 namespace ReservationSystemBackend.Entities
 {
-    public class Photo
+    public class Photo : BaseEntity
     {
-        public int Id { get; set; }
         public string Url { get; set; }
         public string PublicId { get; set; }
         public virtual Product Product { get; set; }

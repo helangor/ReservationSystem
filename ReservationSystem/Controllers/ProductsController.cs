@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using ReservationSystem.DTOs;
 using ReservationSystem.Entities;
 using ReservationSystem.Enums;
-using ReservationSystem.Extensions;
 using ReservationSystem.Interfaces;
 using ReservationSystemBackend.Data;
 using ReservationSystemBackend.Entities;
@@ -62,7 +60,7 @@ namespace ReservationSystem.Controllers
             var reservations = Reservation.GetReservations(productId, context);
             if (reservations == null)
                 return Ok(reservations);
-                        
+
             //TODO: Tämä kantahakuun suoraan
             var futureReservations = reservations.Where(r => r.EndTime >= DateTime.Now
             && r.Status != ReservationStatus.Rejected
@@ -90,12 +88,12 @@ namespace ReservationSystem.Controllers
                 currentProduct.PriceRows = product.PriceRows;
                 context.SaveChanges();
             }
-            
+
             return Ok();
         }
 
         [HttpGet("get-photos")]
-        public async Task< ActionResult<List<Photo>>> GetPhotos(int id)
+        public async Task<ActionResult<List<Photo>>> GetPhotos(int id)
         {
             var query = from product in context.Products
                         where (product.Id == id)

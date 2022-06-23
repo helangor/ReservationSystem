@@ -4,10 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using ReservationSystem.Helpers;
 using ReservationSystem.Interfaces;
-using ReservationSystemBackend.Data;
-using ReservationSystemBackend.Entities;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ReservationSystem.Services
@@ -49,7 +45,7 @@ namespace ReservationSystem.Services
             var deleteParams = new DeletionParams(publicId);
 
             var result = await _cloudinary.DestroyAsync(deleteParams);
-            return result; 
+            return result;
         }
 
 

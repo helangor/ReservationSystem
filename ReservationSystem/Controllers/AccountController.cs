@@ -4,9 +4,6 @@ using ReservationSystem.DTOs;
 using ReservationSystem.Entities;
 using ReservationSystem.Interfaces;
 using ReservationSystemBackend.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +60,7 @@ namespace ReservationSystem.Controllers
 
             for (int i = 0; i < computedHash.Length; i++)
             {
-                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password"); 
+                if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
             return new UserDto
@@ -77,6 +74,6 @@ namespace ReservationSystem.Controllers
         {
             return await _context.Users.AnyAsync(u => u.UserName == username.ToLower());
         }
-        
+
     }
 }

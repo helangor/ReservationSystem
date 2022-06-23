@@ -1,12 +1,11 @@
-﻿using ReservationSystem.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ReservationSystem.Entities
 {
-    public class PriceRow
+    public class PriceRow : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public List<DayOfWeek> DayOfWeeks { get; set; } = new List<DayOfWeek>();
         public List<DateTime> CertainDays { get; set; } = new List<DateTime>();
