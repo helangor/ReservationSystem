@@ -3,11 +3,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductDto } from "../../types/types";
-import "../../styles/productDetail.css";
+import "../products/productDetail.css";
 import { Col, Container, Row } from "react-grid-system";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import ReservationDialog from "../reservation-dialog/reservationDialog";
+import ReservationDialog from "../reservationDialog/reservationDialog";
 import config from "../../config.json";
 const locale = config.LOCALE;
 
@@ -81,11 +81,11 @@ export function ProductDetail() {
             <Row direction="column">
               <p>
                 <strong>Alkuaika</strong>:{" "}
-                {selectedDate[0] && selectedDate[0].toLocaleDateString(locale)}
+                {selectedDate[0] && getDate(selectedDate[0])}
               </p>
               <p>
                 <strong>Loppuaika</strong>:{" "}
-                {selectedDate[1] && selectedDate[1].toLocaleDateString(locale)}
+                {selectedDate[1] && getDate(selectedDate[1])}
               </p>
               <p>
                 <strong>Hinta</strong>:{" "}

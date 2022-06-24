@@ -45,7 +45,6 @@ export default function ReservationDialog(props: ReservationDialogProps) {
   };
 
   const createReservation = () => {
-    console.log("Tilattu", { reservation });
     axios
       .post(
         "https://localhost:44383/api/Reservation/create-reservation",
@@ -86,7 +85,6 @@ export default function ReservationDialog(props: ReservationDialogProps) {
           {formLabels.map((l) => (
             <TextField
               key={l.label}
-              id="outlined-basic"
               label={l.label}
               name={l.name}
               variant="outlined"
