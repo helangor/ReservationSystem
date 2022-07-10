@@ -57,3 +57,8 @@ export enum ReservationStatus {
   Cancelled,
   NotAvailable,
 }
+
+export interface UserDto {
+  username: string;
+  token: string;
+}

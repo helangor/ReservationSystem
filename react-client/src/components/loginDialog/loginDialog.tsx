@@ -5,9 +5,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import { Col, Container, Row } from "react-grid-system";
+import { useDispatch, useSelector } from "react-redux";
+import { authThunkLogin } from "../../store/slices/authSlice";
+import { AppDispatch } from "../../store/store";
 
 export interface LoginDialogProps {
   open: boolean;
@@ -19,6 +21,8 @@ export default function LoginDialog(props: LoginDialogProps) {
     { label: "Käyttäjätunnus", name: "username" },
     { label: "Salasana", name: "password", type: "password" },
   ];
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const onKeyDownHandler = (e: any) => {
     if (e.key === "Enter") {
@@ -50,12 +54,23 @@ export default function LoginDialog(props: LoginDialogProps) {
   };
 
   const login = () => {
-    axios
+    //const { isLoggedIn } = useSelector((state: any) => state.auth);
+    //console.log({ isLoggedIn });
+    //dispatch(authLogin("test"));
+
+    //TODO: Tähän jotenkin, että tulee formilta nämä
+    dispatch(authThunkLogin({ username: "Pekka", password: "Password" }));
+
+    /*axios
       .post("https://localhost:44383/api/account/login", loginCreds)
-      .then((response) => handleClose())
+      .then((response) => {
+        const user = response.data;
+        localStorage.setItem("user", JSON.stringify(user));
+        handleClose();
+      })
       .catch((error) => {
         setLoginError(true);
-      });
+      });*/
   };
 
   return (
