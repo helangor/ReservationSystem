@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Col, Container, Row } from "react-grid-system";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authThunkLogin } from "../../store/slices/authSlice";
 import { AppDispatch } from "../../store/store";
 
@@ -17,11 +17,6 @@ export interface LoginDialogProps {
 }
 
 export default function LoginDialog(props: LoginDialogProps) {
-  const formLabels = [
-    { label: "Käyttäjätunnus", name: "username" },
-    { label: "Salasana", name: "password", type: "password" },
-  ];
-
   const dispatch = useDispatch<AppDispatch>();
 
   const onKeyDownHandler = (e: any) => {
@@ -50,27 +45,35 @@ export default function LoginDialog(props: LoginDialogProps) {
 
   const handleClose = () => {
     setLoginError(false);
+    clearLoginCreds();
     onClose();
   };
 
+  const clearLoginCreds = () => {
+    setLoginCreds((prevState: any) => ({
+      username: "",
+      password: "",
+    }));
+  };
+
   const login = () => {
-    //const { isLoggedIn } = useSelector((state: any) => state.auth);
-    //console.log({ isLoggedIn });
-    //dispatch(authLogin("test"));
-
-    //TODO: Tähän jotenkin, että tulee formilta nämä
-    dispatch(authThunkLogin({ username: "Pekka", password: "Password" }));
-
-    /*axios
-      .post("https://localhost:44383/api/account/login", loginCreds)
-      .then((response) => {
-        const user = response.data;
-        localStorage.setItem("user", JSON.stringify(user));
-        handleClose();
-      })
-      .catch((error) => {
-        setLoginError(true);
-      });*/
+    if (loginCreds.username && loginCreds.password) {
+      const response = dispatch(
+        authThunkLogin({
+          username: loginCreds.username,
+          password: loginCreds.password,
+        })
+      );
+      response.then((o) => {
+        if (o.payload) {
+          handleClose();
+        } else {
+          setLoginError(true);
+        }
+      });
+    } else {
+      setLoginError(true);
+    }
   };
 
   return (
@@ -84,17 +87,24 @@ export default function LoginDialog(props: LoginDialogProps) {
             </Typography>
           )}
           <Row direction="column" component="form">
-            {formLabels.map((l) => (
-              <TextField
-                error={loginError}
-                key={l.label}
-                label={l.label}
-                name={l.name}
-                type={l.type}
-                variant="outlined"
-                onChange={handleChange}
-              />
-            ))}
+            <TextField
+              error={loginError}
+              name="username"
+              label="Käyttäjätunnus"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+              value={loginCreds.username}
+            />
+            <TextField
+              error={loginError}
+              name="password"
+              label="Salasana"
+              type="password"
+              variant="outlined"
+              onChange={handleChange}
+              value={loginCreds.password}
+            />
             <Button onClick={login}>Kirjaudu</Button>
           </Row>
         </Col>
