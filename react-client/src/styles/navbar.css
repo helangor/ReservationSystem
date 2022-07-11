@@ -1,17 +1,25 @@
 .navigation {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
   align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
   width: 100%;
+  height: auto;
   background: deepskyblue;
+  padding: 0 20px;
 }
 
-.navigation-menu li {
-  display: inline-block;
-  margin: 0 1em;
-  flex-grow: 1;
-  width: calc(25% - 2em);
+.brand-name {
+  justify-content: flex-start;
+}
+
+.nav-buttons {
+  justify-content: flex-end;
+}
+
+.nav-buttons button {
+  margin: 0 10px;
 }
 
 .navigation a {

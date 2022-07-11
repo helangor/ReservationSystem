@@ -22,15 +22,17 @@ export function Navbar() {
     setIsLoggedIn(false);
   };
 
-  let loggijuttu;
+  let loginButton;
   if (isLoggedIn) {
-    loggijuttu = (
-      <Button variant="contained" onClick={handleLogOut}>
-        Kirjaudu Ulos
-      </Button>
+    loginButton = (
+      <>
+        <Button variant="contained" onClick={handleLogOut}>
+          Kirjaudu Ulos
+        </Button>
+      </>
     );
   } else {
-    loggijuttu = (
+    loginButton = (
       <Button variant="contained" onClick={handleClickOpen}>
         Kirjaudu
       </Button>
@@ -43,13 +45,12 @@ export function Navbar() {
         <Link to="/" className="brand-name">
           <p>Brändi</p>
         </Link>
-        <div className="navigation-menu">
-          <ul>
-            <li>
-              {loggijuttu}
-              <LoginDialog open={open} onClose={handleClose} />
-            </li>
-          </ul>
+        <div className="nav-buttons">
+          {isLoggedIn && (
+            <Button variant="contained">Yrityksen tietoihin</Button>
+          )}
+          {loginButton}
+          <LoginDialog open={open} onClose={handleClose} />
         </div>
       </nav>
     </>

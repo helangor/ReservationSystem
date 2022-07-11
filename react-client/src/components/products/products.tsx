@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProductDto } from "../../types/types";
 import { ProductCard } from "./productCard";
+import "../../styles/products.css";
 
 const FetchProducts = () => {
   const [products, setProducts] = useState<ProductDto[]>([]);
@@ -27,13 +28,15 @@ export function Products() {
       return <span>Error: {error}</span>;
     } else {
       return (
-        <Grid container spacing={2}>
-          {products.map((p) => (
-            <Grid item xs={12} md={6} lg={4} key={p.id}>
-              <ProductCard {...p} key={p.id} />
-            </Grid>
-          ))}
-        </Grid>
+        <div className="products">
+          <Grid container spacing={2}>
+            {products.map((p) => (
+              <Grid item xs={12} md={6} lg={4} key={p.id}>
+                <ProductCard {...p} key={p.id} />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       );
     }
   }

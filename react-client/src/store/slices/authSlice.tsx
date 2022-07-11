@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { UserDto } from "../../types/types";
 import authService from "../../services/auth.service";
-//const user: UserDto = JSON.parse(localStorage.getItem("user") ?? "");
+
+//TODO: Ei välttii tarvitse tälle reduxia
 
 const user = { username: "test", token: "test" };
 
@@ -10,10 +11,6 @@ interface AuthState {
   isLoggedIn: boolean;
   user: UserDto | null;
 }
-
-//TODO: Eli tekee frontti käyttää vain Redux ja Redux tekee middlewarella api kutsut register serviceen
-//useAppSelector hakee Reduxista ja useDispatch tallentaa reduxiin.
-//IsLoggedIn kanssa reduxiin menemään
 
 export const authThunkLogin = createAsyncThunk(
   "auth/login",
