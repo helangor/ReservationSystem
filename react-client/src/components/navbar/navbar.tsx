@@ -47,7 +47,9 @@ export function Navbar() {
         </Link>
         <div className="nav-buttons">
           {isLoggedIn && (
-            <Button variant="contained">Yrityksen tietoihin</Button>
+            <Link to="/yritykseni">
+              <Button variant="contained">Yritykseni</Button>
+            </Link>
           )}
           {loginButton}
           <LoginDialog open={open} onClose={handleClose} />

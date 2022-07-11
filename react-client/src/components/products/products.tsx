@@ -31,7 +31,7 @@ export function Products() {
         <div className="products">
           <Grid container spacing={2}>
             {products.map((p) => (
-              <Grid item xs={12} md={6} lg={4} key={p.id}>
+              <Grid item xs={12} sm={6} md={4} key={p.id}>
                 <ProductCard {...p} key={p.id} />
               </Grid>
             ))}

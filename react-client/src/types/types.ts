@@ -62,3 +62,14 @@ export interface UserDto {
   username: string;
   token: string;
 }
+
+export interface Company {
+  name: string;
+  created: string;
+  introduction: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  phoneNumber: string;
+  email: string;
+}

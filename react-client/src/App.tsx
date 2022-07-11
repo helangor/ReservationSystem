@@ -5,8 +5,10 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ProductDetail } from "./components/products/productDetail";
+import CompanyControlPanel from "./components/companyControlPanel/companyControlPanel";
+import authService from "./services/auth.service";
 
 function App() {
   return (
@@ -15,9 +17,27 @@ function App() {
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="/palju/:productName" element={<ProductDetail />} />
+        <Route
+          path="/yritykseni"
+          element={
+            <RequireAuth>
+              <CompanyControlPanel />
+            </RequireAuth>
+          }
+        ></Route>
       </Routes>
     </div>
   );
+}
+
+function RequireAuth({ children }: { children: JSX.Element }) {
+  let location = useLocation();
+
+  if (!authService.isLoggedIn()) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return children;
 }
 
 export default App;

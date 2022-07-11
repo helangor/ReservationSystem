@@ -1,6 +1,9 @@
 import axios from "axios";
+import config from "../config.json";
+import { UserDto } from "../types/types";
+const BASE_URL = config.BASE_URL;
 
-const API_URL = "https://localhost:44383/api/Account/";
+const API_URL = BASE_URL + "Account/";
 
 const register = async (username: string, password: string) => {
   return axios.post(API_URL + "signup", {
@@ -25,11 +28,22 @@ const logout = () => {
 };
 
 const isLoggedIn = () => {
+  const user = parseUserFromLocalStorage();
+  return user ? true : false;
+};
+
+const parseUserFromLocalStorage = () => {
   const user = localStorage.getItem("user");
-  if (user && JSON.parse(user).token) {
-    return true;
+  if (user) {
+    const parsedUser: UserDto = JSON.parse(user);
+    return parsedUser;
   }
-  return false;
+  return;
+};
+
+const getUser = () => {
+  const user = parseUserFromLocalStorage();
+  return user;
 };
 
 const authService = {
@@ -37,6 +51,7 @@ const authService = {
   login,
   logout,
   isLoggedIn,
+  getUser,
 };
 
 export default authService;

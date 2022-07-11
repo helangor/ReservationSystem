@@ -1,3 +1,4 @@
 {
-  "LOCALE": "FI-fi"
+  "LOCALE": "FI-fi",
+  "BASE_URL": "https://localhost:44383/api/"
 }

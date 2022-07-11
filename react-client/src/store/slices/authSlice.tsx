@@ -29,9 +29,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     authLogin: (state, action) => {
-      console.log(" ACTION ", { action });
-
-      console.log("REDUXI ", { state });
       state.isLoggedIn = true;
     },
   },
@@ -42,7 +39,6 @@ export const authSlice = createSlice({
       })
       .addCase(authThunkLogin.fulfilled, (state, action) => {
         console.log(action.payload);
-        //state.isLoggedIn = true;
       })
       .addCase(authThunkLogin.rejected, (state, action) => {
         console.log("rejected ");
