@@ -64,6 +64,7 @@ export interface UserDto {
 }
 
 export interface Company {
+  id: number;
   name: string;
   created: string;
   introduction: string;

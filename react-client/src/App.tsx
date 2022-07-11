@@ -7,8 +7,9 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ProductDetail } from "./components/products/productDetail";
-import CompanyControlPanel from "./components/companyControlPanel/companyControlPanel";
 import authService from "./services/auth.service";
+import { Companies } from "./components/companies/companies";
+import { CompanyControlPanel } from "./components/companies/companyControlPanel/companyControlPanel";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
         <Route path="/palju/:productName" element={<ProductDetail />} />
         <Route
           path="/yritykseni"
+          element={
+            <RequireAuth>
+              <Companies />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/muokkaa/:id"
           element={
             <RequireAuth>
               <CompanyControlPanel />

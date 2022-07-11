@@ -5,7 +5,6 @@ const BASE_URL = config.BASE_URL;
 const API_URL = BASE_URL + "Company/";
 
 //TODO: Siirretään tämä headerin laitto jonnekkin mistä menee kaikkii api kutsuihin automaattisesti
-//TODO: Jos vain yksi yritys menee suoraan sen sivulle. Muuten näyttää kaikki yritykset heti
 const getCompaniesByUsername = async () => {
   const user = authService.getUser();
 
@@ -19,8 +18,19 @@ const getCompaniesByUsername = async () => {
   );
 };
 
+const getCompanyById = async (id: string) => {
+  const user = authService.getUser();
+
+  return axios.get(API_URL + "get-company-by-product-id?productId=" + id, {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  });
+};
+
 const companyService = {
   getCompaniesByUsername,
+  getCompanyById,
 };
 
 export default companyService;
