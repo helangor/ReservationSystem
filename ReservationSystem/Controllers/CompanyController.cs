@@ -16,6 +16,8 @@ namespace ReservationSystem.Controllers
         private readonly DataContext context;
         private readonly IMapper mapper;
 
+        //TODO: Näihin ja producteihin tarkistus, jossa hakee käyttäjälle servicestä sen kaikki companyt tai producktit ja vertaa onko samat. 
+
         public CompanyController(DataContext context, IMapper mapper)
         {
             this.context = context;
@@ -50,6 +52,8 @@ namespace ReservationSystem.Controllers
                 currentCompany.PhoneNumber = company.PhoneNumber;
                 currentCompany.Email = company.Email;
                 currentCompany.Introduction = company.Introduction;
+                currentCompany.Address = company.Address;
+                currentCompany.PostalCode = company.PostalCode;
                 context.SaveChanges();
             }
 

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import companyService from "../../services/company.service";
 import { Company } from "../../types/types";
 import Loading from "../general/loading";
-import { CompanyControlPanel } from "./companyControlPanel/companyControlPanel";
+import { CompanyEdit } from "./companyEdit/companyEdit";
 
 const FetchCompanies = () => {
   const [companies, setCompanies] = useState<Company[]>();
@@ -20,7 +20,7 @@ const selectCompany = () => {
   return (
     <>
       <p>a</p>
-      <CompanyControlPanel></CompanyControlPanel>;
+      <CompanyEdit></CompanyEdit>;
     </>
   );
 };
