@@ -1,6 +1,5 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import companyService from "../../../services/company.service";
 import { Company } from "../../../types/types";
 import Loading from "../../general/loading";
@@ -11,13 +10,11 @@ interface EditCompanyAttribute {
   id: string | undefined;
 }
 
-export function CompanyEdit() {
+export function CompanyEdit(props: any) {
   const [company, setCompany] = useState<Company>();
-  const { id } = useParams<string>();
 
   useEffect(() => {
-    var response = companyService.getCompanyById(id!);
-    response.then((res) => setCompany(res.data));
+    setCompany(props.company);
   }, []);
 
   const editCompany = (event: any, company: Company) => {
@@ -51,7 +48,6 @@ export function CompanyEdit() {
     },
   ];
 
-  console.log({ company });
   if (company)
     return (
       <Grid container direction="column" alignItems="center">

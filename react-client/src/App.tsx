@@ -9,7 +9,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ProductDetail } from "./components/products/productDetail";
 import authService from "./services/auth.service";
 import { Companies } from "./components/companies/companies";
-import { CompanyEdit } from "./components/companies/companyEdit/companyEdit";
+import { AdminPanel } from "./components/adminPanel/adminPanel";
 
 function App() {
   return (
@@ -27,10 +27,10 @@ function App() {
           }
         ></Route>
         <Route
-          path="/muokkaa/:id"
+          path="/admin/:id"
           element={
             <RequireAuth>
-              <CompanyEdit />
+              <AdminPanel />
             </RequireAuth>
           }
         ></Route>
